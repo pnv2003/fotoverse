@@ -8,4 +8,9 @@ navbar.setAttribute("data-bs-theme", "dark");
 
 // TODO
 profileNav = document.querySelector("#nav-profile");
-profileNav.setAttribute("href", "../profile/index.html?id=" + 1) 
+if (profileNav) {
+    profileNav.setAttribute("href", "../profile/index.html?id=" + 1) 
+}   
+
+logoutNav = document.querySelector("#nav-logout");
+logoutNav.setAttribute("href", "../../login");
