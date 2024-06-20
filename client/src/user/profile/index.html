@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="shortcut icon" href="../../../favicon.ico" type="image/x-icon"> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script defer src="https://kit.fontawesome.com/81021fae13.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../../../styles/logo.css">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+    <script defer src="../../../scripts/navbar.js"></script>
+</head>
+<body>
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-md">
+            <div class="container-fluid">
+                <a class="navbar-brand logo" href="../feeds">Fotoverse</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../feeds">Feeds</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../feeds/index.html?discover=true">Discover</a>
+                        </li>                  
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">New</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="../newPhoto">Photo</a></li>
+                                <li><a class="dropdown-item" href="../newAlbum">Album</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a id="nav-profile" class="nav-link active" aria-current="page" href="#">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="nav-logout" class="nav-link" href="#">Logout</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="upper">
+            <div class="avatar">
+                <img src="../../../assets/images/google.png" alt="avatar" width="200">
+            </div>
+            <div class="profile">
+                <div class="metrics">
+                    <p><strong>135</strong> photos</p>
+                    <p><strong>32</strong> albums</p>
+                    <p><strong>465K</strong> followers</p>
+                    <p><strong>290</strong> following</p>
+                </div>
+                <div class="info">
+                    <p class="name">Bruh</p>
+                    <p class="desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Porro cumque, vitae rem, repudiandae odio cum tenetur quidem, ipsum voluptas officiis eius voluptate consequuntur odit quas aspernatur quod magnam sed veritatis!</p>
+                </div>
+                <div class="action">
+                    <button class="btn btn-primary follow" type="button">Follow</button>
+                    <a class="btn btn-secondary email" href="#">Email</a>
+                    <a class="btn btn-primary edit" href="../editProfile">Edit Profile</a>
+                </div>
+            </div>
+        </section>
+        <section class="lower">
+            <ul class="nav nav-tabs">
+                <li id="tab-photos" class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Photos</a>
+                </li>
+                <li id="tab-albums" class="nav-item">
+                    <a class="nav-link" href="#">Albums</a>
+                </li>
+                <li id="tab-followers" class="nav-item">
+                    <a class="nav-link" href="#">Followers</a>
+                </li>
+                <li id="tab-following" class="nav-item">
+                    <a class="nav-link" href="#">Following</a>
+                </li>
+            </ul>
+            <div id="photos" class="content display">
+                <div class="item">
+                    <img src="../../../assets/images/google.png" alt="">
+                    <div class="mode">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="../../../assets/images/facebook.png" alt="">
+                </div>
+                <div class="item">
+                    <img src="../../../assets/images/twitter.png" alt="">
+                </div>
+                <div class="item">
+                    <img src="../../../assets/images/facebook.png" alt="">
+                </div>
+                <div class="item">
+                    <img src="../../../assets/images/facebook.png" alt="">
+                </div>
+                <div class="item">
+                    <img src="../../../assets/images/twitter.png" alt="">
+                </div>
+            </div>
+            <div id="albums" class="content display">
+                <div class="item">
+                    <img src="../../../assets/images/google.png" alt="">
+                    <div class="mode">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <p class="count">
+                        100
+                    </p>
+                </div>
+                <div class="item">
+                    <img src="../../../assets/images/facebook.png" alt="">
+                    <div class="mode">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <p class="count">
+                        100
+                    </p>
+                </div>
+                <div class="item">
+                    <img src="../../../assets/images/twitter.png" alt="">
+                    <div class="mode">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                    <p class="count">
+                        100
+                    </p>
+                </div>
+            </div>
+            <div id="followers" class="content users">
+                <div class="item">
+                    <div class="avatar">
+                        <img src="../../../assets/images/google.png" alt="">
+                    </div>
+                    <div class="info">
+                        <p class="name">Bruh</p>
+                        <div class="metrics">
+                            <p>200 photos</p>
+                            <p>20 albums</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary follow" type="button">Follow</button>
+                </div>
+                <div class="item">
+                    <div class="avatar">
+                        <img src="../../../assets/images/google.png" alt="">
+                    </div>
+                    <div class="info">
+                        <p class="name">Bruh</p>
+                        <div class="metrics">
+                            <p>200 photos</p>
+                            <p>20 albums</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary follow" type="button">Follow</button>
+                </div>
+                <div class="item">
+                    <div class="avatar">
+                        <img src="../../../assets/images/google.png" alt="">
+                    </div>
+                    <div class="info">
+                        <p class="name">Bruh</p>
+                        <div class="metrics">
+                            <p>200 photos</p>
+                            <p>20 albums</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary follow" type="button">Follow</button>
+                </div>
+            </div>
+            <div id="following" class="content users">
+                <div class="item">
+                    <div class="avatar">
+                        <img src="../../../assets/images/google.png" alt="">
+                    </div>
+                    <div class="info">
+                        <p class="name">Bruh</p>
+                        <div class="metrics">
+                            <p>200 photos</p>
+                            <p>20 albums</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary follow" type="button">Follow</button>
+                </div>
+                <div class="item">
+                    <div class="avatar">
+                        <img src="../../../assets/images/google.png" alt="">
+                    </div>
+                    <div class="info">
+                        <p class="name">Bruh</p>
+                        <div class="metrics">
+                            <p>200 photos</p>
+                            <p>20 albums</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary follow" type="button">Follow</button>
+                </div>
+            </div>
+        </section>
+
+        <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <span class="badge text-bg-warning">Private</span>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body card">
+                        <img src="../../../assets/images/twitter.png" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">X</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <div class="action">
+                                <a id="edit-photo" href="#" class="btn btn-primary">Edit</a>
+                                <button id="delete-photo" type="button" class="btn btn-danger">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <p class="react">
+                            <i class="fa-regular fa-heart fa-xl"></i>
+                            100K
+                        </p>
+                        <p>2 days ago</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="albumModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body card">
+                        <div id="carouselExampleIndicators" class="card-img-top carousel slide">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                <img src="../../../assets/images/facebook.png" class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item">
+                                <img src="../../../assets/images/google.png" class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item">
+                                <img src="../../../assets/images/twitter.png" class="d-block w-100" alt="...">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                            </div>
+                        <div class="card-body">
+                            <h5 class="card-title">X</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <div class="action">
+                                <a id="edit-album" href="#" class="btn btn-primary">Edit</a>
+                                <button id="delete-album" type="button" class="btn btn-danger">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button> -->
+                        <p class="react">
+                            <i class="fa-regular fa-heart fa-xl"></i>
+                            100K
+                        </p>
+                        <p>2 days ago</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
