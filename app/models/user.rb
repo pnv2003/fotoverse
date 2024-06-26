@@ -7,4 +7,11 @@ class User < ApplicationRecord
 
   has_many :reacts
   has_many :posts, through: :reacts
+
+  validates :fname, length: { maximum: 25 }
+  validates :lname, length: { maximum: 25 }
+  validates :email, presence: true, length: { maximum: 255 }, format: { with: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/ }
+  validates :password, presence: true, confirmation: true, length: { maximum: 64 }
+  validates :role, presence: true, inclusion: { in: %w(member admin)}
+  validates :active, inclusion: [true, false]
 end

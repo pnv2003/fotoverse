@@ -1,10 +1,9 @@
 class Follow < ApplicationRecord
-  validates :follower_id, presence: true
-  validates :followed_id, presence: true
-
   belongs_to :follower, class_name: "User", foreign_key: :follower_id, inverse_of: :follows_as_follower
   belongs_to :followed, class_name: "User", foreign_key: :followed_id, inverse_of: :follows_as_followed
 
+  validates :follower_id, presence: true
+  validates :followed_id, presence: true
   validate :not_following_self
 
   private
