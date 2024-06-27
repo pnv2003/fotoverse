@@ -9,5 +9,4 @@ class Post < ApplicationRecord
   validates :title, presence: true, length: { maximum: 140 }
   validates :description, presence: true, length: { maximum: 300 }
   validates :mode, presence: true, inclusion: { in: %w(public private) }
-  validates :media, presence: true
 end

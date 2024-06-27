@@ -1,3 +1,3 @@
 class Photo < Post
-  validates :media, length: { maximum: 1 }
+  has_one :medium
 end
