@@ -1,8 +1,8 @@
 class Post < ApplicationRecord
   belongs_to :user
 
-  has_many :reacts
-  has_many :users, through: :reacts
+  has_many :reactions
+  has_many :users, through: :reactions
 
   validates :user_id, presence: true
   validates :type, presence: true, inclusion: { in: %w(Photo Album) }

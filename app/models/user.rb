@@ -5,8 +5,8 @@ class User < ApplicationRecord
   has_many :follows_as_follower, class_name: "Follow", foreign_key: :follower_id, inverse_of: :follower
   has_many :followings, through: :follows_as_follower, source: :followed
 
-  has_many :reacts
-  has_many :posts, through: :reacts
+  has_many :reactions
+  has_many :posts, through: :reactions
 
   validates :fname, length: { maximum: 25 }
   validates :lname, length: { maximum: 25 }
