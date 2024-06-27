@@ -1,6 +1,6 @@
 require "test_helper"
 
-class ReactTest < ActiveSupport::TestCase
+class ReactionTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

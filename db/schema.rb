@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_25_083530) do
+ActiveRecord::Schema[7.1].define(version: 2024_06_27_063007) do
   create_table "follows", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "followed_id", null: false
     t.bigint "follower_id", null: false
@@ -38,13 +38,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_083530) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
-  create_table "reacts", charset: "utf8mb3", force: :cascade do |t|
-    t.bigint "post_id", null: false
+  create_table "reactions", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_reacts_on_post_id"
-    t.index ["user_id"], name: "index_reacts_on_user_id"
+    t.index ["post_id"], name: "index_reactions_on_post_id"
+    t.index ["user_id"], name: "index_reactions_on_user_id"
   end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
@@ -62,6 +62,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_083530) do
   add_foreign_key "follows", "users", column: "follower_id"
   add_foreign_key "media", "posts"
   add_foreign_key "posts", "users"
-  add_foreign_key "reacts", "posts"
-  add_foreign_key "reacts", "users"
+  add_foreign_key "reactions", "posts"
+  add_foreign_key "reactions", "users"
 end
