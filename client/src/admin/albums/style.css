@@ -11,10 +11,16 @@ main > * {
     max-width: 70rem;
 }
 
+main nav {
+    position: fixed;
+    bottom: 0;
+}
+
 main .content.display {
     display: grid;
     gap: 0.5rem;
     grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 4rem;
 }
 
 main .content.display .item {

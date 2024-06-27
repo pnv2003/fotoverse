@@ -5,6 +5,15 @@ main {
     padding: 2rem;
 }
 
+main table {
+    margin-bottom: 4rem;
+}
+
+main nav {
+    position: fixed;
+    bottom: 0;
+}
+
 @media screen and (max-width: 50rem) {
     main table tr :last-child {
         display: flex;
