@@ -1,4 +1,4 @@
-import { validate, validator } from "../../scripts/validate.js";
+import { validate, validator } from "../../utils/validate.js";
 
 // form validation
 const email = document.querySelector("#email");

@@ -1,4 +1,4 @@
-import { validate, validator } from "../../scripts/validate.js";
+import { validate, validator } from "../../utils/validate.js";
 
 const fname = document.querySelector("#fname");
 const lname = document.querySelector("#lname");
