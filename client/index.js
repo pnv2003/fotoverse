@@ -1,1 +1,1 @@
-window.location.href = "./src/admin/photos";
+window.location.href = "./src/signup";
