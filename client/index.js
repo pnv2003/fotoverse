@@ -1,1 +1,1 @@
-window.location.href = "./src/user/feeds";
+window.location.href = "./src/login";
