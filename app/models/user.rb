@@ -13,6 +13,6 @@ class User < ApplicationRecord
   validates :lname, length: { maximum: 25 }
   validates :email, presence: true, length: { maximum: 255 }, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
   validates :password, presence: true, confirmation: true, length: { maximum: 64 }
-  validates :role, presence: true, inclusion: { in: %w(member admin)}
+  validates :admin, inclusion: [true, false]
   validates :active, inclusion: [true, false]
 end
