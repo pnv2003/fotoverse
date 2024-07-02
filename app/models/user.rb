@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_secure_password
+
   has_many :follows_as_followed, class_name: "Follow", foreign_key: :followed_id, inverse_of: :followed
   has_many :followers, class_name: "User", through: :follows_as_followed, source: :follower
 
