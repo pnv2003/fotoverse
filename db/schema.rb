@@ -51,7 +51,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_27_063007) do
     t.string "fname"
     t.string "lname"
     t.string "email"
-    t.string "password"
+    t.string "password_digest"
     t.boolean "admin"
     t.boolean "active"
     t.datetime "created_at", null: false
