@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap');
+
+body {
+    height: 100vh !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+main.login {
+    display: flex;
+    justify-content: center;
+}
+
+main.login form {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #F9F9F9;
+    padding: 2rem;
+}
+
+main.login form > * {
+    width: 300px;
+}
+
+main.login form h1, main.login form p:not(.field) {
+    text-align: center;
+}
+
+main.login form h1 {
+    font-family: "Leckerli One", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
+
+main.login .third-party {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
