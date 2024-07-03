@@ -1,5 +1,5 @@
 <main class="login">
-    <%= form_with url: sessions_create_path, method: :get do |form| %>
+    <%= form_with url: sessions_path, method: :post do |form| %>
         <h1>Fotoverse</h1>
         <p class="field">
             <%= form.label :email, "Email", class: "form-label" %>
