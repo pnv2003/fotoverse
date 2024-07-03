@@ -2,10 +2,8 @@ Rails.application.routes.draw do
   get 'sessions/new'
   post 'sessions/create'
   get 'sessions/welcome'
-  get 'users/new'
-  post 'users/create'
-
   resources :users, only: [:new, :create]
+
   get 'login', to: 'sessions#new'
   get 'welcome', to: 'sessions#welcome'
   get 'signup', to: 'users#new'
