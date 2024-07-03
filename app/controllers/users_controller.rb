@@ -6,9 +6,13 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create({**user_params, admin: false, active: true})
-    session[:user_id] = @user.id
-    redirect_to "/welcome", flash: { notice: "You have become a member!" }
+    @user = User.new({**user_params, admin: false, active: true})
+    if @user.save
+      session[:user_id] = @user.id
+      redirect_to "/welcome", flash: { notice: "You have become a member!" }
+    else
+      redirect_to "/signup", flash: { error: "Failed to sign you up. Please try again."}
+    end
   end
 
   private
