@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def create
     @user = User.create({**user_params, admin: false, active: true})
     session[:user_id] = @user.id
-    redirect_to "/welcome"
+    redirect_to "/welcome", flash: { notice: "You have become a member!" }
   end
 
   private
