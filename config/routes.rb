@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'sessions/welcome'
   resources :sessions, only: [:new, :create, :destroy]
-  resources :users, only: [:new, :create, :show, :edit, :update]
+  resources :users, only: [:new, :create, :show, :edit, :update, :destroy]
   get 'posts/all'
   get 'posts/following'
   resources :posts, only: [:destroy]

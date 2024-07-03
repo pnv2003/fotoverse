@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :authorized, only: [:new, :create]
+  before_action :authorized_as_admin, only: [:all, :destroy]
 
   def new
     @user = User.new
@@ -22,6 +23,9 @@ class UsersController < ApplicationController
   end
 
   def update
+  end
+
+  def destroy
   end
 
   def all

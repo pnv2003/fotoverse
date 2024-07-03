@@ -12,6 +12,18 @@ class ApplicationController < ActionController::Base
   end
 
   def authorized
-    redirect_to "/welcome" unless logged_in?
+    if logged_in?
+      if !current_user.active
+        redirect_to welcome_path, flash: { error: "You have been banned. Please ask the system admin to regain access." }
+      end
+    else
+      redirect_to "/welcome"
+    end
+  end
+
+  def authorized_as_admin
+    unless logged_in? && current_user.admin
+      redirect_to welcome_path, flash: { error: "Access denied" }
+    end
   end
 end

@@ -9,7 +9,13 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(params[:password])
 
       session[:user_id] = @user.id
-      redirect_to "/welcome", flash: { notice: "Login successful." }
+
+      if @user.admin
+        redirect_to admin_photos_path, flash: { notice: "Login successful as admin." }
+      else
+        redirect_to feeds_path, flash: { notice: "Login successful." }
+      end
+
     else
       redirect_to "/login", flash: { error: "Login failed. Please try again." }
     end
