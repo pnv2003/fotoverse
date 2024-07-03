@@ -1,6 +1,7 @@
 .welcome header {
     display: flex;
     padding: 2rem;
+    width: 100%;
 }
 
 .welcome header h1 {
