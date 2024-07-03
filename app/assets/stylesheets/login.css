@@ -1,15 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap');
-
-body {
-    height: 100vh !important;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
 main.login {
     display: flex;
     justify-content: center;
+    margin-top: 7rem;
 }
 
 main.login form {

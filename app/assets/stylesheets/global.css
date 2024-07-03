@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap');
+
+body {
+    height: 100vh !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
