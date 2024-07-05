@@ -22,11 +22,18 @@ class SessionsController < ApplicationController
   end
 
   def welcome
+    if session[:user_id]
+      @user = User.find_by(id: session[:user_id])
+      if @user.admin
+        redirect_to admin_photos_path
+      else
+        redirect_to feeds_path
+      end
+    end
   end
 
   def destroy
     session[:user_id] = nil
-    flash[:success] = "Bruh do something"
     redirect_to welcome_path, flash: { notice: "Logout successful."}
   end
 end
