@@ -1,0 +1,67 @@
+<% content_for :header do %>
+    <header class="user sticky-top">
+        <nav class="navbar navbar-expand-md" data-bs-theme="dark">
+            <div class="container-fluid">
+                <a class="navbar-brand logo" href="#">Fotoverse</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                        <li class="nav-item">
+                            <% if current_page?(feeds_path) %>
+                                <a class="nav-link active" aria-current="page" href="#">Feeds</a>
+                            <% else %>
+                                <%= link_to "Feeds", feeds_path, class: "nav-link"%>
+                            <% end %>
+                        </li>
+                        <li class="nav-item">
+                            <% if current_page?(discover_path) %>
+                                <a class="nav-link active" aria-current="page" href="#">Discover</a>
+                            <% else %>
+                                <%= link_to "Discover", discover_path, class: "nav-link"%>
+                            <% end %>
+                        </li>                  
+                        <li class="nav-item dropdown">
+                            <% if current_page?(new_photo_path) || current_page?(new_album_path) %>
+                                <a class="nav-link active dropdown-toggle" aria-current="page" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">New</a>
+                            <% else %>
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">New</a>
+                            <% end %>
+
+                            <ul class="dropdown-menu">
+                                <% if current_page?(new_photo_path) %>
+                                    <li><a class="dropdown-item" href="#">Photo</a></li>
+                                <% else %>
+                                    <li><%= link_to "Photo", new_photo_path, class: "dropdown-item" %></li>
+                                <% end %>
+
+                                <% if current_page?(new_album_path) %>
+                                    <li><a class="dropdown-item" href="#">Album</a></li>
+                                <% else %>
+                                    <li><%= link_to "Album", new_album_path, class: "dropdown-item" %></li>
+                                <% end %>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <% if current_page?(profile_path) %>
+                                <a class="nav-link active" aria-current="page" href="#">Profile</a>
+                            <% else %>
+                                <%= link_to "Profile", profile_path, id: "nav-profile", class: "nav-link"%>
+                            <% end %>
+                        </li>
+                        <li class="nav-item">
+                            <%= link_to "Logout", logout_path, data: {turbo_method: :delete}, id: "nav-logout", class: "nav-link" %>
+                        </li>
+                    </ul>
+                    <%# TODO %>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+<% end %>
+<%= render template: "layouts/application" %>
