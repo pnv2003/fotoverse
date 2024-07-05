@@ -25,7 +25,6 @@ Rails.application.routes.draw do
   get 'discover', to: 'posts#discover'
   get 'new/photo', to: 'photos#new'
   get 'new/album', to: 'albums#new'
-  get 'profile', to: 'users#show'
   delete 'logout', to: 'sessions#destroy'
 
   namespace :admin do
