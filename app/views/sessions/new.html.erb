@@ -1,0 +1,35 @@
+<main class="login">
+    <%= form_with url: sessions_path, method: :post do |form| %>
+        <h1>Fotoverse</h1>
+        <p class="field">
+            <%= form.label :email, "Email", class: "form-label" %>
+            <%= form.email_field :email, class: "form-control", autofocus: true %>
+            <span class="error text-danger"></span>
+        </p>
+        <p class="field">
+            <%= form.label :password, "Password", class: "form-label" %>
+            <%= form.password_field :password, class: "form-control" %>
+            <span class="error text-danger"></span>
+        </p>
+        <%= form.submit "Log in", id: "login", class: "btn btn-primary" %>
+
+        <hr>
+
+        <div class="third-party">
+            <p>Log in with</p>
+            <div class="row row-cols-3">
+                <a href="#"> <%= image_tag 'google.png', size: "50", alt: "Google"%> </a>
+                <a href="#"> <%= image_tag 'facebook.png', size: "50", alt: "Facebook"%> </a>
+                <a href="#"> <%= image_tag 'twitter.png', size: "50", alt: "X"%> </a>
+            </div>
+        </div>
+
+        <p><a href="#">Forgot password?</a></p>
+
+        <hr>
+
+        <p>Don't have an account? <%= link_to "Sign up", signup_path %></p>
+    <% end %>
+</main>
+
+<%= javascript_include_tag "login", type: "module" %>

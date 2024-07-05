@@ -1,2 +1,1 @@
-# fotoverse
-Instagram redesigned
+Final project of the 2024 Summer Internship Program at [NUS Technology](https://www.nustechnology.com)

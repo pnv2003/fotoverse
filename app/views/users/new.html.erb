@@ -1,0 +1,40 @@
+<main class="signup">
+    <%= form_with url: users_path, model: @user, local: true do |form| %>
+        <h1>Fotoverse</h1>
+
+        <p class="field">
+            <%= form.label :fname, "First Name", class: "form-label" %>
+            <%= form.text_field :fname, class: "form-control", autofocus: true %>
+            <span class="error text-danger"></span>
+        </p>
+        <p class="field">
+            <%= form.label :lname, "Last Name", class: "form-label" %>
+            <%= form.text_field :lname, class: "form-control" %>
+            <span class="error text-danger"></span>
+        </p>
+        <p class="field">
+            <%= form.label :email, "Email", class: "form-label" %>
+            <%= form.email_field :email, class: "form-control" %>
+            <span class="error text-danger"></span>
+        </p>
+        <p class="field">
+            <%= form.label :password, "Password", class: "form-label" %>
+            <%= form.password_field :password, class: "form-control" %>
+            <span class="error text-danger"></span>
+        </p>
+        <p class="field">
+            <%= form.label :password_confirmation, "Password Confirmation", class: "form-label" %>
+            <%= form.password_field :password_confirmation, class: "form-control" %>
+            <span class="error text-danger"></span>
+        </p>
+
+        <p>By signing up, you agree to our <a href="#">Terms</a>, <a href="#">Privacy Policy</a> and <a href="#">Cookies Policy</a></p>
+        <%= form.submit "Sign up", id: "signup", class: "btn btn-primary" %>
+
+        <hr>
+
+        <p>Have an account? <%= link_to "Log in", login_path %></p>
+    <% end %>
+</main>
+
+<%= javascript_include_tag "signup", type: "module" %>
