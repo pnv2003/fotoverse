@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
         redirect_to welcome_path, flash: { error: "You have been banned. Please ask the system admin to regain access." }
       end
     else
-      redirect_to "/welcome"
+      redirect_to "/welcome", flash: { error: "Please login to gain access to this page"}
     end
   end
 
