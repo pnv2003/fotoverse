@@ -1,8 +1,10 @@
 class PostsController < ApplicationController
-  def all
+  layout "user"
+
+  def discover
   end
 
-  def following
+  def feeds
   end
 
   def destroy
