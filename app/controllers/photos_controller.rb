@@ -3,6 +3,7 @@ class PhotosController < ApplicationController
   layout "user"
 
   def new
+    @photo = Photo.new
   end
 
   def create
