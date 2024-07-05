@@ -1,2 +1,176 @@
-<h1>Posts#discover</h1>
-<p>Find me in app/views/posts/discover.html.erb</p>
+<main class="feeds">
+    <div class="btn-group">
+        <a id="tab-photos" href="#" class="btn btn-primary active" aria-current="page">Photos</a>
+        <a id="tab-albums" href="#" class="btn btn-primary">Albums</a>
+    </div>
+    <div id="photos" class="content">      
+        <div class="card text-body-secondary">
+            <div class="card-header">
+                <div class="user">
+                    <%= image_tag "google.png" %>
+                    <p class="name">Bruh</p>
+                </div>
+                <button class="btn btn-primary follow" type="button">Follow</button>
+            </div>
+            <%= image_tag "facebook.png", class: "card-img-top" %>
+            <div class="card-body">
+                <h5 class="card-title">Facebook</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+            <div class="card-footer text-body-secondary">
+                <p class="react">
+                    <i class="fa-solid fa-heart fa-xl" style="color: #ed333b;"></i>
+                    100K
+                </p>
+                <p>2 days ago</p>
+            </div>                
+        </div>
+    </div>
+
+    <div id="albums" class="content">   
+        <div class="card">
+            <div class="card-header">
+                <div class="user">
+                    <%= image_tag "google.png" %>
+                    <p class="name">Bruh</p>
+                </div>
+                <button class="btn btn-primary follow" type="button">Follow</button>
+            </div>
+            <%= image_tag "google.png", class: "card-img-top" %>
+            <div class="card-body">
+                <h5 class="card-title">Google</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#albumModal">
+                    Details
+                </button>
+            </div>
+            <div class="card-footer text-body-secondary">
+                <p class="react">
+                    <i class="fa-regular fa-heart fa-xl""></i>
+                    100K
+                </p>
+                <p>3 days ago</p>
+            </div>
+            <p class="count">
+                100
+            </p>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <div class="user">
+                    <%= image_tag "google.png" %>
+                    <p class="name">Bruh</p>
+                </div>
+                <button class="btn btn-primary follow" type="button">Follow</button>
+            </div>
+            <%= image_tag "twitter.png", class: "card-img-top" %>
+            <div class="card-body">
+                <h5 class="card-title">X</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+            <div class="card-footer text-body-secondary">
+                <p class="react">
+                    <i class="fa-solid fa-heart fa-xl" style="color: #ed333b;"></i>
+                    100K
+                </p>
+                <p>2 days ago</p>
+            </div>  
+            <p class="count">
+                100
+            </p>
+        </div>
+    </div>
+
+    <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="user">
+                        <%= image_tag "google.png" %>
+                        <p class="name">Bruh</p>
+                    </div>
+                    <button class="btn btn-primary follow" type="button">Follow</button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body card">
+                    <%= image_tag "twitter.png", class: "card-img-top" %>
+                    <div class="card-body">
+                        <h5 class="card-title">X</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p class="react">
+                        <i class="fa-solid fa-heart fa-xl" style="color: #ed333b;"></i>
+                        100K
+                    </p>
+                    <p>2 days ago</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="albumModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="user">
+                        <%= image_tag "google.png" %>
+                        <p class="name">Bruh</p>
+                    </div>
+                    <button class="btn btn-primary follow" type="button">Follow</button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body card">
+                    <!-- <div class="card"> -->
+                        <div id="carouselExampleIndicators" class="card-img-top carousel slide">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <%= image_tag "facebook.png", class: "d-block w-100" %>
+                                </div>
+                                <div class="carousel-item">
+                                    <%= image_tag "google.png", class: "d-block w-100" %>
+                                </div>
+                                <div class="carousel-item">
+                                    <%= image_tag "twitter.png", class: "d-block w-100" %>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                            </div>
+                        <div class="card-body">
+                            <h5 class="card-title">X</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    <!-- </div> -->
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button> -->
+                    <p class="react">
+                        <i class="fa-solid fa-heart fa-xl" style="color: #ed333b;"></i>
+                        100K
+                    </p>
+                    <p>2 days ago</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%= javascript_include_tag "feeds" %>
+

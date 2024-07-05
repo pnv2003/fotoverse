@@ -12,14 +12,14 @@
                             <% if current_page?(feeds_path) %>
                                 <a class="nav-link active" aria-current="page" href="#">Feeds</a>
                             <% else %>
-                                <%= link_to "Feeds", feeds_path, class: "nav-link"%>
+                                <%= link_to "Feeds", feeds_path, class: "nav-link", data: {turbo: false}%>
                             <% end %>
                         </li>
                         <li class="nav-item">
                             <% if current_page?(discover_path) %>
                                 <a class="nav-link active" aria-current="page" href="#">Discover</a>
                             <% else %>
-                                <%= link_to "Discover", discover_path, class: "nav-link"%>
+                                <%= link_to "Discover", discover_path, class: "nav-link", data: {turbo: false}%>
                             <% end %>
                         </li>                  
                         <li class="nav-item dropdown">
