@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
       end
 
     else
-      redirect_to "/login", flash: { error: "Login failed. Please try again." }
+      redirect_to login_path, flash: { error: "Login failed. Please try again." }
     end
   end
 
@@ -26,6 +26,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to "/welcome", flash: { notice: "Logout successful."}
+    flash[:success] = "Bruh do something"
+    redirect_to welcome_path, flash: { notice: "Logout successful."}
   end
 end
