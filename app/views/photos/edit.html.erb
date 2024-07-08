@@ -1,5 +1,5 @@
 <main class="edit-photo">
-    <%= form_with url: photo_path, model: @photo, local: true do |form| %>
+    <%= form_with url: photo_path(@photo.id), model: @photo, local: true do |form| %>
         <h1>Edit photo</h1>
         <p class="field">
             <%= form.label :title, "Title", class: "form-label" %>

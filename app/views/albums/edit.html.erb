@@ -1,2 +1,34 @@
-<h1>Albums#edit</h1>
-<p>Find me in app/views/albums/edit.html.erb</p>
+<main class="edit-album">
+    <%= form_with url: album_path(@album.id), model: @album, local: true do |form| %>
+        <h1>Edit album</h1>
+        <p class="field">
+            <%= form.label :title, class: 'form-label' %>
+            <%= form.text_field :title, class: 'form-control' %>
+            <span class="error text-danger"></span>
+        </p>
+        <p class="field">
+            <%= form.label :mode, class: 'form-label' %>
+            <div id="mode" class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <%= form.radio_button :mode, 'public', class: 'btn-check', id: 'btnradio1', checked: true %>
+                <%= form.label :mode, 'Public', class: 'btn btn-outline-primary', for: 'btnradio1' %>
+                
+                <%= form.radio_button :mode, 'private', class: 'btn-check', id: 'btnradio2' %>
+                <%= form.label :mode, 'Private', class: 'btn btn-outline-primary', for: 'btnradio2' %>
+            </div>
+            <span class="error text-danger"></span>
+        </p>
+        <p class="field">
+            <%= form.label :desc, class: 'form-label' %>
+            <%= form.text_area :desc, class: 'form-control', rows: 5 %>
+            <span class="error text-danger"></span>
+        </p>
+        <p class="field">
+            <%= form.label :photos, class: 'form-label' %>
+            <%= form.file_field :photos, class: 'form-control' %>
+            <span class="error text-danger"></span>
+        </p>
+        <%= form.submit 'Save', class: 'btn btn-primary', id: 'save' %>
+    <% end %>
+</main>
+
+<%= javascript_include_tag 'edit_album', type: 'module' %>
