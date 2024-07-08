@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   skip_before_action :authorized, only: [:new, :create]
-  layout "user", only: [:show, :edit]
+  layout "user", only: [:show, :edit, :change_password]
 
   def new
     @user = User.new
@@ -21,6 +21,10 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
+  end
+
+  def change_password
     @user = User.find(params[:id])
   end
 
