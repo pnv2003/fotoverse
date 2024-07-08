@@ -1,0 +1,82 @@
+main.admin-photos {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+main.admin-photos > * {
+    max-width: 70rem;
+}
+
+main.admin-photos nav {
+    position: fixed;
+    bottom: 0;
+}
+
+main.admin-photos .content.display {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 4rem;
+}
+
+main.admin-photos .content.display .item {
+    position: relative;
+    cursor: pointer;
+}
+
+main.admin-photos .content.display :is(.mode, .count) {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(64, 64, 64, 0.5);  
+    color: white;
+}
+
+main.admin-photos .content.display .mode {
+    top: 0.5rem;
+    left: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+
+main.admin-photos .content.display .count {
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.2rem;
+    border-radius: 5px;
+}
+
+main.admin-photos .content.display img {
+    width: 100%;
+}
+
+main.admin-photos .modal-body .action {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+main.admin-photos .modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between !important;
+    padding: 1rem 2rem;
+}
+
+main.admin-photos .modal-footer * {
+    padding: 0;
+    margin: 0;
+}
+
+main.admin-photos .modal-footer .react {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
