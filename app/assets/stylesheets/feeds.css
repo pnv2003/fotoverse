@@ -1,0 +1,87 @@
+main.feeds {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    gap: 2rem;
+}
+
+main.feeds .content {
+    display: grid;
+    gap: 1rem;
+}
+
+main.feeds .content .card {
+    width: 18rem;
+}
+
+main.feeds .card {
+    position: relative;
+}
+
+main.feeds .card .count {
+    position: absolute;
+    top: 4rem;
+    right: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(64, 64, 64, 0.5);  
+    color: white;
+    padding: 0.3rem;
+    border-radius: 5px;
+}
+
+main.feeds :is(.card-header, .modal-header) .user {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-right: 1rem;
+}
+
+main.feeds :is(.card-header, .modal-header) .user img {
+    width: 2rem;
+    border-radius: 50%;
+}
+
+main.feeds :is(.card-header, .modal-header, .card-footer, .modal-footer) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between !important;
+}
+
+main.feeds :is(.card-header, .modal-header, .card-footer, .modal-footer) p {
+    padding: 0;
+    margin: 0;
+}
+
+main.feeds .card-footer .react {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 80rem) {
+    main.feeds .content {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media screen and (min-width: 60rem) and (max-width: 80rem) {
+    main.feeds .content {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media screen and (min-width: 40rem) and (max-width: 60rem) {
+    main.feeds .content {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 40rem) {
+    main.feeds .content .card {
+        width: 100%;
+    }
+}

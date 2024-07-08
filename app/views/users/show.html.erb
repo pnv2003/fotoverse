@@ -1,0 +1,247 @@
+<main class="profile">
+    <section class="upper">
+        <div class="avatar">
+            <%= image_tag "google.png", alt: "avatar", width: 200 %>
+        </div>
+        <div class="profile">
+            <div class="metrics">
+                <p><strong>135</strong> photos</p>
+                <p><strong>32</strong> albums</p>
+                <p><strong>465K</strong> followers</p>
+                <p><strong>290</strong> following</p>
+            </div>
+            <div class="info">
+                <p class="name">Bruh</p>
+                <p class="desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Porro cumque, vitae rem, repudiandae odio cum tenetur quidem, ipsum voluptas officiis eius voluptate consequuntur odit quas aspernatur quod magnam sed veritatis!</p>
+            </div>
+            <div class="action">
+                <button class="btn btn-primary follow" type="button">Follow</button>
+                <a class="btn btn-secondary email" href="#">Email</a>
+                <%= link_to "Edit Profile", edit_user_path(@user.id) , class: "btn btn-primary edit" %>
+            </div>
+        </div>
+    </section>
+    <section class="lower">
+        <ul class="nav nav-tabs">
+            <li id="tab-photos" class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Photos</a>
+            </li>
+            <li id="tab-albums" class="nav-item">
+                <a class="nav-link" href="#">Albums</a>
+            </li>
+            <li id="tab-followers" class="nav-item">
+                <a class="nav-link" href="#">Followers</a>
+            </li>
+            <li id="tab-following" class="nav-item">
+                <a class="nav-link" href="#">Following</a>
+            </li>
+        </ul>
+        <div id="photos" class="content display">
+            <div class="item">
+                <%= image_tag "google.png" %>
+                <div class="mode">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+            </div>
+            <div class="item">
+                <%= image_tag "facebook.png" %>
+            </div>
+            <div class="item">
+                <%= image_tag "twitter.png" %>
+            </div>
+            <div class="item">
+                <%= image_tag "facebook.png" %>
+            </div>
+            <div class="item">
+                <%= image_tag "facebook.png" %>
+            </div>
+            <div class="item">
+                <%= image_tag "twitter.png" %>
+            </div>
+        </div>
+        <div id="albums" class="content display">
+            <div class="item">
+                <%= image_tag "google.png" %>
+                <div class="mode">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <p class="count">
+                    100
+                </p>
+            </div>
+            <div class="item">
+                <%= image_tag "facebook.png" %>
+                <div class="mode">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <p class="count">
+                    100
+                </p>
+            </div>
+            <div class="item">
+                <%= image_tag "twitter.png" %>
+                <div class="mode">
+                    <i class="fa-solid fa-lock"></i>
+                </div>
+                <p class="count">
+                    100
+                </p>
+            </div>
+        </div>
+        <div id="followers" class="content users">
+            <div class="item">
+                <div class="avatar">
+                    <%= image_tag "google.png" %>
+                </div>
+                <div class="info">
+                    <p class="name">Bruh</p>
+                    <div class="metrics">
+                        <p>200 photos</p>
+                        <p>20 albums</p>
+                    </div>
+                </div>
+                <button class="btn btn-primary follow" type="button">Follow</button>
+            </div>
+            <div class="item">
+                <div class="avatar">
+                    <%= image_tag "google.png" %>
+                </div>
+                <div class="info">
+                    <p class="name">Bruh</p>
+                    <div class="metrics">
+                        <p>200 photos</p>
+                        <p>20 albums</p>
+                    </div>
+                </div>
+                <button class="btn btn-primary follow" type="button">Follow</button>
+            </div>
+            <div class="item">
+                <div class="avatar">
+                    <%= image_tag "google.png" %>
+                </div>
+                <div class="info">
+                    <p class="name">Bruh</p>
+                    <div class="metrics">
+                        <p>200 photos</p>
+                        <p>20 albums</p>
+                    </div>
+                </div>
+                <button class="btn btn-primary follow" type="button">Follow</button>
+            </div>
+        </div>
+        <div id="following" class="content users">
+            <div class="item">
+                <div class="avatar">
+                    <%= image_tag "google.png" %>
+                </div>
+                <div class="info">
+                    <p class="name">Bruh</p>
+                    <div class="metrics">
+                        <p>200 photos</p>
+                        <p>20 albums</p>
+                    </div>
+                </div>
+                <button class="btn btn-primary follow" type="button">Follow</button>
+            </div>
+            <div class="item">
+                <div class="avatar">
+                    <%= image_tag "google.png" %>
+                </div>
+                <div class="info">
+                    <p class="name">Bruh</p>
+                    <div class="metrics">
+                        <p>200 photos</p>
+                        <p>20 albums</p>
+                    </div>
+                </div>
+                <button class="btn btn-primary follow" type="button">Follow</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <span class="badge text-bg-warning">Private</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body card">
+                    <%= image_tag "twitter.png", class: "card-img-top" %>
+                    <div class="card-body">
+                        <h5 class="card-title">X</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <div class="action">
+                            <%= link_to "Edit", edit_photo_path(User.first.id), id: "edit-photo", class: "btn btn-primary" %>
+                            <button id="delete-photo" type="button" class="btn btn-danger">Delete</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p class="react">
+                        <i class="fa-regular fa-heart fa-xl"></i>
+                        100K
+                    </p>
+                    <p>2 days ago</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="albumModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body card">
+                    <div id="carouselExampleIndicators" class="card-img-top carousel slide">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <%= image_tag "facebook.png", class: "d-block w-100" %>
+                            </div>
+                            <div class="carousel-item">
+                                <%= image_tag "google.png", class: "d-block w-100" %>
+                            </div>
+                            <div class="carousel-item">
+                                <%= image_tag "twitter.png", class: "d-block w-100" %>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        </div>
+                    <div class="card-body">
+                        <h5 class="card-title">X</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <div class="action">
+                            <a id="edit-album" href="#" class="btn btn-primary">Edit</a>
+                            <button id="delete-album" type="button" class="btn btn-danger">Delete</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p class="react">
+                        <i class="fa-regular fa-heart fa-xl"></i>
+                        100K
+                    </p>
+                    <p>2 days ago</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%= javascript_include_tag "profile" %>

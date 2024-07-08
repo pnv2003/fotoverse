@@ -1,2 +1,1 @@
-<h1>Admin::Photos#edit</h1>
-<p>Find me in app/views/admin/photos/edit.html.erb</p>
+<%= render partial: "application/edit_photo", locals: { path: admin_photo_path(@photo.id), model: @photo } %>

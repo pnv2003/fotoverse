@@ -1,4 +1,4 @@
-main.admin-photos {
+main.admin-albums {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -7,28 +7,28 @@ main.admin-photos {
     padding: 2rem;
 }
 
-main.admin-photos > * {
+main.admin-albums > * {
     max-width: 70rem;
 }
 
-main.admin-photos nav {
+main.admin-albums nav {
     position: fixed;
     bottom: 0;
 }
 
-main.admin-photos .content.display {
+main.admin-albums .content.display {
     display: grid;
     gap: 0.5rem;
     grid-template-columns: repeat(4, 1fr);
     margin-bottom: 4rem;
 }
 
-main.admin-photos .content.display .item {
+main.admin-albums .content.display .item {
     position: relative;
     cursor: pointer;
 }
 
-main.admin-photos .content.display :is(.mode, .count) {
+main.admin-albums .content.display :is(.mode, .count) {
     position: absolute;
     display: flex;
     align-items: center;
@@ -37,7 +37,7 @@ main.admin-photos .content.display :is(.mode, .count) {
     color: white;
 }
 
-main.admin-photos .content.display .mode {
+main.admin-albums .content.display .mode {
     top: 0.5rem;
     left: 0.5rem;
     width: 2rem;
@@ -45,36 +45,36 @@ main.admin-photos .content.display .mode {
     border-radius: 50%;
 }
 
-main.admin-photos .content.display .count {
+main.admin-albums .content.display .count {
     top: 0.5rem;
     right: 0.5rem;
     padding: 0.2rem;
     border-radius: 5px;
 }
 
-main.admin-photos .content.display img {
+main.admin-albums .content.display img {
     width: 100%;
 }
 
-main.admin-photos .modal-body .action {
+main.admin-albums .modal-body .action {
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
-main.admin-photos .modal-footer {
+main.admin-albums .modal-footer {
     display: flex;
     align-items: center;
     justify-content: space-between !important;
     padding: 1rem 2rem;
 }
 
-main.admin-photos .modal-footer * {
+main.admin-albums .modal-footer * {
     padding: 0;
     margin: 0;
 }
 
-main.admin-photos .modal-footer .react {
+main.admin-albums .modal-footer .react {
     display: flex;
     align-items: center;
     gap: 0.5rem;

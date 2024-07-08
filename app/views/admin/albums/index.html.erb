@@ -1,2 +1,102 @@
-<h1>Admin::Albums#index</h1>
-<p>Find me in app/views/admin/albums/index.html.erb</p>
+<main class="admin-albums">
+    <div id="albums" class="content display">
+        <div class="item">
+            <%= image_tag "google.png" %>
+            <div class="mode">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <p class="count">
+                100
+            </p>
+        </div>
+        <div class="item">
+            <%= image_tag "facebook.png" %>
+            <div class="mode">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <p class="count">
+                100
+            </p>
+        </div>
+        <div class="item">
+            <%= image_tag "twitter.png" %>
+            <div class="mode">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <p class="count">
+                100
+            </p>
+        </div>
+    </div>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination pagination-lg">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="modal fade" id="albumModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body card">
+                    <div id="carouselExampleIndicators" class="card-img-top carousel slide">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <%= image_tag "facebook.png", class: "d-block w-100" %>
+                            </div>
+                            <div class="carousel-item">
+                                <%= image_tag "google.png", class: "d-block w-100" %>
+                            </div>
+                            <div class="carousel-item">
+                                <%= image_tag "twitter.png", class: "d-block w-100" %>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        </div>
+                    <div class="card-body">
+                        <h5 class="card-title">X</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <div class="action">
+                            <%= link_to "Edit", edit_admin_album_path(2), id: "edit-album", class: "btn btn-primary" %>
+                            <button id="delete-album" type="button" class="btn btn-danger">Delete</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p class="react">
+                        <i class="fa-regular fa-heart fa-xl"></i>
+                        100K
+                    </p>
+                    <p>2 days ago</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%= javascript_include_tag "admin_albums" %>

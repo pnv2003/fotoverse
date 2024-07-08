@@ -1,0 +1,21 @@
+main.admin-edit-user form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+main.admin-edit-user form > * {
+    width: 20rem;
+}
+
+main.admin-edit-user form section {
+    display: flex;
+    flex-direction: column;
+}
+
+main.admin-edit-user form button {
+    margin-top: 0.5rem;
+}

@@ -1,0 +1,81 @@
+<main class="edit-profile">
+    <%= form_with url: user_path, model: @user, local: true, id: "info-form" do |form| %>
+        <section class="info">
+            <h2>Basic Information</h2>
+            <p class="field">
+                <%= form.label :avatar, "Avatar", class: "form-label" %>
+                <%= form.file_field :avatar, class: "form-control" %>
+                <span class="error text-danger"></span>
+            </p>
+            <p class="field">
+                <%= form.label :fname, "First Name", class: "form-label" %>
+                <%= form.text_field :fname, class: "form-control" %>
+                <span class="error text-danger"></span>
+            </p>
+            <p class="field">
+                <%= form.label :lname, "Last Name", class: "form-label" %>
+                <%= form.text_field :lname, class: "form-control" %>
+                <span class="error text-danger"></span>
+            </p>
+            <p class="field">
+                <%= form.label :email, "Email", class: "form-label" %>
+                <%= form.email_field :email, class: "form-control" %>
+                <span class="error text-danger"></span>
+            </p>
+            <%= form.submit "Save Info", id: "save-info", class: "btn btn-primary" %>
+        </section>
+
+    <% end %>
+
+    <%= form_with url: user_path, model: @user, local: true, id: "pwd-form" do |form| %>
+        <section class="pwd">
+            <h2>Change Password</h2>
+            <p class="field">
+                <%= form.label :password, "Current Password", class: "form-label" %>
+                <%= form.password_field :password, class: "form-control" %>
+                <span class="error text-danger"></span>
+            </p>
+            <p class="field">
+                <%= form.label :new_password, "New Password", class: "form-label" %>
+                <%= form.password_field :new_password, class: "form-control" %>
+                <span class="error text-danger"></span>
+            </p>
+            <p class="field">
+                <%= form.label :confirm_password, "Confirm Password", class: "form-label" %>
+                <%= form.password_field :confirm_password, class: "form-control" %>
+                <span class="error text-danger"></span>
+            </p>
+            <%= form.submit "Save Password", id: "save-pwd", class: "btn btn-primary" %>
+        </section>
+    <% end %>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="infoToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img src="..." class="rounded me-2" alt="...">
+                <strong class="me-auto">Bootstrap</strong>
+                <small>11 mins ago</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Information saved!
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="pwdToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img src="..." class="rounded me-2" alt="...">
+                <strong class="me-auto">Bootstrap</strong>
+                <small>11 mins ago</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Password saved!
+            </div>
+        </div>
+    </div>
+</main>
+
+<%= javascript_include_tag "edit_profile", type: "module" %>

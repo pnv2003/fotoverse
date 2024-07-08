@@ -1,2 +1,1 @@
-<h1>Albums#edit</h1>
-<p>Find me in app/views/albums/edit.html.erb</p>
+<%= render partial: "application/edit_album", locals: { path: album_path(@album.id), model: @album } %>

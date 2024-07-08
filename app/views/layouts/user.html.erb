@@ -12,14 +12,14 @@
                             <% if current_page?(feeds_path) %>
                                 <a class="nav-link active" aria-current="page" href="#">Feeds</a>
                             <% else %>
-                                <%= link_to "Feeds", feeds_path, class: "nav-link"%>
+                                <%= link_to "Feeds", feeds_path, class: "nav-link", data: {turbo: false}%>
                             <% end %>
                         </li>
                         <li class="nav-item">
                             <% if current_page?(discover_path) %>
                                 <a class="nav-link active" aria-current="page" href="#">Discover</a>
                             <% else %>
-                                <%= link_to "Discover", discover_path, class: "nav-link"%>
+                                <%= link_to "Discover", discover_path, class: "nav-link", data: {turbo: false}%>
                             <% end %>
                         </li>                  
                         <li class="nav-item dropdown">
@@ -44,14 +44,14 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <% if current_page?(profile_path) %>
+                            <% if params[:controller] == 'users' && params[:action] == 'show' %>
                                 <a class="nav-link active" aria-current="page" href="#">Profile</a>
                             <% else %>
-                                <%= link_to "Profile", profile_path, id: "nav-profile", class: "nav-link"%>
+                                <%= link_to "Profile", user_path(session[:user_id]), id: "nav-profile", class: "nav-link"%>
                             <% end %>
                         </li>
                         <li class="nav-item">
-                            <%= link_to "Logout", logout_path, data: {turbo_method: :delete}, id: "nav-logout", class: "nav-link" %>
+                            <%= link_to "Logout", logout_path, data: {turbo_method: :delete, turbo_confirm: 'Are you sure you want to log out?'}, id: "nav-logout", class: "nav-link" %>
                         </li>
                     </ul>
                     <%# TODO %>

@@ -3,12 +3,14 @@ class AlbumsController < ApplicationController
   layout "user"
 
   def new
+    @album = Album.new
   end
 
   def create
   end
 
   def edit
+    @album = Album.find(params[:id])
   end
 
   def update
