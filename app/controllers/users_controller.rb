@@ -17,14 +17,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    if params[:id]
-      @user = User.find(params[:id])
-    else
-      @user = User.find(session[:user_id])
-    end
+    @user = User.find(params[:id])
   end
 
   def edit
+    @user = User.find(params[:id])
   end
 
   def update

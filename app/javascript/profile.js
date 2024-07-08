@@ -1,6 +1,6 @@
 // user ID
-const params = new URLSearchParams(window.location.search);
-const userId = params.get("id");
+// const params = new URLSearchParams(window.location.search);
+// const userId = params.get("id");
 
 const followAction = document.querySelector(".action .follow");
 const emailAction = document.querySelector(".action .email");
@@ -15,21 +15,21 @@ const modalActions = document.querySelectorAll(".modal-body .action");
 emailAction.setAttribute("href", "mailto:phuongngovan2003@gmail.com"); // TODO
 // TODO: delete
 
-if (userId == 1) {
-    followAction.style.display = "none";
-    emailAction.style.display = "none";
-    editProfileAction.style.display = "block";
-    modalActions.forEach(action => action.style.display = "block");
+// if (userId == 1) {
+//     followAction.style.display = "none";
+//     emailAction.style.display = "none";
+//     editProfileAction.style.display = "block";
+//     modalActions.forEach(action => action.style.display = "block");
 
-    // TODO: edit
-    editPhotoAction.setAttribute("href", "../editPhoto");
-    editAlbumAction.setAttribute("href", "../editAlbum");
-} else {
-    followAction.style.display = "block";
-    emailAction.style.display = "block";
-    editProfileAction.style.display = "none";
-    modalActions.forEach(action => action.style.display = "none");
-}
+//     // TODO: edit
+//     editPhotoAction.setAttribute("href", "../editPhoto");
+//     editAlbumAction.setAttribute("href", "../editAlbum");
+// } else {
+//     followAction.style.display = "block";
+//     emailAction.style.display = "block";
+//     editProfileAction.style.display = "none";
+//     modalActions.forEach(action => action.style.display = "none");
+// }
 
 // tab
 const photos = document.querySelector("#photos");

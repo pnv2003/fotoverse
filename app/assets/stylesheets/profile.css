@@ -6,7 +6,7 @@ main.profile {
     padding: 2rem;
 }
 
-main.profile > * {
+main.profile > section {
     max-width: 70rem;
 }
 
