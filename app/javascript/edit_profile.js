@@ -12,7 +12,6 @@ const lnameError = document.querySelector("#user_lname + .error");
 const emailError = document.querySelector("#user_email + .error");
 
 const saveInfo = document.querySelector("#save-info");
-const infoToast = bootstrap.Toast.getOrCreateInstance(document.querySelector("#infoToast"));
 
 const preview = document.querySelector("#preview");
 const previewImage = document.querySelector("#preview > img");
@@ -46,6 +45,7 @@ avatar.onchange = (event) => {
 			cropBoxMovable: false,
 			cropBoxResizable: false,
 			guides: false,
+			restore: false,
 			ready: function(event) {
 				this.cropper = cropper;
 			},
@@ -81,9 +81,6 @@ saveInfo.addEventListener('click', (e) => {
     e.preventDefault();
     
     if (
-        validate(avatar, avatarError, validator.fileSize(1)) &
-        validate(avatar, avatarError, validator.fileExtension(['png', 'jpg', 'jpeg', 'gif'])) &
-        validate(avatar, avatarError, validator.file) &
         validate(fname, fnameError, validator.length(1, 25)) &
         validate(lname, lnameError, validator.length(1, 25)) &
         validate(email, emailError, validator.length(1, 255)) &
@@ -91,25 +88,34 @@ saveInfo.addEventListener('click', (e) => {
     ) {
 		const form = document.querySelector("#info-form");
 		const formData = new FormData(form);
-		console.log(formData.entries());
 		formData.delete('user[avatar]');
 
-		fetch(previewImage.src)
-			.then(response => response.blob())
-			.then(blob => {
-				formData.append('user[avatar]', blob);
-				fetch(form.action, {
-					method: form.method,
-					body: formData
-				}).then(response => {
-					if (response.ok) {
-						infoToast.show();
-					} else {
-						console.error('Response:', response)
-					}
-				}).catch(error => {
-					console.error('Error:', error)
+		if (avatar.files.length > 0) {
+			if (	
+				!validate(avatar, avatarError, validator.fileSize(1)) ||
+				!validate(avatar, avatarError, validator.fileExtension(['png', 'jpg', 'jpeg', 'gif']))
+			) {
+				return;
+			}
+
+			fetch(previewImage.src)
+				.then(response => response.blob())
+				.then(blob => {
+					formData.append('user[avatar]', blob);
+					fetch(form.action, {
+						method: form.method,
+						body: formData
+					}).catch(error => {
+						console.error('Error:', error)
+					});
 				});
+		} else {
+			fetch(form.action, {
+				method: form.method,
+				body: formData
+			}).catch(error => {
+				console.error('Error:', error)
 			});
+		}
     }
 });

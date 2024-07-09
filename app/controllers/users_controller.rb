@@ -33,6 +33,8 @@ class UsersController < ApplicationController
     if @user.update(user_info_params)
       redirect_to user_path(@user), flash: { notice: "Profile updated!" }
     else
+      # flash.now[:error] = "Failed to update profile: " + @user.errors.full_messages.join(", ")
+      # render :edit
       redirect_to edit_user_path(@user), flash: { error: "Failed to update profile: " + @user.errors.full_messages.join(", ") }
     end
   end
