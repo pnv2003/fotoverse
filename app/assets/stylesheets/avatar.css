@@ -1,0 +1,37 @@
+.rounded .cropper-view-box {
+    border-radius: 50%;
+    outline: none; 
+}
+
+#preview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid lightgray;
+    border-radius: 50%;
+    width: 20rem;
+    height: 20rem;
+    overflow: hidden;
+}
+
+#preview img {
+    object-fit: cover;
+}
+
+#input-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.avatar img {
+    object-fit: cover;
+}

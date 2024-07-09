@@ -1,10 +1,19 @@
 <main class="edit-profile">
-    <%= form_with url: user_path, model: @user, local: true, id: "info-form" do |form| %>
+    <%= form_with url: user_path, model: @user, local: true, html: { multipart: true }, id: "info-form" do |form| %>
         <h2>Edit Profile</h2>
         <p class="field">
             <%= form.label :avatar, "Avatar", class: "form-label" %>
-            <%= form.file_field :avatar, class: "form-control" %>
+            <%= form.file_field :avatar, accept: "image/jpeg, image/gif, image/png, image/jpg", class: "form-control" %>
             <span class="error text-danger"></span>
+            <% if @user.avatar? %>
+                <div id="preview">
+                    <%= image_tag @user.avatar.url, alt: "Avatar Preview" %>
+                </div>
+            <% else %>
+                <div id="preview" style="display: none">
+                    <img src="#" alt="Avatar Preview"></img>
+                </div>
+            <% end %>
         </p>
         <p class="field">
             <%= form.label :fname, "First Name", class: "form-label" %>
@@ -37,6 +46,24 @@
             </div>
             <div class="toast-body">
                 Information saved!
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="cropperModal" tabindex="-1" aria-labelledby="cropperModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="cropperModalLabel">Select Avatar</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="result rounded" id="input-image"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button id="save" type="button" class="btn btn-primary">Save</button>
+                </div>
             </div>
         </div>
     </div>
