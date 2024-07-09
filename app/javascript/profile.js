@@ -14,8 +14,8 @@ albums.style.display = "none";
 followers.style.display = "none";
 following.style.display = "none";
 
-var activeTab = photoTab;
-var activeContent = photos;
+let activeTab = photoTab;
+let activeContent = photos;
 
 function changeTab(tab, content) {
     activeTab.classList.remove("active");

@@ -6,8 +6,8 @@ editActions.forEach(action => action.setAttribute("href", "../editUser"));
 // pagination
 const pagination = document.querySelector("main nav .pagination");
 
-var count = 3;
-var active = 1;
+let count = 3;
+let active = 1;
 
 function changePage(index) {
     if (index > 0 && index <= count && index !== active) {

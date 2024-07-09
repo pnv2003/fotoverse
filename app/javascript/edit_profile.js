@@ -17,7 +17,7 @@ const saveInfo = document.querySelector("#save-info");
 const preview = document.querySelector("#preview");
 const previewImage = document.querySelector("#preview > img");
 const cropperModal = new bootstrap.Modal('#cropperModal');
-var cropper;
+let cropper;
 
 let doIt
 window.addEventListener('resize', () => {
@@ -31,12 +31,12 @@ window.addEventListener('resize', () => {
 })
 
 avatar.onchange = (event) => {
-	var result = document.querySelector('#input-image');
-	var previewImage = document.querySelector('#preview img');
+	let result = document.querySelector('#input-image');
+	let previewImage = document.querySelector('#preview img');
 
 	const [file] = event.target.files;
 	if (file && validate(avatar, avatarError, validator.fileExtension(['png', 'jpg', 'jpeg', 'gif']))) {
-		var img = document.createElement('img');
+		let img = document.createElement('img');
 		img.id = 'image';
 		img.src = URL.createObjectURL(file);
 		img.width = 544;
@@ -61,7 +61,7 @@ avatar.onchange = (event) => {
 				this.cropper = cropper;
 			},
 			crop: function(event) {
-				var imgSrc = this.cropper.getCroppedCanvas({
+				let imgSrc = this.cropper.getCroppedCanvas({
 					width: 170,
 					height: 170
 				}).toDataURL("image/png");

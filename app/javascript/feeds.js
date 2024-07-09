@@ -8,8 +8,8 @@ const albumTab = document.querySelector("#tab-albums");
 photos.style.display = "grid";
 albums.style.display = "none";
 
-var activeTab = photoTab;
-var activeContent = photos;
+let activeTab = photoTab;
+let activeContent = photos;
 
 function changeTab(tab, content) {
     activeTab.classList.remove("active");
