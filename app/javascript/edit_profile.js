@@ -1,4 +1,5 @@
 import { validate, validator } from "./utils/validate.js";
+import { FetchRequest } from "@rails/request.js";
 
 // validation
 const avatar = document.querySelector("#user_avatar");
@@ -20,11 +21,13 @@ var cropper;
 
 let doIt
 window.addEventListener('resize', () => {
-    clearTimeout(doIt);
-    cropper.disable()
-    doIt = setTimeout(() => {
-         cropper.enable()
-    }, 100);
+	if (cropper) {
+		clearTimeout(doIt);
+		cropper.disable()
+		doIt = setTimeout(() => {
+			cropper.enable()
+		}, 100);
+	}	
 })
 
 avatar.onchange = (event) => {
@@ -110,20 +113,23 @@ saveInfo.addEventListener('click', (e) => {
 				.then(response => response.blob())
 				.then(blob => {
 					formData.append('user[avatar]', blob);
-					fetch(form.action, {
-						method: form.method,
-						body: formData
-					}).catch(error => {
-						console.error('Error:', error)
-					});
+
+					console.log("yes file!");
+					const request = new FetchRequest(form.method, form.action, { body: formData });
+					request.perform().then(response => {
+						if (!response.ok) {
+							console.error(response.error);
+						}
+					})
 				});
 		} else {
-			fetch(form.action, {
-				method: form.method,
-				body: formData
-			}).catch(error => {
-				console.error('Error:', error)
-			});
+			console.log("no file!");
+			const request = new FetchRequest(form.method, form.action, { body: formData });
+			request.perform().then(response => {
+				if (!response.ok) {
+					console.error(response.error);
+				}
+			})
 		}
     }
 });
