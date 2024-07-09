@@ -1,5 +1,5 @@
-let statusToast = document.querySelector('#toast-status');
-let errorToast = document.querySelector('#toast-error');
+var statusToast = document.querySelector('#toast-status');
+var errorToast = document.querySelector('#toast-error');
 
 if (statusToast) {
     bootstrap.Toast.getOrCreateInstance(statusToast).show();

@@ -17,15 +17,15 @@ const preview = document.querySelector("#preview");
 const previewImage = document.querySelector("#preview > img");
 
 const cropperModal = new bootstrap.Modal('#cropperModal');
-let cropper;
+var cropper;
 
 avatar.onchange = (event) => {
-	let result = document.querySelector('#input-image');
-	let previewImage = document.querySelector('#preview img');
+	var result = document.querySelector('#input-image');
+	var previewImage = document.querySelector('#preview img');
 
 	const [file] = event.target.files;
 	if (file && validate(avatar, avatarError, validator.fileExtension(['png', 'jpg', 'jpeg', 'gif']))) {
-		let img = document.createElement('img');
+		var img = document.createElement('img');
 		img.id = 'image';
 		img.src = URL.createObjectURL(file);
 		img.width = 544;
@@ -50,7 +50,7 @@ avatar.onchange = (event) => {
 				this.cropper = cropper;
 			},
 			crop: function(event) {
-				let imgSrc = this.cropper.getCroppedCanvas({
+				var imgSrc = this.cropper.getCroppedCanvas({
 					width: 170,
 					height: 170
 				}).toDataURL("image/png");
@@ -88,7 +88,7 @@ saveInfo.addEventListener('click', (e) => {
     ) {
 		const form = document.querySelector("#info-form");
 		const formData = new FormData(form);
-		formData.delete('user[avatar]');
+		formData.devare('user[avatar]');
 
 		if (avatar.files.length > 0) {
 			if (	
