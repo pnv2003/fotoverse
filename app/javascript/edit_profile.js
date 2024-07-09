@@ -96,7 +96,7 @@ saveInfo.addEventListener('click', (e) => {
     ) {
 		const form = document.querySelector("#info-form");
 		const formData = new FormData(form);
-		formData.devare('user[avatar]');
+		formData.delete('user[avatar]');
 
 		if (avatar.files.length > 0) {
 			if (	
