@@ -1,5 +1,3 @@
-const modalActions = document.querySelectorAll(".modal-body .action");
-
 // tab
 const photos = document.querySelector("#photos");
 const albums = document.querySelector("#albums");
