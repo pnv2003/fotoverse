@@ -15,9 +15,17 @@ const saveInfo = document.querySelector("#save-info");
 
 const preview = document.querySelector("#preview");
 const previewImage = document.querySelector("#preview > img");
-
 const cropperModal = new bootstrap.Modal('#cropperModal');
 var cropper;
+
+let doIt
+window.addEventListener('resize', () => {
+    clearTimeout(doIt);
+    cropper.disable()
+    doIt = setTimeout(() => {
+         cropper.enable()
+    }, 100);
+})
 
 avatar.onchange = (event) => {
 	var result = document.querySelector('#input-image');
