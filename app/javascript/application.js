@@ -2,6 +2,9 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
+import { Turbo } from "@hotwired/turbo-rails"
+Turbo.session.drive = false
+
 //= stub 'admin_albums'
 //= stub 'admin_photos'
 //= stub 'admin_users'
