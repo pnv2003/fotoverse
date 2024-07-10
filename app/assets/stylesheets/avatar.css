@@ -3,7 +3,7 @@
     outline: none; 
 }
 
-#preview {
+#preview-avatar {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -14,7 +14,7 @@
     overflow: hidden;
 }
 
-#preview img {
+#preview-avatar img {
     object-fit: cover;
 }
 

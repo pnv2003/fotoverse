@@ -1,5 +1,5 @@
 <main class="new-album">
-    <%= form_with url: albums_path, model: @album, local: true do |form| %>
+    <%= form_with url: albums_path, model: @album, local: true, html: { multipart: true } do |form| %>
         <h1>Add a new album</h1>
         <p class="field">
             <%= form.label :title, "Title", class: "form-label" %>
@@ -12,7 +12,7 @@
                 <%= form.radio_button :mode, "public", class: "btn-check", autocomplete: "off", checked: true %>
                 <%= form.label :mode_public, "Public", class: "btn btn-outline-primary" %>
 
-                <%= form.radio_button :mode, "private", class: "btn-check", autocomplete: "off", checked: true %>
+                <%= form.radio_button :mode, "private", class: "btn-check", autocomplete: "off", checked: false %>
                 <%= form.label :mode_private, "Private", class: "btn btn-outline-primary" %>
             </div>
             <span class="error text-danger"></span>
@@ -22,14 +22,20 @@
             <%= form.text_area :desc, class: "form-control", rows: 5 %>
             <span class="error text-danger"></span>
         </p>
-        <p class="field">
-            <%= form.label :photos, "Photos", class: "form-label" %>
-            <%= form.file_field :photos, class: "form-control" %>
-            <div id="preview"></div>
+        <p class="field media">
+            <%= form.label :media, "Photos", class: "form-label" %>
+
+            <div id="grid">
+                <%= form.fields_for :media do |medium_form| %>
+                    <%= medium_form.label :url, "Add Photo", class: "media-item form-label btn btn-outline-primary" %>
+                    <%= medium_form.file_field :url, class: "media-input active", accept: "image/*" %>
+                <% end %>
+            </div>
+            
             <span class="error text-danger"></span>
         </p>
         <%= form.submit "Save", id: "save", class: "btn btn-primary" %>
     <% end %>
 </main>
 
-<%= javascript_include_tag "new_album", type: "module" %>
+<%= javascript_include_tag "new_album", type: "module", "data-turbo-track": "reload" %>

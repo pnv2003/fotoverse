@@ -25,10 +25,11 @@
   <body>
     <%= yield :header %>
     <%= yield %>
+    <h1 style="font-size: 5rem"> FLASH: <%= flash[:notice] %></h1>
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
 
       <% if flash[:success] != nil %>
-        <div id="toast-status" class="toast align-items-center text-bg-success border-0" role="status" aria-live="polite" aria-atomic="true">
+        <div id="toast-success" class="toast align-items-center text-bg-success border-0" role="status" aria-live="polite" aria-atomic="true">
           <div class="d-flex">
             <div class="toast-body">
               <%= flash[:success] %>

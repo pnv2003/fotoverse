@@ -2,9 +2,6 @@
 import "@hotwired/turbo-rails"
 import "controllers"
 
-//= require_tree .
-//= stub application
-
 //= stub 'admin_albums'
 //= stub 'admin_photos'
 //= stub 'admin_users'

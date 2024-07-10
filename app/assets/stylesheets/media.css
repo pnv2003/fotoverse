@@ -1,0 +1,36 @@
+#grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+
+#grid .media-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10rem;
+    width: 10rem;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+#grid .media-item img {
+    object-fit: cover;
+}
+
+#grid .media-item {
+    position: relative;
+}
+
+#grid .media-remove {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.2rem;
+    cursor: pointer;
+}
+
+#grid .media-input {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}

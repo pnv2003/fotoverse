@@ -6,11 +6,11 @@
             <%= form.file_field :avatar, accept: "image/jpeg, image/gif, image/png, image/jpg", class: "form-control" %>
             <span class="error text-danger"></span>
             <% if @user.avatar? %>
-                <div id="preview">
+                <div id="preview-avatar">
                     <%= image_tag @user.avatar.url, alt: "Avatar Preview" %>
                 </div>
             <% else %>
-                <div id="preview" style="display: none">
+                <div id="preview-avatar" style="display: none">
                     <img src="#" alt="Avatar Preview"></img>
                 </div>
             <% end %>
