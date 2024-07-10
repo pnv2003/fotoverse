@@ -16,7 +16,7 @@
             </div>
             <div class="action">
                 <% if session[:user_id] == @user.id %>
-                    <%= link_to "Edit Profile", edit_user_path(@user.id) , class: "btn btn-primary edit" %>
+                    <%= link_to "Edit Profile", edit_user_path(@user.id) , class: "btn btn-primary edit", data: { turbo: false } %>
                 <% else %>
                     <button class="btn btn-primary follow" type="button">Follow</button>
                     <a class="btn btn-secondary email" href="#">Email</a>
@@ -176,7 +176,7 @@
                         <h5 class="card-title">X</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         <div class="action">
-                            <%= link_to "Edit", edit_photo_path(User.first.id), id: "edit-photo", class: "btn btn-primary" %>
+                            <%= link_to "Edit", edit_photo_path(User.first.id), id: "edit-photo", class: "btn btn-primary", data: { turbo: false } %>
                             <button id="delete-photo" type="button" class="btn btn-danger">Delete</button>
                         </div>
                     </div>
