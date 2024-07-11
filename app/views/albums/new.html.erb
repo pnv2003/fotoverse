@@ -26,9 +26,9 @@
             <%= form.label :media, "Photos", class: "form-label" %>
 
             <div id="grid">
-                <%= form.fields_for :media do |medium_form| %>
-                    <%= medium_form.label :url, "Add Photo", class: "media-item form-label btn btn-outline-primary" %>
-                    <%= medium_form.file_field :url, class: "media-input active", accept: "image/*" %>
+                <%= form.fields_for :media do |media_form| %>
+                    <%= media_form.label :url, "Add Photo", class: "media-item form-label btn btn-outline-primary" %>
+                    <%= media_form.file_field :url, class: "media-input active", accept: "image/*" %>
                 <% end %>
             </div>
             

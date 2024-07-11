@@ -13,22 +13,27 @@
                 <%= form.radio_button :mode, "public", class: "btn-check", autocomplete: "off", checked: true %>
                 <%= form.label :mode_public, "Public", class: "btn btn-outline-primary" %>
 
-                <%= form.radio_button :mode, "private", class: "btn-check", autocomplete: "off", checked: true %>
+                <%= form.radio_button :mode, "private", class: "btn-check", autocomplete: "off", checked: false %>
                 <%= form.label :mode_private, "Private", class: "btn btn-outline-primary" %>
             </div>
             <span class="error text-danger"></span>
         </p>
         <p class="field">
-            <%= form.label :desc, "Title", class: "form-label" %>
-            <%= form.text_area :desc, rows: 5, class: "form-control" %>
+            <%= form.label :description, "Title", class: "form-label" %>
+            <%= form.text_area :description, rows: 5, class: "form-control" %>
             <span class="error text-danger"></span>
         </p>
 
         <p class="field">
-            <%= form.label :photo, "Photo", class: "form-label" %>
-            <%= form.file_field :photo, class: "form-control" %>
-            <img id="preview" src="#" alt="Photo Preview">
-            <span class="error text-danger"></span>
+            <%= form.label :medium, "Photo", class: "form-label" %>
+            
+            <%= form.fields_for :medium do |medium_form| %>
+                <%= medium_form.file_field :url, class: "media-input form-control", accept: "image/*" %>
+                <span class="error text-danger"></span>
+            <% end %>
+            <div id="preview">
+                <img src="#" alt="Photo Preview">
+            </div>
         </p>
 
         <%= form.submit "Save", id: "save", class: "btn btn-primary" %>
