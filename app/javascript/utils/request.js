@@ -19,8 +19,14 @@ const http = {
         });
 
         if (response.ok) {
-            const json = await response.json();
-            return json;
+            const contentType = response.headers.get('Content-Type');
+            if (contentType && contentType.includes('application/json')) {
+                const json = await response.json();
+                return json;
+            } else {
+                const text = await response.text();
+                return text;
+            }
         }
 
         const text = await response.text();
