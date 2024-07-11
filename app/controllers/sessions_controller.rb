@@ -30,6 +30,11 @@ class SessionsController < ApplicationController
         redirect_to feeds_path
       end
     end
+
+    if params[:flash]
+      flash[:notice] = params[:flash]
+      # redirec
+    end
   end
 
   def destroy

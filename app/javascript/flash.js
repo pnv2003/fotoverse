@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {
-    console.log("flash.js loaded");
     const statusToast = document.querySelector('#toast-status');
     const errorToast = document.querySelector('#toast-error');
     const successToast = document.querySelector('#toast-success');
