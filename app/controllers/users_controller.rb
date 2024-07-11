@@ -31,11 +31,15 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_info_params)
-      redirect_to user_path(@user), flash: { notice: "Profile updated!" }
+      msg = "Profile updated!"
+      flash[:notice] = msg
+      render json: { status_code: 200, message: msg }, status: :ok
+      # redirect_to user_path(@user), flash: { notice: "Profile updated!" }
     else
-      # flash.now[:error] = "Failed to update profile: " + @user.errors.full_messages.join(", ")
-      # render :edit
-      redirect_to edit_user_path(@user), flash: { error: "Failed to update profile: " + @user.errors.full_messages.join(", ") }
+      msg = "Failed to update profile: " + @user.errors.full_messages.join(", ")
+      flash[:error] = msg
+      render json: { status_code: 500, message: msg }, status: :internal_server_error
+      # redirect_to edit_user_path(@user), flash: { error: "Failed to update profile: " + @user.errors.full_messages.join(", ") }
     end
   end
 

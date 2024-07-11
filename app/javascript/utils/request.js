@@ -18,19 +18,8 @@ const http = {
             body: data ? JSON.stringify(data) : null
         });
 
-        if (response.ok) {
-            const contentType = response.headers.get('Content-Type');
-            if (contentType && contentType.includes('application/json')) {
-                const json = await response.json();
-                return json;
-            } else {
-                const text = await response.text();
-                return text;
-            }
-        }
-
-        const text = await response.text();
-        throw new Error(`HTTP ${method} failed: ${response.status} - ${text}`);
+        const json = await response.json();
+        return json;
     },
     get: async function(baseURL, param) {
         return this.request('GET', baseURL, param, null);
@@ -47,6 +36,20 @@ const http = {
     delete: async function(baseURL, param, data) {
         return this.request('DELETE', baseURL, param, data);
     },
+
+    upload: async function(method, baseURL, data) {
+        let URL = baseURL;
+        const response = await fetch(SERVER_URL + URL, {
+            method: method,
+            headers: {
+                'X-CSRF-Token': document.head.querySelector("meta[name=csrf-token]")?.content
+            },
+            body: data
+        });
+
+        const json = await response.json();
+        return json;
+    }
 }
 
 export default http;

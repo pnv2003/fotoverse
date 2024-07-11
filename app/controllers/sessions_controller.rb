@@ -33,7 +33,7 @@ class SessionsController < ApplicationController
 
     if params[:flash]
       flash[:notice] = params[:flash]
-      # redirec
+      render json: { status_code: 200, message: params[:flash] }, status: :ok
     end
   end
 

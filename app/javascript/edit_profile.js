@@ -1,5 +1,5 @@
 import { validate, validator } from "./utils/validate.js";
-import { FetchRequest } from "@rails/request.js";
+import http from "./utils/request.js";
 
 // validation
 const avatar = document.querySelector("#user_avatar");
@@ -14,8 +14,8 @@ const emailError = document.querySelector("#user_email + .error");
 
 const saveInfo = document.querySelector("#save-info");
 
-const preview = document.querySelector("#preview");
-const previewImage = document.querySelector("#preview > img");
+const preview = document.querySelector("#preview-avatar");
+const previewImage = document.querySelector("#preview-avatar > img");
 const cropperModal = new bootstrap.Modal('#cropperModal');
 let cropper;
 
@@ -32,7 +32,7 @@ window.addEventListener('resize', () => {
 
 avatar.onchange = (event) => {
 	let result = document.querySelector('#input-image');
-	let previewImage = document.querySelector('#preview img');
+	let previewImage = document.querySelector('#preview-avatar > img');
 
 	const [file] = event.target.files;
 	if (file && validate(avatar, avatarError, validator.fileExtension(['png', 'jpg', 'jpeg', 'gif']))) {
@@ -99,11 +99,12 @@ saveInfo.addEventListener('click', (e) => {
     ) {
 		const form = document.querySelector("#info-form");
 		const formData = new FormData(form);
+		const url = new URL(form.action);
 		formData.delete('user[avatar]');
 
 		if (avatar.files.length > 0) {
 			if (	
-				!validate(avatar, avatarError, validator.fileSize(1)) ||
+				!validate(avatar, avatarError, validator.fileSize(6)) ||
 				!validate(avatar, avatarError, validator.fileExtension(['png', 'jpg', 'jpeg', 'gif']))
 			) {
 				return;
@@ -113,21 +114,20 @@ saveInfo.addEventListener('click', (e) => {
 				.then(response => response.blob())
 				.then(blob => {
 					formData.append('user[avatar]', blob);
-
-					console.log("yes file!");
-					const request = new FetchRequest(form.method, form.action, { body: formData });
-					request.perform().then(response => {
-						if (!response.ok) {
-							console.error(response.error);
+					http.upload('PUT', url.pathname, formData).then(response => {
+						if (response.status_code == 200) {
+							window.location.href = url.pathname;
+						} else {
+							window.location.reload();
 						}
 					})
 				});
 		} else {
-			console.log("no file!");
-			const request = new FetchRequest(form.method, form.action, { body: formData });
-			request.perform().then(response => {
-				if (!response.ok) {
-					console.error(response.error);
+			http.upload('PUT', url.pathname, formData).then(response => {
+				if (response.status_code == 200) {
+					window.location.href = url.pathname;
+				} else {	
+					window.location.reload();
 				}
 			})
 		}
