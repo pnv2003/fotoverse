@@ -1,3 +1,5 @@
+import { getRelativeTime } from "./utils/datetime";
+
 // tab
 const photos = document.querySelector("#photos");
 const albums = document.querySelector("#albums");
@@ -39,14 +41,35 @@ followingTab.addEventListener('click', () => changeTab(followingTab, following))
 const photoItems = document.querySelectorAll("#photos .item");
 const albumItems = document.querySelectorAll("#albums .item");
 
-const photoModal = new bootstrap.Modal(document.querySelector("#photoModal"), {keyboard: false});
-const albumModal = new bootstrap.Modal(document.querySelector("#albumModal"), {keyboard: false});
+const photoModal = document.querySelector("#photoModal");
+const albumModal = document.querySelector("#albumModal");
+
+const photoModalInstance = new bootstrap.Modal(photoModal, {keyboard: false});
+const albumModalInstance = new bootstrap.Modal(albumModal, {keyboard: false});
 
 photoItems.forEach(item => item.addEventListener("click", () => {
-    photoModal.show();
+    const imgSrc = item.querySelector("img").src;
+    const title = item.querySelector(".title").textContent;
+    const desc = item.querySelector(".desc").textContent;
+    const mode = item.querySelector(".mode").textContent;
+    const reactCount = item.querySelector(".react-count").textContent;
+    const updatedAt = item.querySelector(".updated-at").textContent;
+    
+    photoModal.querySelector("img").src = imgSrc;
+    photoModal.querySelector(".card-title").textContent = title;
+    photoModal.querySelector(".card-text").textContent = desc;
+    if (mode == "private") {
+        photoModal.querySelector(".badge").style.display = "inline";
+    } else {
+        photoModal.querySelector(".badge").style.display = "none";
+    }
+    photoModal.querySelector(".react span").textContent = reactCount;
+
+    photoModal.querySelector(".ago").textContent = getRelativeTime(new Date(updatedAt));
+    photoModalInstance.show();
 }));
 albumItems.forEach(item => item.addEventListener("click", () => {
-    albumModal.show();
+    albumModalInstance.show();
 }));
 
 // follow

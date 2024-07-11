@@ -40,56 +40,38 @@
             </li>
         </ul>
         <div id="photos" class="content display">
-            <div class="item">
-                <%= image_tag "google.png" %>
-                <div class="mode">
-                    <i class="fa-solid fa-lock"></i>
+            <% @photos.each do |photo| %>
+                <div class="item">
+                    <%= image_tag photo.medium.url.url, alt: "My Photo" %>
+                    <div class="info" style="display: none">
+                        <p class="title"><%= photo.title %></p>
+                        <p class="desc"><%= photo.description %></p>
+                        <p class="mode"><%= photo.mode %></p>
+                        <p class="react-count"><%= photo.reactions.count %> </p>
+                        <p class="updated-at"><%= photo.updated_at %></p>
+                    </div>
+                    <% if photo.mode == "private" %>
+                        <div class="mode">
+                                <i class="fa-solid fa-lock"></i>
+                        </div>
+                    <% end %>
                 </div>
-            </div>
-            <div class="item">
-                <%= image_tag "facebook.png" %>
-            </div>
-            <div class="item">
-                <%= image_tag "twitter.png" %>
-            </div>
-            <div class="item">
-                <%= image_tag "facebook.png" %>
-            </div>
-            <div class="item">
-                <%= image_tag "facebook.png" %>
-            </div>
-            <div class="item">
-                <%= image_tag "twitter.png" %>
-            </div>
+            <% end %>
         </div>
         <div id="albums" class="content display">
-            <div class="item">
-                <%= image_tag "google.png" %>
-                <div class="mode">
-                    <i class="fa-solid fa-lock"></i>
+            <% @albums.each do |album| %>
+                <div class="item">
+                    <%= image_tag album.media.first.url.url, alt: "My Album" %>
+                    <% if album.mode == "private" %>
+                        <div class="mode">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                    <% end %>
+                    <p class="count">
+                        <%= album.media.count %>
+                    </p>
                 </div>
-                <p class="count">
-                    100
-                </p>
-            </div>
-            <div class="item">
-                <%= image_tag "facebook.png" %>
-                <div class="mode">
-                    <i class="fa-solid fa-lock"></i>
-                </div>
-                <p class="count">
-                    100
-                </p>
-            </div>
-            <div class="item">
-                <%= image_tag "twitter.png" %>
-                <div class="mode">
-                    <i class="fa-solid fa-lock"></i>
-                </div>
-                <p class="count">
-                    100
-                </p>
-            </div>
+            <% end %>
         </div>
         <div id="followers" class="content users">
             <div class="item">
@@ -162,11 +144,11 @@
         </div>
     </section>
 
-    <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="photoModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="photoModalLabel">Photo Details</h1>
                     <span class="badge text-bg-warning">Private</span>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -176,7 +158,7 @@
                         <h5 class="card-title">X</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         <div class="action">
-                            <%= link_to "Edit", edit_photo_path(User.first.id), id: "edit-photo", class: "btn btn-primary", data: { turbo: false } %>
+                            <%= link_to "Edit", edit_photo_path(User.first.id), id: "edit-photo", class: "btn btn-primary" %>
                             <button id="delete-photo" type="button" class="btn btn-danger">Delete</button>
                         </div>
                     </div>
@@ -184,9 +166,9 @@
                 <div class="modal-footer">
                     <p class="react">
                         <i class="fa-regular fa-heart fa-xl"></i>
-                        100K
+                        <span>100K</span>
                     </p>
-                    <p>2 days ago</p>
+                    <p class="ago">2 days ago</p>
                 </div>
             </div>
         </div>
@@ -247,4 +229,4 @@
     </div>
 </main>
 
-<%= javascript_include_tag "profile" %>
+<%= javascript_include_tag "profile", type: "module" %>

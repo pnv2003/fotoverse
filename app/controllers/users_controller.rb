@@ -18,6 +18,8 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @photos = @user.posts.where(type: "Photo")
+    @albums = @user.posts.where(type: "Album")
   end
 
   def edit
