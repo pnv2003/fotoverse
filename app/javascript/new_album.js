@@ -1,11 +1,11 @@
 import { validate, validator } from "./utils/validate.js";
 
 const title = document.querySelector("#album_title");
-const description = document.querySelector("#album_desc");
+const description = document.querySelector("#album_description");
 const grid = document.querySelector("#grid");
 
 const titleError = document.querySelector("#album_title + .error");
-const descError = document.querySelector("#album_desc + .error");
+const descError = document.querySelector("#album_description + .error");
 const mediaError = document.querySelector("#grid + .error");
 
 const save = document.querySelector("#save");
@@ -70,7 +70,6 @@ grid.addEventListener('change', (e) => {
 
 save.addEventListener('click', (e) => {
     e.preventDefault();
-    console.log("bruh");
 
     if (
         validate(null, mediaError, {
@@ -83,6 +82,6 @@ save.addEventListener('click', (e) => {
         // don't send input with no file
         grid.removeChild(document.querySelector("#grid .media-input.active"));
         grid.removeChild(document.querySelector("#grid label.media-item"));
-        document.querySelector("form").submit();
+        document.querySelector("main.new-album form").submit();
     }
 });

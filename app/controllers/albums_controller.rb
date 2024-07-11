@@ -2,20 +2,26 @@ class AlbumsController < ApplicationController
   layout "user"
 
   def new
-    Rails.logger.debug "HELLOOOOOOOOOOOOOOOO AlbumsController#new"
     @album = Album.new
-    @album.media.build
+    @album.media.new
   end
 
   def create
-    Rails.logger.debug "HELOOOOOOOOOOOOOOOOOO AlbumsController#create"
-    @album = Album.new(album_params)
+    @album = Album.new(user_id: current_user.id, title: album_params[:title], mode: album_params[:mode], description: album_params[:description])
+
+    if !@album.save
+      redirect_to new_album_path, flash: {error: "Album creation failed: " + @album.errors.full_messages.join(",")}
+      return
+    end
+
+    album_params[:media_attributes].each do |key, value|
+      @album.media.new(url: value[:url])
+    end
+
     if @album.save
-      # logger.debug "Album created successfully."
-      # redirect_to root_path, flash: { notice: "Album created successfully." }
+      redirect_to root_path, flash: {success: "Album created successfully"}
     else
-      # logger.debug @album.errors.full_messages.join(", ")
-      # redirect_to new_album_path, flash: { error: "Album creation failed: " + @album.errors.full_messages.join(", ")}
+      redirect_to new_album_path, flash: {error: "Album creation failed: " + @album.errors.full_messages.join(",")}
     end
   end
 
@@ -28,6 +34,6 @@ class AlbumsController < ApplicationController
 
   private
   def album_params
-    params.require(:album).permit(:title, :description, media_attribute: [:url, :_destroy])
+    params.require(:album).permit(:title, :mode, :description, media_attributes: [:url, :_destroy])
   end
 end
