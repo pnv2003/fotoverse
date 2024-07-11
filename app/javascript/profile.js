@@ -64,11 +64,54 @@ photoItems.forEach(item => item.addEventListener("click", () => {
         photoModal.querySelector(".badge").style.display = "none";
     }
     photoModal.querySelector(".react span").textContent = reactCount;
-
     photoModal.querySelector(".ago").textContent = getRelativeTime(new Date(updatedAt));
     photoModalInstance.show();
 }));
 albumItems.forEach(item => item.addEventListener("click", () => {
+
+    const images = item.querySelectorAll("img");
+    const title = item.querySelector(".title").textContent;
+    const desc = item.querySelector(".desc").textContent;
+    const mode = item.querySelector(".mode").textContent;
+    const reactCount = item.querySelector(".react-count").textContent;
+    const updatedAt = item.querySelector(".updated-at").textContent;
+
+    // insert images to modal carousel
+    const carousel = albumModal.querySelector(".carousel-inner");
+    const indicators = albumModal.querySelector(".carousel-indicators");
+    carousel.innerHTML = "";
+    indicators.innerHTML = "";
+    images.forEach((img, index) => {
+        const active = index == 0 ? "active" : "";
+        carousel.innerHTML += `
+            <div class="carousel-item ${active}">
+                <img src="${img.src}" class="d-block w-100">
+            </div>
+        `;
+
+        if (index == 0) {
+            indicators.innerHTML += `
+                <button type="button" data-bs-target="#carouselAlbumIndicators" data-bs-slide-to="${index}" class="${active}" aria-current="true" aria-label="Slide ${index + 1}"></button>
+            `;
+        } else {
+            indicators.innerHTML += `
+                <button type="button" data-bs-target="#carouselAlbumIndicators" data-bs-slide-to="${index}" aria-label="Slide ${index + 1}"></button>
+            `;
+        }
+    });
+
+    
+
+
+    albumModal.querySelector(".card-title").textContent = title;
+    albumModal.querySelector(".card-text").textContent = desc;
+    if (mode == "private") {
+        albumModal.querySelector(".badge").style.display = "inline";
+    } else {
+        albumModal.querySelector(".badge").style.display = "none";
+    }
+    albumModal.querySelector(".react span").textContent = reactCount;
+    albumModal.querySelector(".ago").textContent = getRelativeTime(new Date(updatedAt));
     albumModalInstance.show();
 }));
 
