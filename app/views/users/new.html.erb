@@ -33,7 +33,7 @@
 
         <hr>
 
-        <p>Have an account? <%= link_to "Log in", login_path %></p>
+        <p>Have an account? <%= link_to "Log in", login_path, data: { turbo: false } %></p>
     <% end %>
 </main>
 

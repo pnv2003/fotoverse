@@ -30,10 +30,18 @@ class SessionsController < ApplicationController
         redirect_to feeds_path
       end
     end
+
+    if params[:flash]
+      flash[:notice] = params[:flash]
+      render json: { status_code: 200, message: params[:flash] }, status: :ok
+    end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to welcome_path, flash: { notice: "Logout successful."}
+    data = { status_code: 200, message: "Logout successful."}
+    render json: data, status: :ok
+  rescue StandardError => e
+    render json: { status_code: 500, message: e.message }, status: :internal_server_error
   end
 end

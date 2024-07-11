@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_27_063007) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_10_024319) do
   create_table "follows", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "followed_id", null: false
     t.bigint "follower_id", null: false
@@ -24,6 +24,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_27_063007) do
     t.bigint "post_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "url"
     t.index ["post_id"], name: "index_media_on_post_id"
   end
 
@@ -56,6 +57,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_27_063007) do
     t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "avatar"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

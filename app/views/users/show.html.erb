@@ -1,7 +1,7 @@
 <main class="profile">
     <section class="upper">
         <div class="avatar">
-            <%= image_tag "google.png", alt: "avatar", width: 200 %>
+            <%= image_tag @user.avatar.url, alt: "avatar", width: 200 %>
         </div>
         <div class="profile">
             <div class="metrics">
@@ -11,13 +11,16 @@
                 <p><strong>290</strong> following</p>
             </div>
             <div class="info">
-                <p class="name">Bruh</p>
-                <p class="desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Porro cumque, vitae rem, repudiandae odio cum tenetur quidem, ipsum voluptas officiis eius voluptate consequuntur odit quas aspernatur quod magnam sed veritatis!</p>
+                <p class="name"><%= @user.fname + ' ' + @user.lname %></p>
+                <p class="desc">Hello, I'm <%= @user.fname %>. Contact me via my <a href="mailto:<%= @user.email %>">email</a>.</p>
             </div>
             <div class="action">
-                <button class="btn btn-primary follow" type="button">Follow</button>
-                <a class="btn btn-secondary email" href="#">Email</a>
-                <%= link_to "Edit Profile", edit_user_path(@user.id) , class: "btn btn-primary edit" %>
+                <% if session[:user_id] == @user.id %>
+                    <%= link_to "Edit Profile", edit_user_path(@user.id) , class: "btn btn-primary edit", data: { turbo: false } %>
+                <% else %>
+                    <button class="btn btn-primary follow" type="button">Follow</button>
+                    <a class="btn btn-secondary email" href="#">Email</a>
+                <% end %>
             </div>
         </div>
     </section>
@@ -173,7 +176,7 @@
                         <h5 class="card-title">X</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         <div class="action">
-                            <%= link_to "Edit", edit_photo_path(User.first.id), id: "edit-photo", class: "btn btn-primary" %>
+                            <%= link_to "Edit", edit_photo_path(User.first.id), id: "edit-photo", class: "btn btn-primary", data: { turbo: false } %>
                             <button id="delete-photo" type="button" class="btn btn-danger">Delete</button>
                         </div>
                     </div>

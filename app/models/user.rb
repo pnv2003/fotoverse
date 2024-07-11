@@ -17,4 +17,6 @@ class User < ApplicationRecord
   validates :password_digest, presence: true, confirmation: true, length: { maximum: 64 }
   validates :admin, inclusion: [true, false]
   validates :active, inclusion: [true, false]
+
+  mount_uploader :avatar, AvatarUploader
 end

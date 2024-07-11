@@ -6,10 +6,12 @@
     <div id="photos" class="content">      
         <div class="card text-body-secondary">
             <div class="card-header">
+                <%= link_to user_path(session[:user_id]), data: { turbo: false } do %>
                 <div class="user">
                     <%= image_tag "google.png" %>
                     <p class="name">Bruh</p>
                 </div>
+                <% end %>
                 <button class="btn btn-primary follow" type="button">Follow</button>
             </div>
             <%= image_tag "facebook.png", class: "card-img-top" %>
