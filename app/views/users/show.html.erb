@@ -173,6 +173,7 @@
                         <h5 class="card-title">X</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         <div class="action">
+                            <%= link_to "Edit", edit_photo_path(1), id: "edit-photo", class: "btn btn-primary" %>
                             <button id="delete-photo" type="button" class="btn btn-danger">Delete</button>
                         </div>
                     </div>
@@ -227,6 +228,7 @@
                         <h5 class="card-title">X</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         <div class="action">
+                            <%= link_to "Edit", edit_album_path(1), id: "edit-album", class: "btn btn-primary" %>
                             <button id="delete-album" type="button" class="btn btn-danger">Delete</button>
                         </div>
                     </div>

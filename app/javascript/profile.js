@@ -80,12 +80,8 @@ photoItems.forEach(item => item.addEventListener("click", () => {
     photoModal.querySelector(".ago").textContent = getRelativeTime(new Date(updatedAt));
 
     // add edit link
-    const action = document.querySelector("#photoModal .action");
     const editPath = item.querySelector(".edit-path").textContent;
-    
-    action.innerHTML = `
-        <a class="btn btn-primary" href="${editPath}">Edit</a>
-    ` + action.innerHTML;
+    document.querySelector("#edit-photo").href = editPath;
 
     photoModalInstance.show();
 }));
@@ -133,11 +129,8 @@ albumItems.forEach(item => item.addEventListener("click", () => {
     albumModal.querySelector(".ago").textContent = getRelativeTime(new Date(updatedAt));
 
     // add edit link
-    const action = document.querySelector("#albumModal .action");
     const editPath = item.querySelector(".edit-path").textContent;
-    action.innerHTML = `
-        <a class="btn btn-primary" href="${editPath}">Edit</a>
-    ` + action.innerHTML;
+    document.querySelector("#edit-album").href = editPath;
 
     albumModalInstance.show();
 }));
