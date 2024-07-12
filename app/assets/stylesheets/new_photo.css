@@ -2,7 +2,7 @@ main.new-photo form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 3rem;
+    margin: 3rem 0;
 }
 
 main.new-photo form > * {
