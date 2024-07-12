@@ -92,6 +92,8 @@ main.profile .content.display :is(.mode, .count) {
     justify-content: center;
     background-color: rgba(64, 64, 64, 0.5);  
     color: white;
+    aspect-ratio: 1 / 1;
+    width: 2rem;
 }
 
 main.profile .content.display .mode {
