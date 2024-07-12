@@ -31,9 +31,8 @@ class SessionsController < ApplicationController
       end
     end
 
-    if params[:flash]
-      flash[:notice] = params[:flash]
-      render json: { status_code: 200, message: params[:flash] }, status: :ok
+    if params[:notice]
+      render json: { status_code: 200, message: params[:notice] }, status: :ok
     end
   end
 
