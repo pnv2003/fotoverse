@@ -178,7 +178,7 @@ main.profile .modal-footer {
     display: flex;
     align-items: center;
     justify-content: space-between !important;
-    padding: 1rem 2rem;
+    padding: 1rem 1rem;
 }
 
 main.profile .modal-footer * {
@@ -191,6 +191,10 @@ main.profile .modal-footer .react {
     align-items: center;
     gap: 0.5rem;
     cursor: pointer;
+}
+
+main.profile .modal-footer .react span {
+    font-size: 1.5rem;
 }
 
 @media screen and (max-width: 40rem) {
