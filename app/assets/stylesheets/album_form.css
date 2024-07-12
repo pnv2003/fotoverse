@@ -1,26 +1,26 @@
-main.new-album form {
+main.album-form form {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin: 3rem 0;
 }
 
-main.new-album form > * {
+main.album-form form > * {
     width: 35rem;
 }
 
-main.new-album form h1 {
+main.album-form form h1 {
     text-align: center;
     margin-bottom: 1rem;
 }
 
-main.new-album #save {
+main.album-form #save {
     padding: 1rem 0;
     margin-top: 3rem;
 }
 
 @media screen and (max-width: 40rem) {
-    main.new-album form > * {
+    main.album-form form > * {
         width: 25rem;
     }
 }

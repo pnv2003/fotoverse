@@ -154,6 +154,6 @@ save.addEventListener('click', (e) => {
         // don't send input with no file
         grid.removeChild(document.querySelector("#grid .media-input.active"));
         grid.removeChild(document.querySelector("#grid .media-item.active-label"));
-        document.querySelector("main.new-album form").submit();
+        document.querySelector("main.album-form form").submit();
     }
 });

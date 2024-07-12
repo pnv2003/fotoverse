@@ -1,4 +1,4 @@
-<main class="new-album">
+<main class="album-form">
     <%= form_with url: path, model: album, local: true, html: { multipart: true } do |form| %>
         <h1><%= title %></h1>
         <p class="field">
@@ -54,4 +54,4 @@
     <% end %>
 </main>
 
-<%= javascript_include_tag "new_album", type: "module" %>
+<%= javascript_include_tag "album_form", type: "module" %>
