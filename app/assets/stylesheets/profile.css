@@ -73,6 +73,16 @@ main.profile .content.display {
 main.profile .content.display .item {
     position: relative;
     cursor: pointer;
+    overflow: hidden;
+    border-radius: 5px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+main.profile .content.display .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 main.profile .content.display :is(.mode, .count) {
@@ -120,12 +130,7 @@ main.profile .content.users .item {
 }
 
 main.profile .content.users .avatar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 5rem;
-    height: 5rem;
-    border-radius: 50%;
 }
 
 main.profile .content.users img {
@@ -194,14 +199,11 @@ main.profile .modal-footer .react {
     main.profile .upper {
         display: flex;
         flex-direction: column;
+        gap: 2rem;
     }
 
     main.profile .upper .avatar {
         display: flex;
         justify-content: center;
-    }
-
-    main.profile .upper .avatar img {
-        width: 50%;
     }
 }
