@@ -1,6 +1,6 @@
 <%# params: path, model %>
 <main class="edit-photo">
-    <%= form_with url: path, model: model, local: true do |form| %>
+    <%= form_with url: path, model: photo, local: true do |form| %>
         <h1>Edit photo</h1>
         <p class="field">
             <%= form.label :title, "Title", class: "form-label" %>
@@ -19,14 +19,20 @@
             <span class="error text-danger"></span>
         </p>
         <p class="field">
-            <%= form.label :desc, "Description", class: "form-label" %>
-            <%= form.text_area :desc, class: "form-control", rows: 5 %>
+            <%= form.label :description, "Description", class: "form-label" %>
+            <%= form.text_area :description, class: "form-control", rows: 5 %>
             <span class="error text-danger"></span>
         </p>
         <p class="field">
-            <%= form.label :photo, "Photo", class: "form-label" %>
-            <%= form.file_field :photo, class: "form-control" %>
-            <span class="error text-danger"></span>
+            <%= form.label :medium, "Photo", class: "form-label" %>
+            
+            <%= form.fields_for :medium do |medium_form| %>
+                <%= medium_form.file_field :url, class: "media-input form-control", accept: "image/*" %>
+                <span class="error text-danger"></span>
+            <% end %>
+            <div id="preview">
+                <img src="#" alt="Photo Preview">
+            </div>
         </p>
         <%= form.submit "Save", id: "save", class: "btn btn-primary" %>
     <% end %>

@@ -78,6 +78,15 @@ photoItems.forEach(item => item.addEventListener("click", () => {
     }
     photoModal.querySelector(".react span").textContent = reactCount;
     photoModal.querySelector(".ago").textContent = getRelativeTime(new Date(updatedAt));
+
+    // add edit link
+    const action = document.querySelector("#photoModal .action");
+    const editPath = item.querySelector(".edit-path").textContent;
+    
+    action.innerHTML = `
+        <a class="btn btn-primary" href="${editPath}">Edit</a>
+    ` + action.innerHTML;
+
     photoModalInstance.show();
 }));
 albumItems.forEach(item => item.addEventListener("click", () => {
@@ -113,9 +122,6 @@ albumItems.forEach(item => item.addEventListener("click", () => {
         }
     });
 
-    
-
-
     albumModal.querySelector(".card-title").textContent = title;
     albumModal.querySelector(".card-text").textContent = desc;
     if (mode == "private") {
@@ -125,6 +131,14 @@ albumItems.forEach(item => item.addEventListener("click", () => {
     }
     albumModal.querySelector(".react span").textContent = reactCount;
     albumModal.querySelector(".ago").textContent = getRelativeTime(new Date(updatedAt));
+
+    // add edit link
+    const action = document.querySelector("#albumModal .action");
+    const editPath = item.querySelector(".edit-path").textContent;
+    action.innerHTML = `
+        <a class="btn btn-primary" href="${editPath}">Edit</a>
+    ` + action.innerHTML;
+
     albumModalInstance.show();
 }));
 

@@ -50,6 +50,7 @@
                         <p class="mode"><%= photo.mode %></p>
                         <p class="react-count"><%= photo.reactions.count %> </p>
                         <p class="updated-at"><%= photo.updated_at %></p>
+                        <p class="edit-path"><%= edit_photo_path(photo.id) %></p>
                     </div>
                     <% if photo.mode == "private" %>
                         <div class="mode">
@@ -69,6 +70,7 @@
                         <p class="mode"> <%= album.mode %></p>
                         <p class="react-count"><%= album.reactions.count %></p>
                         <p class="updated-at"><%= album.updated_at %></p>
+                        <p class="edit-path"><%= edit_album_path(album.id) %></p>
 
                         <% album.media.each do |medium| %>
                             <%= image_tag medium.url.url, alt: "My Album Photo" %>
@@ -171,7 +173,6 @@
                         <h5 class="card-title">X</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         <div class="action">
-                            <%= link_to "Edit", edit_photo_path(User.first.id), id: "edit-photo", class: "btn btn-primary" %>
                             <button id="delete-photo" type="button" class="btn btn-danger">Delete</button>
                         </div>
                     </div>
@@ -226,7 +227,6 @@
                         <h5 class="card-title">X</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         <div class="action">
-                            <a id="edit-album" href="#" class="btn btn-primary">Edit</a>
                             <button id="delete-album" type="button" class="btn btn-danger">Delete</button>
                         </div>
                     </div>
