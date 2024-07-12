@@ -35,3 +35,6 @@
 /config/master.key
 
 .vscode
+
+# Ignore CarrierWave cache directory
+public/uploads/tmp
