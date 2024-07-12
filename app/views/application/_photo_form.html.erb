@@ -10,11 +10,19 @@
         <p class="field">
             <%= form.label :mode, "Sharing mode", class: "form-label" %>
             <div id="mode" class="btn-group" role="group" aria-label="Basic radio toggle button group">
-                <%= form.radio_button :mode, "public", class: "btn-check", autocomplete: "off", checked: true %>
-                <%= form.label :mode_public, "Public", class: "btn btn-outline-primary" %>
+                <% if @photo.mode && @photo.mode == "private" %>
+                    <%= form.radio_button :mode, "public", class: "btn-check", autocomplete: "off", checked: true %>
+                    <%= form.label :mode_public, "Public", class: "btn btn-outline-primary" %>
 
-                <%= form.radio_button :mode, "private", class: "btn-check", autocomplete: "off", checked: false %>
-                <%= form.label :mode_private, "Private", class: "btn btn-outline-primary" %>
+                    <%= form.radio_button :mode, "private", class: "btn-check", autocomplete: "off", checked: false %>
+                    <%= form.label :mode_private, "Private", class: "btn btn-outline-primary" %>
+                <% else %>
+                    <%= form.radio_button :mode, "public", class: "btn-check", autocomplete: "off", checked: true %>
+                    <%= form.label :mode_public, "Public", class: "btn btn-outline-primary" %>
+
+                    <%= form.radio_button :mode, "private", class: "btn-check", autocomplete: "off", checked: false %>
+                    <%= form.label :mode_private, "Private", class: "btn btn-outline-primary" %>
+                <% end %>
             </div>
             <span class="error text-danger"></span>
         </p>
