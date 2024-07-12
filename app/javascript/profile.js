@@ -1,4 +1,5 @@
 import { getRelativeTime } from "./utils/datetime";
+import { compactFormatter } from "./utils/number";
 
 // tab
 const photos = document.querySelector("#photos");
@@ -76,7 +77,7 @@ photoItems.forEach(item => item.addEventListener("click", () => {
     } else {
         photoModal.querySelector(".badge").style.display = "none";
     }
-    photoModal.querySelector(".react span").textContent = reactCount;
+    photoModal.querySelector(".react span").textContent = compactFormatter.format(reactCount);
     photoModal.querySelector(".ago").textContent = getRelativeTime(new Date(updatedAt));
 
     // add edit link
@@ -125,7 +126,7 @@ albumItems.forEach(item => item.addEventListener("click", () => {
     } else {
         albumModal.querySelector(".badge").style.display = "none";
     }
-    albumModal.querySelector(".react span").textContent = reactCount;
+    albumModal.querySelector(".react span").textContent = compactFormatter.format(reactCount);
     albumModal.querySelector(".ago").textContent = getRelativeTime(new Date(updatedAt));
 
     // add edit link
