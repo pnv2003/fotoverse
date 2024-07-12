@@ -28,6 +28,14 @@ class PhotosController < ApplicationController
   end
 
   def update
+    @photo = Photo.find(params[:id])
+    @photo.medium.destroy
+
+    if @photo.update(photo_params)
+      redirect_to user_path(session[:user_id], tab: "photos"), flash: {success: "Photo updated successfully"}
+    else
+      redirect_to edit_photo_path(@photo), flash: {error: "Photo update failed: " + @photo.errors.full_messages.join(",")}
+    end
   end
 
   private
