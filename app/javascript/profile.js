@@ -11,7 +11,9 @@ const albumTab = document.querySelector("#tab-albums a");
 const followerTab = document.querySelector("#tab-followers a");
 const followingTab = document.querySelector("#tab-following a");
 
-photos.style.display = "grid";
+const activeTabName = document.querySelector("#activeTab").textContent;
+
+photos.style.display = "none";
 albums.style.display = "none";
 followers.style.display = "none";
 following.style.display = "none";
@@ -30,6 +32,17 @@ function changeTab(tab, content) {
 
     activeTab = tab;
     activeContent = content;
+}
+
+// initial tab based on query param
+if (activeTabName === "albums") {
+    changeTab(albumTab, albums);
+} else if (activeTabName === "followers") {
+    changeTab(followerTab, followers);
+} else if (activeTabName === "following") {
+    changeTab(followingTab, following);
+} else { // default to photos
+    changeTab(photoTab, photos);
 }
 
 photoTab.addEventListener('click', () => changeTab(photoTab, photos));
@@ -83,7 +96,6 @@ albumItems.forEach(item => item.addEventListener("click", () => {
     indicators.innerHTML = "";
     images.forEach((img, index) => {
         const active = index == 0 ? "active" : "";
-        console.log("Insert!");
         carousel.innerHTML += `
             <div class="carousel-item ${active}">
                 <img src="${img.src}" class="d-block w-100">

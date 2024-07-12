@@ -19,7 +19,7 @@ class AlbumsController < ApplicationController
     end
 
     if @album.save
-      redirect_to root_path, flash: {success: "Album created successfully"}
+      redirect_to user_path(session[:user_id], tab: "albums"), flash: {success: "Album created successfully"}
     else
       redirect_to new_album_path, flash: {error: "Album creation failed: " + @album.errors.full_messages.join(",")}
     end

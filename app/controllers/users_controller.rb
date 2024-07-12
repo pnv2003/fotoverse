@@ -20,6 +20,12 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @photos = @user.posts.where(type: "Photo")
     @albums = @user.posts.where(type: "Album")
+
+    if (params[:tab].present?)
+      @tab = params[:tab]
+    else
+      @tab = "photos"
+    end
   end
 
   def edit
