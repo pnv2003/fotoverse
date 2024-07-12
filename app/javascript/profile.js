@@ -69,7 +69,7 @@ photoItems.forEach(item => item.addEventListener("click", () => {
 }));
 albumItems.forEach(item => item.addEventListener("click", () => {
 
-    const images = item.querySelectorAll("img");
+    const images = item.querySelectorAll(".info img");
     const title = item.querySelector(".title").textContent;
     const desc = item.querySelector(".desc").textContent;
     const mode = item.querySelector(".mode").textContent;
@@ -83,6 +83,7 @@ albumItems.forEach(item => item.addEventListener("click", () => {
     indicators.innerHTML = "";
     images.forEach((img, index) => {
         const active = index == 0 ? "active" : "";
+        console.log("Insert!");
         carousel.innerHTML += `
             <div class="carousel-item ${active}">
                 <img src="${img.src}" class="d-block w-100">
