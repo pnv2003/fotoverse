@@ -53,6 +53,6 @@ save.addEventListener('click', (e) => {
         validate(description, descError, validator.length(1, 300)) &
         validate(photo, photoError, validator.file)
     ) {
-        document.querySelector('main.new-photo form').submit();
+        document.querySelector('main.photo-form form').submit();
     }
 });

@@ -1,4 +1,4 @@
-<main class="new-photo">
+<main class="photo-form">
     <%= form_with url: path, model: photo, local: true do |form| %>
         <h1><%= title %></h1>
 
@@ -28,10 +28,10 @@
             <%= form.label :medium, "Photo", class: "form-label" %>
             
             <%= form.fields_for :medium do |medium_form| %>
-                <% if photo.medium %>
+                <% if photo.medium.url? %>
                     
-                    <%= medium_form.label :url, class: "media-item" do %>
-                        <%= image_tag photo.medium.url.url, style: "height: 100%" %>
+                    <%= medium_form.label :url, class: "media-item", style: "height: 100%"  do %>
+                        <%= image_tag photo.medium.url.url %>
                         <span class="media-edit">
                             <i class="fa-solid fa-pen-to-square fa-2xl" aria-hidden="false"></i>
                         </span>
@@ -48,4 +48,4 @@
     <% end %>
 </main>
 
-<%= javascript_include_tag "new_photo", type: "module" %>
+<%= javascript_include_tag "photo_form", type: "module" %>
