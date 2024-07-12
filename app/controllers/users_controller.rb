@@ -26,6 +26,10 @@ class UsersController < ApplicationController
     else
       @tab = "photos"
     end
+
+    if (params[:notice].present?)
+      render json: { status_code: 200, message: params[:notice] }, status: :ok
+    end
   end
 
   def edit

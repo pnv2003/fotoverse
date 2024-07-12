@@ -51,6 +51,7 @@
                         <p class="react-count"><%= photo.reactions.count %> </p>
                         <p class="updated-at"><%= photo.updated_at %></p>
                         <p class="edit-path"><%= edit_photo_path(photo.id) %></p>
+                        <p class="delete-path"><%= post_path(photo.id) %></p>
                     </div>
                     <% if photo.mode == "private" %>
                         <div class="mode">
@@ -71,6 +72,7 @@
                         <p class="react-count"><%= album.reactions.count %></p>
                         <p class="updated-at"><%= album.updated_at %></p>
                         <p class="edit-path"><%= edit_album_path(album.id) %></p>
+                        <p class="delete-path"><%= post_path(album.id) %></p>
 
                         <% album.media.each do |medium| %>
                             <%= image_tag medium.url.url, alt: "My Album Photo" %>

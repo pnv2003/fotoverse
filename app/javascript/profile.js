@@ -1,5 +1,6 @@
 import { getRelativeTime } from "./utils/datetime";
 import { compactFormatter } from "./utils/number";
+import http from "./utils/request";
 
 // tab
 const photos = document.querySelector("#photos");
@@ -84,8 +85,20 @@ photoItems.forEach(item => item.addEventListener("click", () => {
     const editPath = item.querySelector(".edit-path").textContent;
     document.querySelector("#edit-photo").href = editPath;
 
+    // add delete event
+    const detelePath = item.querySelector(".delete-path").textContent;
+    document.querySelector("#delete-photo").addEventListener("click", () => {
+        http.delete(detelePath, {}, null).then((response) => {
+            const url = new URL(window.location.href);
+            http.get(url.pathname, { tab: "photo", notice: response.message }, null).then(() => {
+                window.location.reload();
+            });
+        });
+    });
+
     photoModalInstance.show();
 }));
+
 albumItems.forEach(item => item.addEventListener("click", () => {
 
     const images = item.querySelectorAll(".info img");
@@ -132,6 +145,17 @@ albumItems.forEach(item => item.addEventListener("click", () => {
     // add edit link
     const editPath = item.querySelector(".edit-path").textContent;
     document.querySelector("#edit-album").href = editPath;
+
+    // add delete event
+    const detelePath = item.querySelector(".delete-path").textContent;
+    document.querySelector("#delete-album").addEventListener("click", () => {
+        http.delete(detelePath, {}, null).then((response) => {
+            const url = new URL(window.location.href);
+            http.get(url.pathname, { tab: "albums", notice: response.message }, null).then(() => {
+                window.location.reload();
+            });
+        });
+    });
 
     albumModalInstance.show();
 }));
