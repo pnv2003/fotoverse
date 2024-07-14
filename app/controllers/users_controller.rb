@@ -20,6 +20,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @photos = @user.posts.where(type: "Photo")
     @albums = @user.posts.where(type: "Album")
+    @followers = @user.followers
+    @followings = @user.followings
 
     if (params[:tab].present?)
       @tab = params[:tab]

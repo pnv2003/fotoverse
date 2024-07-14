@@ -1,4 +1,5 @@
 import { getRelativeTime } from "./utils/datetime";
+import { debounce } from "./utils/exec";
 import { compactFormatter } from "./utils/number";
 import http from "./utils/request";
 
@@ -175,7 +176,55 @@ function toggleFollow(button) {
     }
 }
 
-followButtons.forEach(button => button.addEventListener('click', () => toggleFollow(button)));
+followButtons.forEach(button => {
+    button.setAttribute("data-status", button.textContent);
+    const debouncedFollow = debounce(() => {
+        if (button.getAttribute("data-status") === "Follow" && button.textContent === "Following") {
+            http.post('/follows', {}, {
+                follow: { 
+                    follower_id: button.getAttribute("data-follower-id"),
+                    followed_id: button.getAttribute("data-followed-id")
+                }
+            }).then((response) => {
+                if (response.status_code === 201) {
+                    console.log(response.message);  
+                    button.setAttribute("data-follow-id", response.follow_id);
+                } else {
+                    console.error(response.message);
+                    toggleFollow(button);
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+                toggleFollow(button);
+            });
+        } else if (button.getAttribute("data-status") === "Following" && button.textContent === "Follow") {
+            http.delete('/follows/1', {}, {
+                follow: {
+                    follower_id: button.getAttribute("data-follower-id"),
+                    followed_id: button.getAttribute("data-followed-id")
+                }
+            }).then((response) => {
+                if (response.status_code === 200) {
+                    console.log(response.message);
+                    button.setAttribute("data-status", "Follow");
+                } else {
+                    console.error(response.message);
+                    toggleFollow(button);
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+                toggleFollow(button);
+            });
+        }
+    }, 1000);
+
+    button.addEventListener('click', () => {
+        toggleFollow(button);
+        debouncedFollow();
+    });
+});
 
 // react
 const reactIcons = document.querySelectorAll(".react");

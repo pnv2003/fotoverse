@@ -28,6 +28,8 @@ Rails.application.routes.draw do
   get 'users/:id/change_password', to: 'users#change_password', as: 'change_password'
   delete 'logout', to: 'sessions#destroy'
 
+  resources :follows, only: [:create, :destroy]
+
   namespace :admin do
     resources :users, only: [:index, :edit, :update, :destroy]
     resources :albums, only: [:index, :edit, :update, :destroy]

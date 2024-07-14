@@ -7,8 +7,8 @@
             <div class="metrics">
                 <p><strong><%= @photos.count %></strong> photos</p>
                 <p><strong><%= @albums.count %></strong> albums</p>
-                <p><strong>465K</strong> followers</p>
-                <p><strong>290</strong> following</p>
+                <p><strong><%= @followers.count %></strong> followers</p>
+                <p><strong><%= @followings.count %></strong> following</p>
             </div>
             <div class="info">
                 <p class="name"><%= @user.fname + ' ' + @user.lname %></p>
@@ -18,8 +18,22 @@
                 <% if session[:user_id] == @user.id %>
                     <%= link_to "Edit Profile", edit_user_path(@user.id) , class: "btn btn-primary edit", data: { turbo: false } %>
                 <% else %>
-                    <button class="btn btn-primary follow" type="button">Follow</button>
-                    <a class="btn btn-secondary email" href="#">Email</a>
+                    <% if @followers.ids.include?(session[:user_id]) %>
+                        <button 
+                            data-follower-id="<%= session[:user_id] %>" 
+                            data-followed-id="<%= @user.id  %>" 
+                            class="btn btn-outline-primary follow" 
+                            type="button"
+                        >Following</button>
+                    <% else %>
+                        <button 
+                            data-follower-id="<%= session[:user_id] %>" 
+                            data-followed-id="<%= @user.id  %>" 
+                            class="btn btn-primary follow" 
+                            type="button"
+                        >Follow</button>
+                    <% end %>
+                    <a class="btn btn-secondary email" href="#">Email</a>                    
                 <% end %>
             </div>
         </div>
@@ -91,73 +105,47 @@
             <% end %>
         </div>
         <div id="followers" class="content users">
-            <div class="item">
-                <div class="avatar">
-                    <%= image_tag "google.png" %>
-                </div>
-                <div class="info">
-                    <p class="name">Bruh</p>
-                    <div class="metrics">
-                        <p>200 photos</p>
-                        <p>20 albums</p>
+            <% @followers.each do |follower| %>
+                <div class="item">
+                    <div class="avatar">
+                        <%= image_tag follower.avatar.url, alt: "avatar" %>
                     </div>
-                </div>
-                <button class="btn btn-primary follow" type="button">Follow</button>
-            </div>
-            <div class="item">
-                <div class="avatar">
-                    <%= image_tag "google.png" %>
-                </div>
-                <div class="info">
-                    <p class="name">Bruh</p>
-                    <div class="metrics">
-                        <p>200 photos</p>
-                        <p>20 albums</p>
+                    <div class="info">
+                        <p class="name"><%= follower.fname + ' ' + follower.lname %></p>
+                        <div class="metrics">
+                            <p><%= follower.posts.where(type: "Photo").count %> photos</p>
+                            <p><%= follower.posts.where(type: "Album").count %> albums</p>
+                        </div>
                     </div>
+
+                    <% if follower.followers.ids.include?(session[:user_id]) %>
+                        <button data-follower-id="<%= session[:user_id] %>" data-followed-id="<%= follower.id %>" class="btn btn-outline-primary follow" type="button">Following</button>
+                    <% else %>
+                        <button data-follower-id="<%= session[:user_id] %>" data-followed-id="<%= follower.id %>" class="btn btn-primary follow" type="button">Follow</button>
+                    <% end %>
                 </div>
-                <button class="btn btn-primary follow" type="button">Follow</button>
-            </div>
-            <div class="item">
-                <div class="avatar">
-                    <%= image_tag "google.png" %>
-                </div>
-                <div class="info">
-                    <p class="name">Bruh</p>
-                    <div class="metrics">
-                        <p>200 photos</p>
-                        <p>20 albums</p>
-                    </div>
-                </div>
-                <button class="btn btn-primary follow" type="button">Follow</button>
-            </div>
+            <% end %>
         </div>
         <div id="following" class="content users">
-            <div class="item">
-                <div class="avatar">
-                    <%= image_tag "google.png" %>
-                </div>
-                <div class="info">
-                    <p class="name">Bruh</p>
-                    <div class="metrics">
-                        <p>200 photos</p>
-                        <p>20 albums</p>
+            <% @followings.each do |following| %>
+                <div class="item">
+                    <div class="avatar">
+                        <%= image_tag following.avatar.url, alt: "avatar" %>
                     </div>
-                </div>
-                <button class="btn btn-primary follow" type="button">Follow</button>
-            </div>
-            <div class="item">
-                <div class="avatar">
-                    <%= image_tag "google.png" %>
-                </div>
-                <div class="info">
-                    <p class="name">Bruh</p>
-                    <div class="metrics">
-                        <p>200 photos</p>
-                        <p>20 albums</p>
+                    <div class="info">
+                        <p class="name"><%= following.fname + ' ' + following.lname %></p>
+                        <div class="metrics">
+                            <p><%= following.posts.where(type: "Photo").count %> photos</p>
+                            <p><%= following.posts.where(type: "Album").count %> albums</p>
+                        </div>
                     </div>
+                    <% if following.followers.ids.include?(session[:user_id]) %>
+                        <button data-follower-id="<%= session[:user_id] %>" data-followed-id="<%= following.id %>" class="btn btn-outline-primary follow" type="button">Following</button>
+                    <% else %>
+                        <button data-follower-id="<%= session[:user_id] %>" data-followed-id="<%= following.id %>" class="btn btn-primary follow" type="button">Follow</button>
+                    <% end %>
                 </div>
-                <button class="btn btn-primary follow" type="button">Follow</button>
-            </div>
+            <% end %>
         </div>
     </section>
 
