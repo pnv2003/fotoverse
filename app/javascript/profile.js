@@ -97,6 +97,16 @@ photoItems.forEach(item => item.addEventListener("click", () => {
         });
     });
 
+    // add reaction info    
+    const photoId = item.querySelector(".id").textContent;
+    const reacted = item.querySelector(".reacted").textContent;
+    const reactButton = photoModal.querySelector(".react");
+    console.log(reacted);
+    if (reacted === "true") {
+        console.log("toggled");
+        toggleReact(reactButton.querySelector("i"));
+    }
+    reactButton.setAttribute("data-post-id", photoId);
     photoModalInstance.show();
 }));
 
@@ -158,6 +168,14 @@ albumItems.forEach(item => item.addEventListener("click", () => {
         });
     });
 
+    // add reaction info
+    const albumId = item.querySelector(".id").textContent;
+    const reacted = item.querySelector(".reacted").textContent;
+    const reactButton = albumModal.querySelector(".react");
+    if (reacted === "true") {
+        toggleReact(reactButton.querySelector("i"));
+    }
+    reactButton.setAttribute("data-post-id", albumId);
     albumModalInstance.show();
 }));
 
@@ -227,22 +245,77 @@ followButtons.forEach(button => {
 });
 
 // react
-const reactIcons = document.querySelectorAll(".react");
+const reactButtons = document.querySelectorAll(".react");
 
-function toggleReact(icon) {
+function toggleReact(icon, count = null) {
     if (icon.classList.contains("fa-solid")) { // reacted
         icon.classList.remove("fa-solid");
         icon.classList.add("fa-regular");
         icon.removeAttribute("style");
+        if (count) {
+            count.textContent = parseInt(count.textContent) - 1;
+        }
     } else {
         icon.classList.remove("fa-regular");
         icon.classList.add("fa-solid");
         icon.setAttribute("style", "color: #ed333b;");
+        if (count) {
+            count.textContent = parseInt(count.textContent) + 1;
+        }
     }
 }
 
-reactIcons.forEach(icon => icon.addEventListener('click', () => {
-    toggleReact(icon.firstElementChild);
+reactButtons.forEach(button => button.addEventListener('click', () => {
+    const icon = button.querySelector("i");
+    const count = button.querySelector("span");
+
+    button.setAttribute("data-reacted", icon.classList.contains("fa-solid"));
+    const debouncedReact = debounce(() => {
+        if (button.getAttribute("data-reacted") === "false" && icon.classList.contains("fa-solid")) {
+            http.post('/reactions', {}, {
+                reaction: {
+                    post_id: button.getAttribute("data-post-id"),
+                    user_id: button.getAttribute("data-user-id")
+                }
+            }).then((response) => {
+                if (response.status_code === 201) {
+                    console.log(response.message);
+                    button.setAttribute("data-reacted", "true");
+                } else {
+                    console.error(response.message);
+                    toggleReact(icon, count);
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+                toggleReact(icon, count);
+            });
+        } else if (button.getAttribute("data-reacted") === "true" && !icon.classList.contains("fa-solid")) {
+            http.delete('/reactions/1', {}, {
+                reaction: {
+                    post_id: button.getAttribute("data-post-id"),
+                    user_id: button.getAttribute("data-user-id")
+                }
+            }).then((response) => {
+                if (response.status_code === 200) {
+                    console.log(response.message);
+                    button.setAttribute("data-reacted", "false");
+                } else {
+                    console.error(response.message);
+                    toggleReact(icon, count);
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+                toggleReact(icon, count);
+            });
+        }
+    }, 1000);
+
+    button.addEventListener('click', () => {
+        toggleReact(icon, count);
+        debouncedReact();
+    });
 }))
-document.querySelector("#photoModal img").addEventListener('dblclick', () => toggleReact(document.querySelector("#photoModal .react i")));
-document.querySelector("#albumModal img").addEventListener('dblclick', () => toggleReact(document.querySelector("#albumModal .react i")));
+// document.querySelector("#photoModal img").addEventListener('dblclick', () => toggleReact(document.querySelector("#photoModal .react i")));
+// document.querySelector("#albumModal img").addEventListener('dblclick', () => toggleReact(document.querySelector("#albumModal .react i")));

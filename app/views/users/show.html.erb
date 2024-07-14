@@ -59,10 +59,12 @@
                 <div class="item">
                     <%= image_tag photo.medium.url.url, alt: "My Photo" %>
                     <div class="info" style="display: none">
+                        <p class="id"><%= photo.id %></p>
                         <p class="title"><%= photo.title %></p>
                         <p class="desc"><%= photo.description %></p>
                         <p class="mode"><%= photo.mode %></p>
-                        <p class="react-count"><%= photo.reactions.count %> </p>
+                        <p class="reacted"><%= photo.reactors.ids.include?(session[:user_id]) %></p>
+                        <p class="react-count"><%= photo.reactions.count %></p>
                         <p class="updated-at"><%= photo.updated_at %></p>
                         <p class="edit-path"><%= edit_photo_path(photo.id) %></p>
                         <p class="delete-path"><%= post_path(photo.id) %></p>
@@ -80,9 +82,11 @@
                 <div class="item">
                     <%= image_tag album.media.first.url.url, alt: "My Album" %>
                     <div class="info" style="display: none">
+                        <p class="id"><%= album.id %></p>
                         <p class="title"><%= album.title %></p>
-                        <p class="desc"> <%= album.description %></p>
-                        <p class="mode"> <%= album.mode %></p>
+                        <p class="desc"><%= album.description %></p>
+                        <p class="mode"><%= album.mode %></p>
+                        <p class="reacted"><%= album.reactors.ids.include?(session[:user_id]) %></p>
                         <p class="react-count"><%= album.reactions.count %></p>
                         <p class="updated-at"><%= album.updated_at %></p>
                         <p class="edit-path"><%= edit_album_path(album.id) %></p>
@@ -170,7 +174,10 @@
                 </div>
                 <div class="modal-footer">
                     <p class="react">
-                        <i class="fa-regular fa-heart fa-xl"></i>
+                        <i 
+                            class="fa-regular fa-heart fa-xl"
+                            data-user-id="<%= session[:user_id] %>"
+                        ></i>
                         <span>100K</span>
                     </p>
                     <p class="ago">2 days ago</p>
@@ -225,7 +232,10 @@
                 </div>
                 <div class="modal-footer">
                     <p class="react">
-                        <i class="fa-regular fa-heart fa-xl"></i>
+                        <i 
+                            class="fa-regular fa-heart fa-xl"
+                            data-user-id="<%= session[:user_id] %>"
+                        ></i>
                         <span>100K</span>
                     </p>
                     <p class="ago">2 days ago</p>
