@@ -2,7 +2,7 @@
     <header class="user sticky-top">
         <nav class="navbar navbar-expand-md" data-bs-theme="dark">
             <div class="container-fluid">
-                <a class="navbar-brand logo" href="#">Fotoverse</a>
+                <%= link_to "Fotoverse", root_path, class: "navbar-brand logo" %>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -45,7 +45,7 @@
                         </li>
                         <li class="nav-item">
                             <% if params[:controller] == 'users' && params[:action] == 'show' %>
-                                <a class="nav-link active" aria-current="page" href="#">Profile</a>
+                                <%= link_to "Profile", user_path(session[:user_id]), id: "nav-profile", class: "nav-link active", aria: { current: "page" }, data: {turbo: false}%>
                             <% else %>
                                 <%= link_to "Profile", user_path(session[:user_id]), id: "nav-profile", class: "nav-link", data: {turbo: false}%>
                             <% end %>
