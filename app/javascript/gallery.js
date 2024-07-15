@@ -25,6 +25,17 @@ function changeTab(tab, content) {
 
     activeTab = tab;
     activeContent = content;
+
+    // change URL
+    history.pushState({}, "", `?tab=${tab === photoTab ? "photos" : "albums"}`);
+}
+
+// initial tab based on query param
+const activeTabName = document.querySelector("#activeTab").textContent;
+if (activeTabName === "albums") {
+    changeTab(albumTab, albums);
+} else {
+    changeTab(photoTab, photos);
 }
 
 photoTab.addEventListener('click', () => changeTab(photoTab, photos));

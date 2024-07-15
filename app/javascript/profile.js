@@ -35,6 +35,13 @@ function changeTab(tab, content) {
 
     activeTab = tab;
     activeContent = content;
+
+    // change URL
+    history.pushState(null, null, `?tab=${
+        tab === photoTab ? "photos" : 
+        tab === albumTab ? "albums" : 
+        tab === followerTab ? "followers" : "following"
+    }`);
 }
 
 // initial tab based on query param
