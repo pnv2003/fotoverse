@@ -35,3 +35,18 @@ main.login .third-party {
     align-items: center;
     margin-bottom: 2rem;
 }
+
+main.login .or {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+main.login .or::before,
+main.login .or::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid lightgray;
+  margin: 0 10px;
+}

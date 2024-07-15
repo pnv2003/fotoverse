@@ -5,7 +5,7 @@ main.signup {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 7rem;
+    margin-top: 4rem;
 }
 
 main.signup form {
@@ -33,4 +33,26 @@ main.signup form h1 {
 
 main.signup .agree {
     text-align: center;
+}
+
+main.signup .third-party {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+main.signup .or {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+main.signup .or::before,
+main.signup .or::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid lightgray;
+  margin: 0 10px;
 }
