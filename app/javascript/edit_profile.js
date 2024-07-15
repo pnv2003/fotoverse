@@ -19,16 +19,16 @@ const previewImage = document.querySelector("#preview-avatar > img");
 const cropperModal = new bootstrap.Modal('#cropperModal');
 let cropper;
 
-let doIt
-window.addEventListener('resize', () => {
-	if (cropper) {
-		clearTimeout(doIt);
-		cropper.disable()
-		doIt = setTimeout(() => {
-			cropper.enable()
-		}, 100);
-	}	
-})
+// let doIt;
+// window.addEventListener('resize', () => {
+// 	if (cropper) {
+// 		clearTimeout(doIt);
+// 		cropper.disable();
+// 		doIt = setTimeout(() => {
+// 			cropper.enable();
+// 		}, 100);
+// 	}	
+// })
 
 avatar.onchange = (event) => {
 	let result = document.querySelector('#input-image');
@@ -61,12 +61,13 @@ avatar.onchange = (event) => {
 				this.cropper = cropper;
 			},
 			crop: function(event) {
-				let imgSrc = this.cropper.getCroppedCanvas({
-					width: 170,
-					height: 170
-				}).toDataURL("image/png");
-				preview.style.display = "block";
-				previewImage.src = imgSrc;
+				// console.log("change?");
+				// let imgSrc = this.cropper.getCroppedCanvas({
+				// 	width: 170,
+				// 	height: 170
+				// }).toDataURL("image/png");
+				// preview.style.display = "block";
+				// previewImage.src = imgSrc;
 			}
 		});
 		cropperModal.show();
@@ -74,6 +75,7 @@ avatar.onchange = (event) => {
 }
 
 document.querySelector("#cropperModal #save").addEventListener('click', () => {
+	console.log("change");
     previewImage.src = cropper.getCroppedCanvas().toDataURL();
     preview.style.display = "block";
     cropperModal.hide();
@@ -81,6 +83,7 @@ document.querySelector("#cropperModal #save").addEventListener('click', () => {
 
 document.querySelectorAll("#cropperModal button[data-bs-dismiss='modal']").forEach((button) => {
 	button.addEventListener('click', () => {
+		console.log("change");
 		previewImage.src = '';
 		preview.style.display = "none";
 		cropper.destroy();

@@ -35,6 +35,13 @@ function changeTab(tab, content) {
 
     activeTab = tab;
     activeContent = content;
+
+    // change URL
+    history.pushState(null, null, `?tab=${
+        tab === photoTab ? "photos" : 
+        tab === albumTab ? "albums" : 
+        tab === followerTab ? "followers" : "following"
+    }`);
 }
 
 // initial tab based on query param
@@ -101,9 +108,7 @@ photoItems.forEach(item => item.addEventListener("click", () => {
     const photoId = item.querySelector(".id").textContent;
     const reacted = item.querySelector(".reacted").textContent;
     const reactButton = photoModal.querySelector(".react");
-    console.log(reacted);
     if (reacted === "true") {
-        console.log("toggled");
         toggleReact(reactButton.querySelector("i"));
     }
     reactButton.setAttribute("data-post-id", photoId);
@@ -206,7 +211,7 @@ followButtons.forEach(button => {
             }).then((response) => {
                 if (response.status_code === 201) {
                     console.log(response.message);  
-                    button.setAttribute("data-follow-id", response.follow_id);
+                    button.setAttribute("data-status", "Following");
                 } else {
                     console.error(response.message);
                     toggleFollow(button);
@@ -265,7 +270,7 @@ function toggleReact(icon, count = null) {
     }
 }
 
-reactButtons.forEach(button => button.addEventListener('click', () => {
+reactButtons.forEach(button => {
     const icon = button.querySelector("i");
     const count = button.querySelector("span");
 
@@ -285,8 +290,7 @@ reactButtons.forEach(button => button.addEventListener('click', () => {
                     console.error(response.message);
                     toggleReact(icon, count);
                 }
-            })
-            .catch((error) => {
+            }).catch((error) => {
                 console.error(error);
                 toggleReact(icon, count);
             });
@@ -316,6 +320,6 @@ reactButtons.forEach(button => button.addEventListener('click', () => {
         toggleReact(icon, count);
         debouncedReact();
     });
-}))
+});
 // document.querySelector("#photoModal img").addEventListener('dblclick', () => toggleReact(document.querySelector("#photoModal .react i")));
 // document.querySelector("#albumModal img").addEventListener('dblclick', () => toggleReact(document.querySelector("#albumModal .react i")));

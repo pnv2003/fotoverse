@@ -1,4 +1,4 @@
-main.feeds {
+main.gallery {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -6,20 +6,20 @@ main.feeds {
     gap: 2rem;
 }
 
-main.feeds .content {
+main.gallery .content {
     display: grid;
     gap: 1rem;
 }
 
-main.feeds .content .card {
+main.gallery .content .card {
     width: 18rem;
 }
 
-main.feeds .card {
+main.gallery .card {
     position: relative;
 }
 
-main.feeds .card .count {
+main.gallery .card .count {
     position: absolute;
     top: 4rem;
     right: 0.5rem;
@@ -30,32 +30,54 @@ main.feeds .card .count {
     color: white;
     padding: 0.3rem;
     border-radius: 5px;
+    aspect-ratio: 1 / 1;
+    width: 2rem;
 }
 
-main.feeds :is(.card-header, .modal-header) .user {
+main.gallery :is(.card-header, .modal-header) a {
+    text-decoration: none;
+    color: black;
+}
+
+main.gallery :is(.card-header, .modal-header) .user {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     margin-right: 1rem;
 }
 
-main.feeds :is(.card-header, .modal-header) .user img {
+main.gallery :is(.card-header, .modal-header) .user img {
     width: 2rem;
     border-radius: 50%;
 }
 
-main.feeds :is(.card-header, .modal-header, .card-footer, .modal-footer) {
+main.gallery .image {
+    cursor: pointer;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+}
+
+main.gallery .card-img-top {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+main.gallery :is(.card-header, .modal-header, .card-footer, .modal-footer) {
     display: flex;
     align-items: center;
     justify-content: space-between !important;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
 }
 
-main.feeds :is(.card-header, .modal-header, .card-footer, .modal-footer) p {
+main.gallery :is(.card-header, .modal-header, .card-footer, .modal-footer) p {
     padding: 0;
     margin: 0;
 }
 
-main.feeds .card-footer .react {
+main.gallery :is(.card-footer, .modal-footer) .react {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -63,25 +85,25 @@ main.feeds .card-footer .react {
 }
 
 @media screen and (min-width: 80rem) {
-    main.feeds .content {
+    main.gallery .content {
         grid-template-columns: repeat(4, 1fr);
     }
 }
 
 @media screen and (min-width: 60rem) and (max-width: 80rem) {
-    main.feeds .content {
+    main.gallery .content {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
 @media screen and (min-width: 40rem) and (max-width: 60rem) {
-    main.feeds .content {
+    main.gallery .content {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media screen and (max-width: 40rem) {
-    main.feeds .content .card {
+    main.gallery .content .card {
         width: 100%;
     }
 }
