@@ -1,5 +1,6 @@
 <main class="gallery">
     <div class="btn-group">
+        <p id="activeTab" style="display: none"><%= tab %></p>
         <a id="tab-photos" href="#" class="btn btn-primary active" aria-current="page">Photos</a>
         <a id="tab-albums" href="#" class="btn btn-primary">Albums</a>
     </div>
@@ -55,6 +56,12 @@
                 </div>                
             </div>
         <% end %>
+
+        <div class="infinite-scroll-end"></div>
+
+        <div class="pagination">
+            <%= paginate photos %>
+        </div>
     </div>
 
     <div id="albums" class="content">   
