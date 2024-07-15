@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :authorized, only: [:welcome, :new, :create]
+  # skip_before_action :authorized, only: [:welcome, :new, :create]
 
   def new
   end

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :authorized, only: [:new, :create]
+  # skip_before_action :authorized, only: [:new, :create]
   layout "user", only: [:show, :edit, :change_password]
 
   def new
