@@ -73,6 +73,16 @@ main.profile .content.display {
 main.profile .content.display .item {
     position: relative;
     cursor: pointer;
+    overflow: hidden;
+    border-radius: 5px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+main.profile .content.display .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 main.profile .content.display :is(.mode, .count) {
@@ -82,6 +92,8 @@ main.profile .content.display :is(.mode, .count) {
     justify-content: center;
     background-color: rgba(64, 64, 64, 0.5);  
     color: white;
+    aspect-ratio: 1 / 1;
+    width: 2rem;
 }
 
 main.profile .content.display .mode {
@@ -120,12 +132,7 @@ main.profile .content.users .item {
 }
 
 main.profile .content.users .avatar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 5rem;
-    height: 5rem;
-    border-radius: 50%;
 }
 
 main.profile .content.users img {
@@ -171,7 +178,7 @@ main.profile .modal-footer {
     display: flex;
     align-items: center;
     justify-content: space-between !important;
-    padding: 1rem 2rem;
+    padding: 1rem 1rem;
 }
 
 main.profile .modal-footer * {
@@ -186,6 +193,10 @@ main.profile .modal-footer .react {
     cursor: pointer;
 }
 
+main.profile .modal-footer .react span {
+    font-size: 1.5rem;
+}
+
 @media screen and (max-width: 40rem) {
     main.profile .content.display {
         grid-template-columns: repeat(3, 1fr);
@@ -194,14 +205,11 @@ main.profile .modal-footer .react {
     main.profile .upper {
         display: flex;
         flex-direction: column;
+        gap: 2rem;
     }
 
     main.profile .upper .avatar {
         display: flex;
         justify-content: center;
-    }
-
-    main.profile .upper .avatar img {
-        width: 50%;
     }
 }

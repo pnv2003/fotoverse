@@ -1,0 +1,59 @@
+<main class="photo-form">
+    <%= form_with url: path, model: photo, local: true do |form| %>
+        <h1><%= title %></h1>
+
+        <p class="field">
+            <%= form.label :title, "Title", class: "form-label" %>
+            <%= form.text_field :title, class: "form-control" %>
+            <span class="error text-danger"></span>
+        </p>
+        <p class="field">
+            <%= form.label :mode, "Sharing mode", class: "form-label" %>
+            <div id="mode" class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                <% if @photo.mode && @photo.mode == "private" %>
+                    <%= form.radio_button :mode, "public", class: "btn-check", autocomplete: "off", checked: true %>
+                    <%= form.label :mode_public, "Public", class: "btn btn-outline-primary" %>
+
+                    <%= form.radio_button :mode, "private", class: "btn-check", autocomplete: "off", checked: false %>
+                    <%= form.label :mode_private, "Private", class: "btn btn-outline-primary" %>
+                <% else %>
+                    <%= form.radio_button :mode, "public", class: "btn-check", autocomplete: "off", checked: true %>
+                    <%= form.label :mode_public, "Public", class: "btn btn-outline-primary" %>
+
+                    <%= form.radio_button :mode, "private", class: "btn-check", autocomplete: "off", checked: false %>
+                    <%= form.label :mode_private, "Private", class: "btn btn-outline-primary" %>
+                <% end %>
+            </div>
+            <span class="error text-danger"></span>
+        </p>
+        <p class="field">
+            <%= form.label :description, "Title", class: "form-label" %>
+            <%= form.text_area :description, rows: 5, class: "form-control" %>
+            <span class="error text-danger"></span>
+        </p>
+
+        <p class="field photo">
+            <%= form.label :medium, "Photo", class: "form-label" %>
+            
+            <%= form.fields_for :medium do |medium_form| %>
+                <% if photo.medium.url? %>
+                    
+                    <%= medium_form.label :url, class: "media-item", style: "height: 100%"  do %>
+                        <%= image_tag photo.medium.url.url %>
+                        <span class="media-edit">
+                            <i class="fa-solid fa-pen-to-square fa-2xl" aria-hidden="false"></i>
+                        </span>
+                    <% end %>
+                <% else %>
+                    <%= medium_form.label :url, "Select or drop your fancy photo here", class: "media-item form-label btn btn-outline-primary" %>
+                <% end %>
+                <%= medium_form.file_field :url, class: "media-input", accept: "image/*" %>
+                <span class="error text-danger"></span>
+            <% end %>
+        </p>
+
+        <%= form.submit "Save", id: "save", class: "btn btn-primary" %>
+    <% end %>
+</main>
+
+<%= javascript_include_tag "photo_form", type: "module" %>

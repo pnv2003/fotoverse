@@ -5,10 +5,10 @@
         </div>
         <div class="profile">
             <div class="metrics">
-                <p><strong>135</strong> photos</p>
-                <p><strong>32</strong> albums</p>
-                <p><strong>465K</strong> followers</p>
-                <p><strong>290</strong> following</p>
+                <p><strong><%= @photos.count %></strong> photos</p>
+                <p><strong><%= @albums.count %></strong> albums</p>
+                <p><strong><%= @followers.count %></strong> followers</p>
+                <p><strong><%= @followings.count %></strong> following</p>
             </div>
             <div class="info">
                 <p class="name"><%= @user.fname + ' ' + @user.lname %></p>
@@ -18,14 +18,29 @@
                 <% if session[:user_id] == @user.id %>
                     <%= link_to "Edit Profile", edit_user_path(@user.id) , class: "btn btn-primary edit", data: { turbo: false } %>
                 <% else %>
-                    <button class="btn btn-primary follow" type="button">Follow</button>
-                    <a class="btn btn-secondary email" href="#">Email</a>
+                    <% if @followers.ids.include?(session[:user_id]) %>
+                        <button 
+                            data-follower-id="<%= session[:user_id] %>" 
+                            data-followed-id="<%= @user.id  %>" 
+                            class="btn btn-outline-primary follow" 
+                            type="button"
+                        >Following</button>
+                    <% else %>
+                        <button 
+                            data-follower-id="<%= session[:user_id] %>" 
+                            data-followed-id="<%= @user.id  %>" 
+                            class="btn btn-primary follow" 
+                            type="button"
+                        >Follow</button>
+                    <% end %>
+                    <a class="btn btn-secondary email" href="#">Email</a>                    
                 <% end %>
             </div>
         </div>
     </section>
     <section class="lower">
         <ul class="nav nav-tabs">
+            <p id="activeTab" style="display: none"><%= @tab %></p>
             <li id="tab-photos" class="nav-item">
                 <a class="nav-link active" aria-current="page" href="#">Photos</a>
             </li>
@@ -40,133 +55,109 @@
             </li>
         </ul>
         <div id="photos" class="content display">
-            <div class="item">
-                <%= image_tag "google.png" %>
-                <div class="mode">
-                    <i class="fa-solid fa-lock"></i>
+            <% @photos.each do |photo| %>
+                <div class="item">
+                    <%= image_tag photo.medium.url.url, alt: "My Photo" %>
+                    <div class="info" style="display: none">
+                        <p class="id"><%= photo.id %></p>
+                        <p class="title"><%= photo.title %></p>
+                        <p class="desc"><%= photo.description %></p>
+                        <p class="mode"><%= photo.mode %></p>
+                        <p class="reacted"><%= photo.reactors.ids.include?(session[:user_id]) %></p>
+                        <p class="react-count"><%= photo.reactions.count %></p>
+                        <p class="updated-at"><%= photo.updated_at %></p>
+                        <p class="edit-path"><%= edit_photo_path(photo.id) %></p>
+                        <p class="delete-path"><%= post_path(photo.id) %></p>
+                    </div>
+                    <% if photo.mode == "private" %>
+                        <div class="mode">
+                                <i class="fa-solid fa-lock"></i>
+                        </div>
+                    <% end %>
                 </div>
-            </div>
-            <div class="item">
-                <%= image_tag "facebook.png" %>
-            </div>
-            <div class="item">
-                <%= image_tag "twitter.png" %>
-            </div>
-            <div class="item">
-                <%= image_tag "facebook.png" %>
-            </div>
-            <div class="item">
-                <%= image_tag "facebook.png" %>
-            </div>
-            <div class="item">
-                <%= image_tag "twitter.png" %>
-            </div>
+            <% end %>
         </div>
         <div id="albums" class="content display">
-            <div class="item">
-                <%= image_tag "google.png" %>
-                <div class="mode">
-                    <i class="fa-solid fa-lock"></i>
+            <% @albums.each do |album| %>
+                <div class="item">
+                    <%= image_tag album.media.first.url.url, alt: "My Album" %>
+                    <div class="info" style="display: none">
+                        <p class="id"><%= album.id %></p>
+                        <p class="title"><%= album.title %></p>
+                        <p class="desc"><%= album.description %></p>
+                        <p class="mode"><%= album.mode %></p>
+                        <p class="reacted"><%= album.reactors.ids.include?(session[:user_id]) %></p>
+                        <p class="react-count"><%= album.reactions.count %></p>
+                        <p class="updated-at"><%= album.updated_at %></p>
+                        <p class="edit-path"><%= edit_album_path(album.id) %></p>
+                        <p class="delete-path"><%= post_path(album.id) %></p>
+
+                        <% album.media.each do |medium| %>
+                            <%= image_tag medium.url.url, alt: "My Album Photo" %>
+                        <% end %>
+                        
+                    </div>
+                    <% if album.mode == "private" %>
+                        <div class="mode">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                    <% end %>
+                    <p class="count">
+                        <%= album.media.count %>
+                    </p>
                 </div>
-                <p class="count">
-                    100
-                </p>
-            </div>
-            <div class="item">
-                <%= image_tag "facebook.png" %>
-                <div class="mode">
-                    <i class="fa-solid fa-lock"></i>
-                </div>
-                <p class="count">
-                    100
-                </p>
-            </div>
-            <div class="item">
-                <%= image_tag "twitter.png" %>
-                <div class="mode">
-                    <i class="fa-solid fa-lock"></i>
-                </div>
-                <p class="count">
-                    100
-                </p>
-            </div>
+            <% end %>
         </div>
         <div id="followers" class="content users">
-            <div class="item">
-                <div class="avatar">
-                    <%= image_tag "google.png" %>
-                </div>
-                <div class="info">
-                    <p class="name">Bruh</p>
-                    <div class="metrics">
-                        <p>200 photos</p>
-                        <p>20 albums</p>
+            <% @followers.each do |follower| %>
+                <div class="item">
+                    <div class="avatar">
+                        <%= image_tag follower.avatar.url, alt: "avatar" %>
                     </div>
-                </div>
-                <button class="btn btn-primary follow" type="button">Follow</button>
-            </div>
-            <div class="item">
-                <div class="avatar">
-                    <%= image_tag "google.png" %>
-                </div>
-                <div class="info">
-                    <p class="name">Bruh</p>
-                    <div class="metrics">
-                        <p>200 photos</p>
-                        <p>20 albums</p>
+                    <div class="info">
+                        <p class="name"><%= follower.fname + ' ' + follower.lname %></p>
+                        <div class="metrics">
+                            <p><%= follower.posts.where(type: "Photo").count %> photos</p>
+                            <p><%= follower.posts.where(type: "Album").count %> albums</p>
+                        </div>
                     </div>
+
+                    <% if follower.followers.ids.include?(session[:user_id]) %>
+                        <button data-follower-id="<%= session[:user_id] %>" data-followed-id="<%= follower.id %>" class="btn btn-outline-primary follow" type="button">Following</button>
+                    <% else %>
+                        <button data-follower-id="<%= session[:user_id] %>" data-followed-id="<%= follower.id %>" class="btn btn-primary follow" type="button">Follow</button>
+                    <% end %>
                 </div>
-                <button class="btn btn-primary follow" type="button">Follow</button>
-            </div>
-            <div class="item">
-                <div class="avatar">
-                    <%= image_tag "google.png" %>
-                </div>
-                <div class="info">
-                    <p class="name">Bruh</p>
-                    <div class="metrics">
-                        <p>200 photos</p>
-                        <p>20 albums</p>
-                    </div>
-                </div>
-                <button class="btn btn-primary follow" type="button">Follow</button>
-            </div>
+            <% end %>
         </div>
         <div id="following" class="content users">
-            <div class="item">
-                <div class="avatar">
-                    <%= image_tag "google.png" %>
-                </div>
-                <div class="info">
-                    <p class="name">Bruh</p>
-                    <div class="metrics">
-                        <p>200 photos</p>
-                        <p>20 albums</p>
+            <% @followings.each do |following| %>
+                <div class="item">
+                    <div class="avatar">
+                        <%= image_tag following.avatar.url, alt: "avatar" %>
                     </div>
-                </div>
-                <button class="btn btn-primary follow" type="button">Follow</button>
-            </div>
-            <div class="item">
-                <div class="avatar">
-                    <%= image_tag "google.png" %>
-                </div>
-                <div class="info">
-                    <p class="name">Bruh</p>
-                    <div class="metrics">
-                        <p>200 photos</p>
-                        <p>20 albums</p>
+                    <div class="info">
+                        <p class="name"><%= following.fname + ' ' + following.lname %></p>
+                        <div class="metrics">
+                            <p><%= following.posts.where(type: "Photo").count %> photos</p>
+                            <p><%= following.posts.where(type: "Album").count %> albums</p>
+                        </div>
                     </div>
+                    <% if following.followers.ids.include?(session[:user_id]) %>
+                        <button data-follower-id="<%= session[:user_id] %>" data-followed-id="<%= following.id %>" class="btn btn-outline-primary follow" type="button">Following</button>
+                    <% else %>
+                        <button data-follower-id="<%= session[:user_id] %>" data-followed-id="<%= following.id %>" class="btn btn-primary follow" type="button">Follow</button>
+                    <% end %>
                 </div>
-                <button class="btn btn-primary follow" type="button">Follow</button>
-            </div>
+            <% end %>
         </div>
     </section>
 
-    <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="photoModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="photoModalLabel">Photo Details</h1>
                     <span class="badge text-bg-warning">Private</span>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -176,35 +167,39 @@
                         <h5 class="card-title">X</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         <div class="action">
-                            <%= link_to "Edit", edit_photo_path(User.first.id), id: "edit-photo", class: "btn btn-primary", data: { turbo: false } %>
+                            <%= link_to "Edit", edit_photo_path(1), id: "edit-photo", class: "btn btn-primary" %>
                             <button id="delete-photo" type="button" class="btn btn-danger">Delete</button>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <p class="react">
-                        <i class="fa-regular fa-heart fa-xl"></i>
-                        100K
+                        <i 
+                            class="fa-regular fa-heart fa-xl"
+                            data-user-id="<%= session[:user_id] %>"
+                        ></i>
+                        <span>100K</span>
                     </p>
-                    <p>2 days ago</p>
+                    <p class="ago">2 days ago</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="albumModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="albumModal" tabindex="-1" aria-labelledby="albumModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="albumModalLabel">Album Details</h1>
+                    <span class="badge text-bg-warning">Private</span>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body card">
-                    <div id="carouselExampleIndicators" class="card-img-top carousel slide">
+                    <div id="carouselAlbumIndicators" class="card-img-top carousel slide">
                         <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            <button type="button" data-bs-target="#carouselAlbumIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselAlbumIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselAlbumIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
                         </div>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
@@ -217,11 +212,11 @@
                                 <%= image_tag "twitter.png", class: "d-block w-100" %>
                             </div>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselAlbumIndicators" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Previous</span>
                         </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselAlbumIndicators" data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
                             <span class="visually-hidden">Next</span>
                         </button>
@@ -230,21 +225,24 @@
                         <h5 class="card-title">X</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         <div class="action">
-                            <a id="edit-album" href="#" class="btn btn-primary">Edit</a>
+                            <%= link_to "Edit", edit_album_path(1), id: "edit-album", class: "btn btn-primary" %>
                             <button id="delete-album" type="button" class="btn btn-danger">Delete</button>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <p class="react">
-                        <i class="fa-regular fa-heart fa-xl"></i>
-                        100K
+                        <i 
+                            class="fa-regular fa-heart fa-xl"
+                            data-user-id="<%= session[:user_id] %>"
+                        ></i>
+                        <span>100K</span>
                     </p>
-                    <p>2 days ago</p>
+                    <p class="ago">2 days ago</p>
                 </div>
             </div>
         </div>
     </div>
 </main>
 
-<%= javascript_include_tag "profile" %>
+<%= javascript_include_tag "profile", type: "module" %>

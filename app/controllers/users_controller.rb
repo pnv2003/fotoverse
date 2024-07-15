@@ -18,6 +18,20 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @photos = @user.posts.where(type: "Photo")
+    @albums = @user.posts.where(type: "Album")
+    @followers = @user.followers
+    @followings = @user.followings
+
+    if (params[:tab].present?)
+      @tab = params[:tab]
+    else
+      @tab = "photos"
+    end
+
+    if (params[:notice].present?)
+      render json: { status_code: 200, message: params[:notice] }, status: :ok
+    end
   end
 
   def edit

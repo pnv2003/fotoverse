@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :authorized
+  before_action :flash_message
   helper_method :current_user
   helper_method :logged_in?
 
@@ -24,6 +25,16 @@ class ApplicationController < ActionController::Base
   def authorized_as_admin
     unless logged_in? && current_user.admin
       redirect_to welcome_path, flash: { error: "Access denied" }
+    end
+  end
+
+  def flash_message
+    if params[:error]
+      flash[:error] = params[:error]
+    elsif params[:success]
+      flash[:success] = params[:success]
+    elsif params[:notice]
+      flash[:notice] = params[:notice]
     end
   end
 end

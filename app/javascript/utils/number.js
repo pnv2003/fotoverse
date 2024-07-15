@@ -1,0 +1,1 @@
+export const compactFormatter = new Intl.NumberFormat('en', { notation: 'compact' });

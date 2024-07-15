@@ -19,7 +19,7 @@ class AlbumsController < ApplicationController
     end
 
     if @album.save
-      redirect_to root_path, flash: {success: "Album created successfully"}
+      redirect_to user_path(session[:user_id], tab: "albums"), flash: {success: "Album created successfully"}
     else
       redirect_to new_album_path, flash: {error: "Album creation failed: " + @album.errors.full_messages.join(",")}
     end
@@ -30,6 +30,26 @@ class AlbumsController < ApplicationController
   end
 
   def update
+    @album = Album.find(params[:id])
+
+    if !@album.update(title: album_params[:title], mode: album_params[:mode], description: album_params[:description])
+      redirect_to edit_album_path(@album), flash: {error: "Album update failed: " + @album.errors.full_messages.join(",")}
+      return
+    end
+
+    album_params[:media_attributes].each do |key, value|
+      if Integer(key) > @album.media.length - 1
+        @album.media.new(url: value[:url])
+      elsif value[:_destroy] == "true"
+        @album.media[Integer(key)].destroy
+      end
+    end
+
+    if @album.save
+      redirect_to user_path(session[:user_id], tab: "albums"), flash: {success: "Album updated successfully"}
+    else
+      redirect_to edit_album_path(@album), flash: {error: "Album update failed: " + @album.errors.full_messages.join(",")}
+    end
   end
 
   private

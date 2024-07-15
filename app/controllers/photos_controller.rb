@@ -17,7 +17,7 @@ class PhotosController < ApplicationController
     @photo.medium = Medium.new(url: photo_params[:medium_attributes][:url])
 
     if @photo.save
-      redirect_to root_path, flash: {success: "Photo created successfully"}
+      redirect_to user_path(session[:user_id], tab: "photos"), flash: {success: "Photo created successfully"}
     else
       redirect_to new_photo_path, flash: {error: "Photo creation failed: " + @photo.errors.full_messages.join(",")}
     end
@@ -28,6 +28,14 @@ class PhotosController < ApplicationController
   end
 
   def update
+    @photo = Photo.find(params[:id])
+    @photo.medium.destroy
+
+    if @photo.update(photo_params)
+      redirect_to user_path(session[:user_id], tab: "photos"), flash: {success: "Photo updated successfully"}
+    else
+      redirect_to edit_photo_path(@photo), flash: {error: "Photo update failed: " + @photo.errors.full_messages.join(",")}
+    end
   end
 
   private

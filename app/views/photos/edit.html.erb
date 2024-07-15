@@ -1,1 +1,1 @@
-<%= render partial: "application/edit_photo", locals: { path: photo_path(@photo.id), model: @photo } %>
+<%= render partial: "application/photo_form", locals: { path: photo_path(@photo.id), photo: @photo, title: "Edit Photo" } %>

@@ -14,7 +14,7 @@ if (logout) {
         http.delete('/logout', {}, null).then(response => {
             if (response.status_code === 200) {
                 console.log(response.message);
-                http.get('/', { flash: response.message }).then(() => {
+                http.get('/', { notice: response.message }).then(() => {
                     window.location.href = "/";
                 })
             } else {
