@@ -1,0 +1,215 @@
+<main class="gallery">
+    <div class="btn-group">
+        <a id="tab-photos" href="#" class="btn btn-primary active" aria-current="page">Photos</a>
+        <a id="tab-albums" href="#" class="btn btn-primary">Albums</a>
+    </div>
+    <div id="photos" class="content">
+        <% photos.each do |photo| %>
+            <div class="card text-body-secondary" data-post-id="<%= photo.id %>">
+                <div class="card-header">
+                    <%= link_to user_path(photo.user_id) do %>
+                        <div class="user">
+                            <%= image_tag photo.user.avatar.url, alt: "avatar" %>
+                            <p class="name"><%= photo.user.fname + ' ' + photo.user.lname %></p>
+                        </div>
+                    <% end %>
+                    <% if photo.user_id != session[:user_id] %>
+                        <% if photo.user.followers.ids.include?(session[:user_id]) %>
+                            <button 
+                                data-follower-id="<%= session[:user_id] %>" 
+                                data-followed-id="<%= photo.user.id  %>" 
+                                class="btn btn-outline-primary follow" 
+                                type="button"
+                            >Following</button>
+                        <% else %>
+                            <button 
+                                data-follower-id="<%= session[:user_id] %>" 
+                                data-followed-id="<%= photo.user.id  %>" 
+                                class="btn btn-primary follow" 
+                                type="button"
+                            >Follow</button>
+                        <% end %>
+                    <% end %>
+                </div>
+                <div class="image">
+                    <%= image_tag photo.medium.url.url, class: "card-img-top" %>    
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title"><%= photo.title %></h5>
+                    <p class="card-text"><%= photo.description %></p>
+                </div>
+                <div class="card-footer text-body-secondary">
+                    <p 
+                        class="react" 
+                        data-user-id="<%= session[:user_id] %>"
+                        data-post-id="<%= photo.id %>"
+                    >
+                        <% if photo.reactors.ids.include?(session[:user_id]) %>
+                            <i class="fa-solid fa-heart fa-xl" style="color: #ed333b;"></i>
+                        <% else %>
+                            <i class="fa-regular fa-heart fa-xl"></i>
+                        <% end %>
+                        <span><%= photo.reactions.count %></span>
+                    </p>
+                    <p class="ago"><%= time_ago_in_words(photo.updated_at) %> ago</p>
+                </div>                
+            </div>
+        <% end %>
+    </div>
+
+    <div id="albums" class="content">   
+        <% albums.each do |album| %>
+            <div class="card" data-post-id="<%= album.id %>">
+                <div class="card-header">
+                    <%= link_to user_path(album.user_id) do %>
+                        <div class="user">
+                            <%= image_tag album.user.avatar.url, alt: "avatar" %>
+                            <p class="name"><%= album.user.fname + ' ' + album.user.lname %></p>
+                        </div>
+                    <% end %>
+                    <% if album.user_id != session[:user_id] %>
+                        <% if album.user.followers.ids.include?(session[:user_id]) %>
+                            <button 
+                                data-follower-id="<%= session[:user_id] %>" 
+                                data-followed-id="<%= album.user.id  %>" 
+                                class="btn btn-outline-primary follow" 
+                                type="button"
+                            >Following</button>
+                        <% else %>
+                            <button 
+                                data-follower-id="<%= session[:user_id] %>" 
+                                data-followed-id="<%= album.user.id  %>" 
+                                class="btn btn-primary follow" 
+                                type="button"
+                            >Follow</button>
+                        <% end %>
+                    <% end %>
+                </div>
+                <div class="image">
+                    <%= image_tag album.media.first.url.url, class: "card-img-top" %>
+                </div>
+                <div class="images" style="display: none">
+                    <% album.media.each do |medium| %>
+                        <%= image_tag medium.url.url %>
+                    <% end %>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title"><%= album.title %></h5>
+                    <p class="card-text"><%= album.description %></p>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#albumModal">
+                        Details
+                    </button>
+                </div>
+                <div class="card-footer text-body-secondary">
+                    <p 
+                        class="react" 
+                        data-user-id="<%= session[:user_id] %>"
+                        data-post-id="<%= album.id %>"
+                    >
+                        <% if album.reactors.ids.include?(session[:user_id]) %>
+                            <i class="fa-solid fa-heart fa-xl" style="color: #ed333b;"></i>
+                        <% else %>
+                            <i class="fa-regular fa-heart fa-xl""></i>
+                        <% end %>
+                        <span><%= album.reactions.count %></span>
+                    </p>
+                    <p class="ago"><%= time_ago_in_words(album.updated_at) %> ago</p>
+                </div>
+                <p class="count">
+                    <%= album.media.count %>
+                </p>
+            </div>
+        <% end %>
+    </div>
+
+    <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="photoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="#">
+                        <div class="user">
+                            <%= image_tag "google.png" %>
+                            <p class="name">Bruh</p>
+                        </div>
+                    </a>
+                    <button class="btn btn-primary follow" type="button">Follow</button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body card">
+                    <%= image_tag "twitter.png", class: "card-img-top" %>
+                    <div class="card-body">
+                        <h5 class="card-title">X</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p class="react" data-user-id="<%= session[:user_id] %>">
+                        <i class="fa-regular fa-heart fa-xl"></i>
+                        <span>100K</span>
+                    </p>
+                    <p class="ago">2 days ago</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="albumModal" tabindex="-1" aria-labelledby="albumModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="#">
+                        <div class="user">
+                            <%= image_tag "google.png" %>
+                            <p class="name">Bruh</p>
+                        </div>
+                    </a>
+                    <button class="btn btn-primary follow" type="button">Follow</button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body card">
+                    <!-- <div class="card"> -->
+                        <div id="carouselAlbumIndicators" class="card-img-top carousel slide">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselAlbumIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselAlbumIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#carouselAlbumIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <%= image_tag "facebook.png", class: "d-block w-100" %>
+                                </div>
+                                <div class="carousel-item">
+                                    <%= image_tag "google.png", class: "d-block w-100" %>
+                                </div>
+                                <div class="carousel-item">
+                                    <%= image_tag "twitter.png", class: "d-block w-100" %>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselAlbumIndicators" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselAlbumIndicators" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                            </div>
+                        <div class="card-body">
+                            <h5 class="card-title">X</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <p class="react" data-user-id="<%= session[:user_id] %>">
+                        <i class="fa-regular fa-heart fa-xl"></i>
+                        <span>100K</span>
+                    </p>
+                    <p class="ago">2 days ago</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%= javascript_include_tag "gallery", type: "module" %>
+
