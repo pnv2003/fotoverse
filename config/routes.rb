@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
 
   resources :sessions, only: [:new]
-  resources :users, only: [:show, :edit, :update]
+  resources :users, only: [:show, :update]
   get 'posts/discover'
   get 'posts/feeds'
   resources :posts, only: [:destroy]

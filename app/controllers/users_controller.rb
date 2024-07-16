@@ -19,10 +19,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit
-    @user = User.find(params[:id])
-  end
-
   def update # update avatar only (everything else is handled by users/registrations_controller)
     @user = User.find(params[:id])
     if @user.update(user_info_params)
