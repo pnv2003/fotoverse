@@ -1,5 +1,3 @@
-import http from "./utils/request";
-
 const logout = document.querySelector("#nav-logout");
 
 if (logout) {
@@ -11,15 +9,6 @@ if (logout) {
     });
 
     confirm.addEventListener('click', () => {
-        http.delete('/logout', {}, null).then(response => {
-            if (response.status_code === 200) {
-                console.log(response.message);
-                http.get('/', { notice: response.message }).then(() => {
-                    window.location.href = "/";
-                })
-            } else {
-                console.error(response.message);
-            }
-        });
+        document.querySelector("#real-logout").click();
     });
 }

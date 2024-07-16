@@ -45,13 +45,14 @@
                         </li>
                         <li class="nav-item">
                             <% if params[:controller] == 'users' && params[:action] == 'show' %>
-                                <%= link_to "Profile", user_path(session[:user_id]), id: "nav-profile", class: "nav-link active", aria: { current: "page" }, data: {turbo: false}%>
+                                <%= link_to "Profile", user_path(current_user.id), id: "nav-profile", class: "nav-link active", aria: { current: "page" }, data: {turbo: false}%>
                             <% else %>
-                                <%= link_to "Profile", user_path(session[:user_id]), id: "nav-profile", class: "nav-link", data: {turbo: false}%>
+                                <%= link_to "Profile", user_path(current_user.id), id: "nav-profile", class: "nav-link", data: {turbo: false}%>
                             <% end %>
                         </li>
                         <li class="nav-item">
-                            <a href="#" id="nav-logout" class="nav-link">Logout</a>
+                            <a href="#" class="nav-link" id="nav-logout">Logout</a>
+                            <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link", style: "display: none", id: "real-logout" %>
                         </li>
                     </ul>
                     <%# TODO %>

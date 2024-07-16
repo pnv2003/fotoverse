@@ -1,7 +1,7 @@
 const SERVER_URL = "http://127.0.0.1:3000";
 
 const http = {
-    request: async function(method, baseURL, param, data) {
+    request: async function(method, baseURL, param, data, json = true) {
         let URL = baseURL;
         if (param) {
             const keys = Object.keys(param).map(key => key.toString());
@@ -18,26 +18,29 @@ const http = {
             body: data ? JSON.stringify(data) : null
         });
 
-        const json = await response.json();
-        return json;
+        if (json) {
+            const json = await response.json();
+            return json;
+        }
+        return response;
     },
-    get: async function(baseURL, param) {
-        return this.request('GET', baseURL, param, null);
+    get: async function(baseURL, param, json = true) {
+        return this.request('GET', baseURL, param, null, json);
     },
-    post: async function(baseURL, param, data) {
-        return this.request('POST', baseURL, param, data);
+    post: async function(baseURL, param, data, json = true) {
+        return this.request('POST', baseURL, param, data, json);
     },
-    put: async function(baseURL, param, data) {
-        return this.request('PUT', baseURL, param, data);
+    put: async function(baseURL, param, data, json = true) {
+        return this.request('PUT', baseURL, param, data, json);
     },
-    patch: async function(baseURL, param, data) {
-        return this.request('PATCH', baseURL, param, data);
+    patch: async function(baseURL, param, data, json = true) {
+        return this.request('PATCH', baseURL, param, data, json);
     },
-    delete: async function(baseURL, param, data) {
-        return this.request('DELETE', baseURL, param, data);
+    delete: async function(baseURL, param, data, json = true) {
+        return this.request('DELETE', baseURL, param, data, json);
     },
 
-    upload: async function(method, baseURL, data) {
+    upload: async function(method, baseURL, data, json = true) {
         let URL = baseURL;
         const response = await fetch(SERVER_URL + URL, {
             method: method,
@@ -47,8 +50,11 @@ const http = {
             body: data
         });
 
-        const json = await response.json();
-        return json;
+        if (json) {
+            const json = await response.json();
+            return json;
+        }
+        return response;
     }
 }
 
