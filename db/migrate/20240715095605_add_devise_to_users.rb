@@ -42,7 +42,7 @@ class AddDeviseToUsers < ActiveRecord::Migration[7.1]
     add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true
 
-    remove_column :users, :password_digest
+    remove_column :users, :password_digest, :string
   end
 
   def self.down
@@ -65,12 +65,14 @@ class AddDeviseToUsers < ActiveRecord::Migration[7.1]
     remove_column :users, :sign_in_count, :integer
     remove_column :users, :current_sign_in_at, :datetime
     remove_column :users, :last_sign_in_at, :datetime
-    # t.remove_column :current_sign_in_ip
-    # t.remove_column :last_sign_in_ip
+    remove_column :users, :current_sign_in_ip, :string
+    remove_column :users, :last_sign_in_ip, :string
     remove_column :users, :confirmation_token, :string
     remove_column :users, :confirmed_at, :datetime
     remove_column :users, :confirmation_sent_at, :datetime
     remove_column :users, :unconfirmed_email, :string
     # t.remove :failed_attempts, :unlock_token, :locked_at
+
+    add_column :users, :password_digest, :string
   end
 end
