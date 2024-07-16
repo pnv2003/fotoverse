@@ -33,7 +33,6 @@ Rails.application.routes.draw do
   get 'discover', to: 'posts#discover'
   get 'new/photo', to: 'photos#new'
   get 'new/album', to: 'albums#new'
-  get 'users/:id/change_password', to: 'users#change_password', as: 'change_password'
   delete 'logout', to: 'sessions#destroy'
 
   resources :follows, only: [:create, :destroy]
