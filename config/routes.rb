@@ -26,14 +26,11 @@ Rails.application.routes.draw do
   resources :albums, only: [:new, :create, :edit, :update]
 
   get 'welcome', to: 'sessions#welcome'
-  get 'login', to: 'sessions#new'
-  get 'signup', to: 'users#new'
 
   get 'feeds', to: 'posts#feeds'
   get 'discover', to: 'posts#discover'
   get 'new/photo', to: 'photos#new'
   get 'new/album', to: 'albums#new'
-  delete 'logout', to: 'sessions#destroy'
 
   resources :follows, only: [:create, :destroy]
   resources :reactions, only: [:create, :destroy]
