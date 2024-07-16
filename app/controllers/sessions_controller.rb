@@ -22,9 +22,8 @@ class SessionsController < ApplicationController
   end
 
   def welcome
-    if session[:user_id]
-      @user = User.find_by(id: session[:user_id])
-      if @user.admin
+    if user_signed_in?
+      if current_user.admin
         redirect_to admin_photos_path
       else
         redirect_to feeds_path

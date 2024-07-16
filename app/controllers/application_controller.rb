@@ -1,16 +1,16 @@
 class ApplicationController < ActionController::Base
-  # before_action :authorized
+  before_action :authenticate_user!
   before_action :flash_message
-  helper_method :current_user
-  helper_method :logged_in?
+  # helper_method :current_user
+  # helper_method :logged_in?
 
-  def current_user
-    User.find_by(id: session[:user_id])
-  end
+  # def current_user
+  #   User.find_by(id: session[:user_id])
+  # end
 
-  def logged_in?
-    !current_user.nil?
-  end
+  # def logged_in?
+  #   !current_user.nil?
+  # end
 
   def authorized
     if logged_in?
