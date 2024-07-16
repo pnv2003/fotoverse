@@ -23,23 +23,21 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def update
+  def update # update avatar only (everything else is handled by users/registrations_controller)
     @user = User.find(params[:id])
     if @user.update(user_info_params)
       msg = "Profile updated!"
       flash[:notice] = msg
       render json: { status_code: 200, message: msg }, status: :ok
-      # redirect_to user_path(@user), flash: { notice: "Profile updated!" }
     else
       msg = "Failed to update profile: " + @user.errors.full_messages.join(", ")
       flash[:error] = msg
       render json: { status_code: 500, message: msg }, status: :internal_server_error
-      # redirect_to edit_user_path(@user), flash: { error: "Failed to update profile: " + @user.errors.full_messages.join(", ") }
     end
   end
 
   private
   def user_info_params
-    params.require(:user).permit(:avatar, :fname, :lname, :email)
+    params.require(:user).permit(:avatar)
   end
 end

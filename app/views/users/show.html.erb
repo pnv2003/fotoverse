@@ -16,7 +16,7 @@
             </div>
             <div class="action">
                 <% if current_user.id == @user.id %>
-                    <%= link_to "Edit Profile", edit_user_path(@user.id) , class: "btn btn-primary edit", data: { turbo: false } %>
+                    <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-primary edit", data: { turbo: false } %>
                 <% else %>
                     <% if @followers.ids.include?(current_user.id) %>
                         <button 
