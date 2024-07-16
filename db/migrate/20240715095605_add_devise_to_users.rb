@@ -37,10 +37,12 @@ class AddDeviseToUsers < ActiveRecord::Migration[7.1]
       # t.timestamps null: false
     end
 
-    # add_index :users, :email,                unique: true
+    add_index :users, :email,                unique: true
     add_index :users, :reset_password_token, unique: true
     add_index :users, :confirmation_token,   unique: true
     # add_index :users, :unlock_token,         unique: true
+
+    remove_column :users, :password_digest
   end
 
   def self.down
@@ -48,29 +50,27 @@ class AddDeviseToUsers < ActiveRecord::Migration[7.1]
     # model already existed. Please edit below which fields you would like to remove in this migration.
     # raise ActiveRecord::IrreversibleMigration
 
-    change_table :users do |t|
-      t.remove_column :encrypted_password
-      t.remove_column :reset_password_token
-      t.remove_column :reset_password_sent_at
-      t.remove_column :remember_created_at
-
-      # If you uncommented any of the Trackable, Confirmable, or Lockable fields in the up method,
-      # you need to remove them here as well. For example:
-      t.remove_column :sign_in_count
-      t.remove_column :current_sign_in_at
-      t.remove_column :last_sign_in_at
-      # t.remove_column :current_sign_in_ip
-      # t.remove_column :last_sign_in_ip
-      t.remove_column :confirmation_token
-      t.remove_column :confirmed_at
-      t.remove_column :confirmation_sent_at
-      t.remove_column :unconfirmed_email
-      # t.remove :failed_attempts, :unlock_token, :locked_at
-    end
-
     remove_index :users, :email
     remove_index :users, :reset_password_token
     remove_index :users, :confirmation_token
     # remove_index :users, :unlock_token
+
+    remove_column :users, :encrypted_password, :string
+    remove_column :users, :reset_password_token, :string
+    remove_column :users, :reset_password_sent_at, :datetime
+    remove_column :users, :remember_created_at, :datetime
+
+    # If you uncommented any of the Trackable, Confirmable, or Lockable fields in the up method,
+    # you need to remove them here as well. For example:
+    remove_column :users, :sign_in_count, :integer
+    remove_column :users, :current_sign_in_at, :datetime
+    remove_column :users, :last_sign_in_at, :datetime
+    # t.remove_column :current_sign_in_ip
+    # t.remove_column :last_sign_in_ip
+    remove_column :users, :confirmation_token, :string
+    remove_column :users, :confirmed_at, :datetime
+    remove_column :users, :confirmation_sent_at, :datetime
+    remove_column :users, :unconfirmed_email, :string
+    # t.remove :failed_attempts, :unlock_token, :locked_at
   end
 end
