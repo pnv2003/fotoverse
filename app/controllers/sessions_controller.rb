@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:welcome]
+  skip_before_action :authorize_user, only: [:welcome]
 
   def welcome
     if user_signed_in?
