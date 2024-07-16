@@ -1,5 +1,5 @@
 class Admin::PhotosController < ApplicationController
-  before_action :authorized_as_admin
+  before_action :authorize_admin
   layout "admin"
 
   def index

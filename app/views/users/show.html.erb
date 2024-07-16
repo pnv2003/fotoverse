@@ -15,19 +15,19 @@
                 <p class="desc">Hello, I'm <%= @user.fname %>. Contact me via my <a href="mailto:<%= @user.email %>">email</a>.</p>
             </div>
             <div class="action">
-                <% if session[:user_id] == @user.id %>
-                    <%= link_to "Edit Profile", edit_user_path(@user.id) , class: "btn btn-primary edit", data: { turbo: false } %>
+                <% if current_user.id == @user.id %>
+                    <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-primary edit", data: { turbo: false } %>
                 <% else %>
-                    <% if @followers.ids.include?(session[:user_id]) %>
+                    <% if @followers.ids.include?(current_user.id) %>
                         <button 
-                            data-follower-id="<%= session[:user_id] %>" 
+                            data-follower-id="<%= current_user.id %>" 
                             data-followed-id="<%= @user.id  %>" 
                             class="btn btn-outline-primary follow" 
                             type="button"
                         >Following</button>
                     <% else %>
                         <button 
-                            data-follower-id="<%= session[:user_id] %>" 
+                            data-follower-id="<%= current_user.id %>" 
                             data-followed-id="<%= @user.id  %>" 
                             class="btn btn-primary follow" 
                             type="button"
@@ -63,7 +63,7 @@
                         <p class="title"><%= photo.title %></p>
                         <p class="desc"><%= photo.description %></p>
                         <p class="mode"><%= photo.mode %></p>
-                        <p class="reacted"><%= photo.reactors.ids.include?(session[:user_id]) %></p>
+                        <p class="reacted"><%= photo.reactors.ids.include?(current_user.id) %></p>
                         <p class="react-count"><%= photo.reactions.count %></p>
                         <p class="updated-at"><%= photo.updated_at %></p>
                         <p class="edit-path"><%= edit_photo_path(photo.id) %></p>
@@ -86,7 +86,7 @@
                         <p class="title"><%= album.title %></p>
                         <p class="desc"><%= album.description %></p>
                         <p class="mode"><%= album.mode %></p>
-                        <p class="reacted"><%= album.reactors.ids.include?(session[:user_id]) %></p>
+                        <p class="reacted"><%= album.reactors.ids.include?(current_user.id) %></p>
                         <p class="react-count"><%= album.reactions.count %></p>
                         <p class="updated-at"><%= album.updated_at %></p>
                         <p class="edit-path"><%= edit_album_path(album.id) %></p>
@@ -122,10 +122,10 @@
                         </div>
                     </div>
 
-                    <% if follower.followers.ids.include?(session[:user_id]) %>
-                        <button data-follower-id="<%= session[:user_id] %>" data-followed-id="<%= follower.id %>" class="btn btn-outline-primary follow" type="button">Following</button>
+                    <% if follower.followers.ids.include?(current_user.id) %>
+                        <button data-follower-id="<%= current_user.id %>" data-followed-id="<%= follower.id %>" class="btn btn-outline-primary follow" type="button">Following</button>
                     <% else %>
-                        <button data-follower-id="<%= session[:user_id] %>" data-followed-id="<%= follower.id %>" class="btn btn-primary follow" type="button">Follow</button>
+                        <button data-follower-id="<%= current_user.id %>" data-followed-id="<%= follower.id %>" class="btn btn-primary follow" type="button">Follow</button>
                     <% end %>
                 </div>
             <% end %>
@@ -143,10 +143,10 @@
                             <p><%= following.posts.where(type: "Album").count %> albums</p>
                         </div>
                     </div>
-                    <% if following.followers.ids.include?(session[:user_id]) %>
-                        <button data-follower-id="<%= session[:user_id] %>" data-followed-id="<%= following.id %>" class="btn btn-outline-primary follow" type="button">Following</button>
+                    <% if following.followers.ids.include?(current_user.id) %>
+                        <button data-follower-id="<%= current_user.id %>" data-followed-id="<%= following.id %>" class="btn btn-outline-primary follow" type="button">Following</button>
                     <% else %>
-                        <button data-follower-id="<%= session[:user_id] %>" data-followed-id="<%= following.id %>" class="btn btn-primary follow" type="button">Follow</button>
+                        <button data-follower-id="<%= current_user.id %>" data-followed-id="<%= following.id %>" class="btn btn-primary follow" type="button">Follow</button>
                     <% end %>
                 </div>
             <% end %>
@@ -176,7 +176,7 @@
                     <p class="react">
                         <i 
                             class="fa-regular fa-heart fa-xl"
-                            data-user-id="<%= session[:user_id] %>"
+                            data-user-id="<%= current_user.id %>"
                         ></i>
                         <span>100K</span>
                     </p>
@@ -234,7 +234,7 @@
                     <p class="react">
                         <i 
                             class="fa-regular fa-heart fa-xl"
-                            data-user-id="<%= session[:user_id] %>"
+                            data-user-id="<%= current_user.id %>"
                         ></i>
                         <span>100K</span>
                     </p>

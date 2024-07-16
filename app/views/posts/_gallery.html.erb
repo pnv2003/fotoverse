@@ -14,17 +14,17 @@
                             <p class="name"><%= photo.user.fname + ' ' + photo.user.lname %></p>
                         </div>
                     <% end %>
-                    <% if photo.user_id != session[:user_id] %>
-                        <% if photo.user.followers.ids.include?(session[:user_id]) %>
+                    <% if photo.user_id != current_user.id %>
+                        <% if photo.user.followers.ids.include?(current_user.id) %>
                             <button 
-                                data-follower-id="<%= session[:user_id] %>" 
+                                data-follower-id="<%= current_user.id %>" 
                                 data-followed-id="<%= photo.user.id  %>" 
                                 class="btn btn-outline-primary follow" 
                                 type="button"
                             >Following</button>
                         <% else %>
                             <button 
-                                data-follower-id="<%= session[:user_id] %>" 
+                                data-follower-id="<%= current_user.id %>" 
                                 data-followed-id="<%= photo.user.id  %>" 
                                 class="btn btn-primary follow" 
                                 type="button"
@@ -42,10 +42,10 @@
                 <div class="card-footer text-body-secondary">
                     <p 
                         class="react" 
-                        data-user-id="<%= session[:user_id] %>"
+                        data-user-id="<%= current_user.id %>"
                         data-post-id="<%= photo.id %>"
                     >
-                        <% if photo.reactors.ids.include?(session[:user_id]) %>
+                        <% if photo.reactors.ids.include?(current_user.id) %>
                             <i class="fa-solid fa-heart fa-xl" style="color: #ed333b;"></i>
                         <% else %>
                             <i class="fa-regular fa-heart fa-xl"></i>
@@ -60,7 +60,7 @@
         <div class="infinite-scroll-end"></div>
 
         <div class="pagination">
-            <%= paginate photos %>
+            <%#= paginate photos %>
         </div>
     </div>
 
@@ -74,17 +74,17 @@
                             <p class="name"><%= album.user.fname + ' ' + album.user.lname %></p>
                         </div>
                     <% end %>
-                    <% if album.user_id != session[:user_id] %>
-                        <% if album.user.followers.ids.include?(session[:user_id]) %>
+                    <% if album.user_id != current_user.id %>
+                        <% if album.user.followers.ids.include?(current_user.id) %>
                             <button 
-                                data-follower-id="<%= session[:user_id] %>" 
+                                data-follower-id="<%= current_user.id %>" 
                                 data-followed-id="<%= album.user.id  %>" 
                                 class="btn btn-outline-primary follow" 
                                 type="button"
                             >Following</button>
                         <% else %>
                             <button 
-                                data-follower-id="<%= session[:user_id] %>" 
+                                data-follower-id="<%= current_user.id %>" 
                                 data-followed-id="<%= album.user.id  %>" 
                                 class="btn btn-primary follow" 
                                 type="button"
@@ -110,10 +110,10 @@
                 <div class="card-footer text-body-secondary">
                     <p 
                         class="react" 
-                        data-user-id="<%= session[:user_id] %>"
+                        data-user-id="<%= current_user.id %>"
                         data-post-id="<%= album.id %>"
                     >
-                        <% if album.reactors.ids.include?(session[:user_id]) %>
+                        <% if album.reactors.ids.include?(current_user.id) %>
                             <i class="fa-solid fa-heart fa-xl" style="color: #ed333b;"></i>
                         <% else %>
                             <i class="fa-regular fa-heart fa-xl""></i>
@@ -150,7 +150,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <p class="react" data-user-id="<%= session[:user_id] %>">
+                    <p class="react" data-user-id="<%= current_user.id %>">
                         <i class="fa-regular fa-heart fa-xl"></i>
                         <span>100K</span>
                     </p>
@@ -207,7 +207,7 @@
                         </div>
                 </div>
                 <div class="modal-footer">
-                    <p class="react" data-user-id="<%= session[:user_id] %>">
+                    <p class="react" data-user-id="<%= current_user.id %>">
                         <i class="fa-regular fa-heart fa-xl"></i>
                         <span>100K</span>
                     </p>

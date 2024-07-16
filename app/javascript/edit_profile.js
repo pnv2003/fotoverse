@@ -6,13 +6,17 @@ const avatar = document.querySelector("#user_avatar");
 const fname = document.querySelector("#user_fname");
 const lname = document.querySelector("#user_lname");
 const email = document.querySelector("#user_email");
+const pwd = document.querySelector("#user_password");
+const conpwd = document.querySelector("#user_password_confirmation");
+const curpwd = document.querySelector("#user_current_password");
 
 const avatarError = document.querySelector("#user_avatar + .error");
 const fnameError = document.querySelector("#user_fname + .error");
 const lnameError = document.querySelector("#user_lname + .error");
 const emailError = document.querySelector("#user_email + .error");
-
-const saveInfo = document.querySelector("#save-info");
+const pwdError = document.querySelector("#user_password + .error");
+const conpwdError = document.querySelector("#user_password_confirmation + .error");
+const curpwdError = document.querySelector("#user_current_password + .error");
 
 const preview = document.querySelector("#preview-avatar");
 const previewImage = document.querySelector("#preview-avatar > img");
@@ -91,16 +95,25 @@ document.querySelectorAll("#cropperModal button[data-bs-dismiss='modal']").forEa
 	});
 });
 
-saveInfo.addEventListener('click', (e) => {
+document.querySelector("#update").addEventListener('click', (e) => {
     e.preventDefault();
     
     if (
         validate(fname, fnameError, validator.length(1, 25)) &
         validate(lname, lnameError, validator.length(1, 25)) &
         validate(email, emailError, validator.length(1, 255)) &
-        validate(email, emailError, validator.email)
+        validate(email, emailError, validator.email) &
+		validate(pwd, pwdError, validator.length(0, 64)) &
+		validate(null, conpwdError, {
+			check: () => {
+				return conpwd.value === pwd.value;
+			},
+			message: "Password does not match"
+		}) &
+		validate(curpwd, curpwdError, validator.required)
     ) {
-		const form = document.querySelector("#info-form");
+		// submit avatar
+		const form = document.querySelector("#avatar-form");
 		const formData = new FormData(form);
 		const url = new URL(form.action);
 		formData.delete('user[avatar]');
@@ -118,21 +131,13 @@ saveInfo.addEventListener('click', (e) => {
 				.then(blob => {
 					formData.append('user[avatar]', blob);
 					http.upload('PUT', url.pathname, formData).then(response => {
-						if (response.status_code == 200) {
-							window.location.href = url.pathname;
-						} else {
-							window.location.reload();
-						}
+						window.location.reload();
+						document.querySelector("#edit_user").submit();
 					})
 				});
 		} else {
-			http.upload('PUT', url.pathname, formData).then(response => {
-				if (response.status_code == 200) {
-					window.location.href = url.pathname;
-				} else {	
-					window.location.reload();
-				}
-			})
+			// submit info
+			document.querySelector("#edit_user").submit();
 		}
     }
 });
