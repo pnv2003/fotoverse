@@ -5,15 +5,9 @@
             <%= form.label :avatar, "Avatar", class: "form-label" %>
             <%= form.file_field :avatar, accept: "image/jpeg, image/gif, image/png, image/jpg", class: "form-control" %>
             <span class="error text-danger"></span>
-            <% if @user.avatar? %>
-                <div id="preview-avatar">
-                    <%= image_tag @user.avatar.url, alt: "Avatar Preview" %>
-                </div>
-            <% else %>
-                <div id="preview-avatar" style="display: none">
-                    <img src="#" alt="Avatar Preview"></img>
-                </div>
-            <% end %>
+            <div id="preview-avatar">
+                <%= image_tag @user.avatar.url, alt: "Avatar Preview" %>
+            </div>
         </p>
         <p class="field">
             <%= form.label :fname, "First Name", class: "form-label" %>
