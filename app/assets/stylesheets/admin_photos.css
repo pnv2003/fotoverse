@@ -26,6 +26,16 @@ main.admin-photos .content.display {
 main.admin-photos .content.display .item {
     position: relative;
     cursor: pointer;
+    overflow: hidden;
+    border-radius: 5px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+main.admin-photos .content.display .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 main.admin-photos .content.display :is(.mode, .count) {
@@ -54,6 +64,20 @@ main.admin-photos .content.display .count {
 
 main.admin-photos .content.display img {
     width: 100%;
+}
+
+main.admin-photos .modal-header a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-right: 1rem;
+}
+
+main.admin-photos .modal-header a img {
+    width: 2rem;
+    border-radius: 50%;
 }
 
 main.admin-photos .modal-body .action {

@@ -1,50 +1,24 @@
 <main class="admin-photos">
     <div id="photos" class="content display">
-        <div class="item">
-            <%= image_tag "google.png" %>
-        </div>
-        <div class="item">
-            <%= image_tag "facebook.png" %>
-        </div>
-        <div class="item">
-            <%= image_tag "twitter.png" %>
-        </div>
-        <div class="item">
-            <%= image_tag "facebook.png" %>
-        </div>
-        <div class="item">
-            <%= image_tag "facebook.png" %>
-        </div>
-        <div class="item">
-            <%= image_tag "twitter.png" %>
-        </div>
-        <div class="item">
-            <%= image_tag "twitter.png" %>
-        </div>
-        <div class="item">
-            <%= image_tag "twitter.png" %>
-        </div>
-        <div class="item">
-            <%= image_tag "twitter.png" %>
-        </div>
-        <div class="item">
-            <%= image_tag "twitter.png" %>
-        </div>
-        <div class="item">
-            <%= image_tag "twitter.png" %>
-        </div>
-        <div class="item">
-            <%= image_tag "twitter.png" %>
-        </div>
-        <div class="item">
-            <%= image_tag "twitter.png" %>
-        </div>
-        <div class="item">
-            <%= image_tag "twitter.png" %>
-        </div>
-        <div class="item">
-            <%= image_tag "twitter.png" %>
-        </div>
+        <% @photos.each do |photo| %>
+            <div class="item">
+                <%= image_tag photo.medium.url.url, alt: "photo" %>
+                <div class="info" style="display: none">
+                    <p class="id"><%= photo.id %></p>
+                    <p class="user-name"><%= photo.user.fname + ' ' + photo.user.lname %></p>
+                    <p class="user-avatar"><%= image_tag photo.user.avatar.url %></p>
+                    <p class="user-path"><%= edit_admin_user_path(photo.user_id) %></p>
+                    <p class="title"><%= photo.title %></p>
+                    <p class="desc"><%= photo.description %></p>
+                    <p class="mode"><%= photo.mode %></p>
+                    <p class="reacted"><%= photo.reactors.ids.include?(current_user.id) %></p>
+                    <p class="react-count"><%= photo.reactions.count %></p>
+                    <p class="updated-at"><%= photo.updated_at %></p>
+                    <p class="edit-path"><%= edit_admin_photo_path(photo.id) %></p>
+                    <p class="delete-path"><%= post_path(photo.id) %></p>
+                </div>
+            </div>
+        <% end %>
     </div>
     <nav aria-label="Page navigation example">
         <ul class="pagination pagination-lg">
@@ -65,7 +39,13 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        <a href="#">
+                            <%= image_tag "google.png" %>
+                            <span class="name">Bruh</span>
+                        </a>
+                    </h1>
+                    <span class="badge text-bg-warning">Private</span>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body card">
@@ -81,14 +61,17 @@
                 </div>
                 <div class="modal-footer">
                     <p class="react">
-                        <i class="fa-regular fa-heart fa-xl"></i>
-                        100K
+                        <i 
+                            class="fa-regular fa-heart fa-xl"
+                            data-user-id="<%= current_user.id %>"
+                        ></i>
+                        <span>100K</span>
                     </p>
-                    <p>2 days ago</p>
+                    <p class="ago">2 days ago</p>
                 </div>
             </div>
         </div>
     </div>
 </main>
 
-<%= javascript_include_tag "admin_photos" %>
+<%= javascript_include_tag "admin_photos", type: "module" %>
