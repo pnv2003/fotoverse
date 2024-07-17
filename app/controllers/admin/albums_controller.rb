@@ -14,7 +14,7 @@ class Admin::AlbumsController < ApplicationController
     @album = Album.find(params[:id])
 
     if !@album.update(title: album_params[:title], mode: album_params[:mode], description: album_params[:description])
-      redirect_to edit_album_path(@album), flash: {error: "Album update failed: " + @album.errors.full_messages.join(",")}
+      redirect_to edit_admin_album_path(@album), flash: {error: "Album update failed: " + @album.errors.full_messages.join(",")}
       return
     end
 
@@ -27,9 +27,9 @@ class Admin::AlbumsController < ApplicationController
     end
 
     if @album.save
-      redirect_to user_path(current_user.id, tab: "albums"), flash: {success: "Album updated successfully"}
+      redirect_to admin_albums_path, flash: {success: "Album updated successfully"}
     else
-      redirect_to edit_album_path(@album), flash: {error: "Album update failed: " + @album.errors.full_messages.join(",")}
+      redirect_to edit_admin_album_path(@album), flash: {error: "Album update failed: " + @album.errors.full_messages.join(",")}
     end
   end
 
