@@ -15,7 +15,7 @@
                     <p class="react-count"><%= photo.reactions.count %></p>
                     <p class="updated-at"><%= photo.updated_at %></p>
                     <p class="edit-path"><%= edit_admin_photo_path(photo.id) %></p>
-                    <p class="delete-path"><%= post_path(photo.id) %></p>
+                    <p class="delete-path"><%= admin_photo_path(photo.id) %></p>
                 </div>
             </div>
         <% end %>
