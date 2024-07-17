@@ -7,42 +7,37 @@
                 <th scope="col">Last Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Last Access</th>
+                <th scope="col">Status</th>
                 <th scope="col">Actions</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td>2024/06/19 11:30:00</td>
-                <td>
-                    <%= link_to "Edit", edit_admin_user_path(1), class: "btn btn-primary" %>
-                    <button class="btn btn-danger" type="button">Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>2024/06/19 11:30:00</td>
-                <td>
-                    <%= link_to "Edit", edit_admin_user_path(1), class: "btn btn-primary" %>
-                    <button class="btn btn-danger" type="button">Delete</button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-                <td>2024/06/19 11:30:00</td>
-                <td>
-                    <%= link_to "Edit", edit_admin_user_path(1), class: "btn btn-primary" %>
-                    <button class="btn btn-danger" type="button">Delete</button>
-                </td>
-            </tr>
+            <% @users.each.with_index do |user, index| %>
+                <tr>
+                    <th scope="row"><%= index + 1 %></th>
+                    <td><%= user.fname %></td>
+                    <td><%= user.lname %></td>
+                    <td><%= user.email %></td>
+                    <td>
+                        <% if user.last_sign_in_at %>
+                            <%= user.last_sign_in_at %>
+                        <% else %>
+                            <span>No Access</span>
+                        <% end %>
+                    </td>
+                    <td>
+                        <% if user.active %>
+                            <span class="badge text-bg-success">Active</span>
+                        <% else %>
+                            <span class="badge text-bg-danger">Inactive</span>
+                        <% end %>
+                    </td>
+                    <td>
+                        <%= link_to "Edit", edit_admin_user_path(user.id), class: "btn btn-primary" %>
+                        <button class="btn btn-danger" type="button">Delete</button>
+                    </td>
+                </tr>
+            <% end %>
         </tbody>
     </table>
     <nav aria-label="Page navigation example">
