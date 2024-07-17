@@ -124,6 +124,7 @@ grid.addEventListener('change', (e) => {
 
     // remove active class from input
     input.classList.remove("active");
+    input.style.display = "none";
 
     // create new input and label
     const newInput = document.createElement('input');
