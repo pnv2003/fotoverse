@@ -4,8 +4,6 @@ const title = document.querySelector("#photo_title");
 const description = document.querySelector("#photo_description");
 const photo = document.querySelector(".media-input");
 
-const mediaItem = document.querySelector(".media-item");
-
 const titleError = document.querySelector("#photo_title + .error");
 const descError = document.querySelector("#photo_description + .error");
 const photoError = document.querySelector(".media-input + .error");
