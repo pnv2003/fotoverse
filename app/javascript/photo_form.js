@@ -49,7 +49,10 @@ save.addEventListener('click', (e) => {
     if (
         validate(title, titleError, validator.length(1, 140)) &
         validate(description, descError, validator.length(1, 300)) &
-        validate(photo, photoError, validator.file)
+        validate(null, photoError, {
+            check: () => document.querySelector(".media-item img"),
+            message: "Please upload a photo"
+        })
     ) {
         document.querySelector('main.photo-form form').submit();
     }
