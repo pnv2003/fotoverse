@@ -30,7 +30,8 @@
                             <% end %>
                         </li>
                         <li class="nav-item">
-                            <%= link_to "Logout", logout_path, data: {turbo_method: :delete, turbo_confirm: 'Are you sure you want to log out?'}, id: "nav-logout", class: "nav-link" %>
+                            <a href="#" class="nav-link" id="nav-logout">Logout</a>
+                            <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link", style: "display: none", id: "real-logout" %>
                         </li>
                     </ul>
                     <form class="d-flex" role="search">

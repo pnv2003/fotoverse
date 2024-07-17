@@ -1,80 +1,85 @@
 <main class="admin-edit-user">
-    <%= form_with url: admin_user_path(@user.id), model: @user, local: true, id: "info-form" do |form| %>
-        <section class="info">
-            <h2>Basic Information</h2>
-            <p class="field">
-                <%= form.label :avatar, "Avatar", class: "form-label" %>
-                <%= form.file_field :avatar, class: "form-control" %>
-                <span class="error text-danger"></span>
-            </p>
-            <p class="field">
-                <%= form.label :fname, "First Name", class: "form-label" %>
-                <%= form.text_field :fname, class: "form-control" %>
-                <span class="error text-danger"></span>
-            </p>
-            <p class="field">
-                <%= form.label :lname, "Last Name", class: "form-label" %>
-                <%= form.text_field :lname, class: "form-control" %>
-                <span class="error text-danger"></span>
-            </p>
-            <p class="field">
-                <%= form.label :email, "Email", class: "form-label" %>
-                <%= form.email_field :email, class: "form-control" %>
-                <span class="error text-danger"></span>
-            </p>
-            <button id="save-info" class="btn btn-primary" type="button">Save Info</button>
-        </section>
-    <% end %>
+  <h2>Edit User</h2>
 
-    <%= form_with url: user_path, model: @user, local: true, id: "pwd-form" do |form| %>
-        <section class="pwd">
-            <h2>Change Password</h2>
-            <p class="field">
-                <%= form.label :password, "Current Password", class: "form-label" %>
-                <%= form.password_field :password, class: "form-control" %>
-                <span class="error text-danger"></span>
-            </p>
-            <p class="field">
-                <%= form.label :new_password, "New Password", class: "form-label" %>
-                <%= form.password_field :new_password, class: "form-control" %>
-                <span class="error text-danger"></span>
-            </p>
-            <p class="field">
-                <%= form.label :confirm_password, "Confirm Password", class: "form-label" %>
-                <%= form.password_field :confirm_password, class: "form-control" %>
-                <span class="error text-danger"></span>
-            </p>
-            <button id="save-pwd" class="btn btn-primary" type="button">Save Password</button>
-        </section>
-    <% end %>
+  <%= form_with url: admin_user_path(@user.id), model: @user, local: true, id: "edit-user-form" do |f| %>
+    <p class="field">
+        <%= f.label :avatar, "Avatar", class: "form-label" %>
+        <%= f.file_field :avatar, accept: "image/jpeg, image/gif, image/png, image/jpg", class: "form-control" %>
+        <span class="error text-danger"></span>
+        <div id="preview-avatar">
+            <%= image_tag @user.avatar.url, alt: "Avatar Preview" %>
+        </div>
+    </p>
+    <p class="field">
+        <%= f.label :fname, "First Name", class: "form-label" %>
+        <%= f.text_field :fname, class: "form-control" %>
+        <span class="error text-danger"></span>
+    </p>
+    <p class="field">
+      <%= f.label :lname, "Last Name", class: "form-label" %>
+      <%= f.text_field :lname, class: "form-control" %>
+      <span class="error text-danger"></span>
+    </p>
+    <p class="field">
+      <%= f.label :email, class: "form-label" %>
+      <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
+      <span class="error text-danger"></span>
+    </p>
+    <p class="field">
+      <%= f.label :password, class: "form-label" %> <i>(leave blank if you don't want to change it)</i><br />
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+      <span class="error text-danger"></span>
+    </p>
+    <p class="field">
+      <%= f.label :password_confirmation, class: "form-label" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+      <span class="error text-danger"></span>
+    </p>
+    <p class="field">
+        <%= f.label :active, "Status", class: "form-label" %>
+        <div id="active" class="btn-group" role="group" aria-label="Basic radio toggle button group">
 
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="infoToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <img src="..." class="rounded me-2" alt="...">
-                <strong class="me-auto">Bootstrap</strong>
-                <small>11 mins ago</small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            <% if !@user.active %>
+                <%= f.radio_button :active, "true", class: "btn-check", autocomplete: "off", checked: false %>
+                <%= f.label :active_true, "Active", class: "btn btn-outline-success" %>
+
+                <%= f.radio_button :active, "false", class: "btn-check", autocomplete: "off", checked: true %>
+                <%= f.label :active_false, "Inactive", class: "btn btn-outline-danger" %>
+            <% else %>
+                <%= f.radio_button :active, "true", class: "btn-check", autocomplete: "off", checked: true %>
+                <%= f.label :active_true, "Active", class: "btn btn-outline-success" %>
+
+                <%= f.radio_button :active, "false", class: "btn-check", autocomplete: "off", checked: false %>
+                <%= f.label :active_false, "Inactive", class: "btn btn-outline-danger" %>
+            <% end %>
+        </div>
+    </p>
+
+    <div class="actions">
+      <%= f.submit "Update", id: "update", class: "btn btn-primary" %>
+      <%= button_to "Delete account", user_registration_path, class: "btn btn-danger" %>
+    </div>
+
+    <p class="target" style="display: none"><%= admin_users_path %></p>
+  <% end %>
+
+  <div class="modal fade" id="cropperModal" tabindex="-1" aria-labelledby="cropperModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="cropperModalLabel">Select Avatar</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="toast-body">
-                Information saved!
+            <div class="modal-body">
+                <div class="result rounded" id="input-image"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button id="save" type="button" class="btn btn-primary">Save</button>
             </div>
         </div>
     </div>
-
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
-        <div id="pwdToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <img src="..." class="rounded me-2" alt="...">
-                <strong class="me-auto">Bootstrap</strong>
-                <small>11 mins ago</small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                Password saved!
-            </div>
-        </div>
-    </div>
+  </div>
 </main>
 
 <%= javascript_include_tag "admin_edit_user", type: "module" %>

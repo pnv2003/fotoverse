@@ -1,54 +1,51 @@
 <main class="admin-albums">
     <div id="albums" class="content display">
-        <div class="item">
-            <%= image_tag "google.png" %>
-            <div class="mode">
-                <i class="fa-solid fa-lock"></i>
+
+        <% @albums.each do |album| %>
+            <div class="item">
+                <%= image_tag album.media.first.url.url, alt: "album" %>
+
+                <div class="info" style="display: none">
+                    <p class="id"><%= album.id %></p>
+                    <p class="user-name"><%= album.user.fname + ' ' + album.user.lname %></p>
+                    <p class="user-avatar"><%= image_tag album.user.avatar.url %></p>
+                    <p class="user-path"><%= edit_admin_user_path(album.user_id) %></p>
+                    <p class="title"><%= album.title %></p>
+                    <p class="desc"><%= album.description %></p>
+                    <p class="mode"><%= album.mode %></p>
+                    <p class="reacted"><%= album.reactors.ids.include?(current_user.id) %></p>
+                    <p class="react-count"><%= album.reactions.count %></p>
+                    <p class="updated-at"><%= album.updated_at %></p>
+                    <p class="edit-path"><%= edit_admin_album_path(album.id) %></p>
+                    <p class="delete-path"><%= admin_album_path(album.id) %></p>
+
+                    <% album.media.each do |medium| %>
+                        <%= image_tag medium.url.url, alt: "Album Photo" %>
+                    <% end %>
+                </div>
+                <% if album.mode == "private" %>
+                    <div class="mode">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                <% end %>
+                <p class="count"><%= album.media.count %></p>
             </div>
-            <p class="count">
-                100
-            </p>
-        </div>
-        <div class="item">
-            <%= image_tag "facebook.png" %>
-            <div class="mode">
-                <i class="fa-solid fa-lock"></i>
-            </div>
-            <p class="count">
-                100
-            </p>
-        </div>
-        <div class="item">
-            <%= image_tag "twitter.png" %>
-            <div class="mode">
-                <i class="fa-solid fa-lock"></i>
-            </div>
-            <p class="count">
-                100
-            </p>
-        </div>
+        <% end %>
     </div>
 
-    <nav aria-label="Page navigation example">
-        <ul class="pagination pagination-lg">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-                </a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+    <%= paginate @albums, theme: 'bootstrap-5', pagination_class: "pagination-lg" %>
 
     <div class="modal fade" id="albumModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        <a href="#">
+                            <%= image_tag "google.png" %>
+                            <span class="name">Bruh</span>
+                        </a>
+                    </h1>
+                    <span class="badge text-bg-warning">Private</span>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body card">
@@ -82,21 +79,24 @@
                         <h5 class="card-title">X</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         <div class="action">
-                            <%= link_to "Edit", edit_admin_album_path(2), id: "edit-album", class: "btn btn-primary" %>
+                            <%= link_to "Edit", edit_admin_album_path(1), id: "edit-album", class: "btn btn-primary" %>
                             <button id="delete-album" type="button" class="btn btn-danger">Delete</button>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
                     <p class="react">
-                        <i class="fa-regular fa-heart fa-xl"></i>
-                        100K
+                        <i 
+                            class="fa-regular fa-heart fa-xl"
+                            data-user-id="<%= current_user.id %>"
+                        ></i>
+                        <span>100K</span>
                     </p>
-                    <p>2 days ago</p>
+                    <p class="ago">2 days ago</p>
                 </div>
             </div>
         </div>
     </div>
 </main>
 
-<%= javascript_include_tag "admin_albums" %>
+<%= javascript_include_tag "admin_albums", type: "module" %>

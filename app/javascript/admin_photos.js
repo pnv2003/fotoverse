@@ -1,51 +1,61 @@
+import { getRelativeTime } from "./utils/datetime";
+import { compactFormatter } from "./utils/number";
+import http from "./utils/request";
+
 // modal
 const photoItems = document.querySelectorAll("#photos .item");
 const albumItems = document.querySelectorAll("#albums .item");
 
-const photoModal = new bootstrap.Modal(document.querySelector("#photoModal"), {keyboard: false});
+const photoModal = document.querySelector("#photoModal");
+const photoModalInstance = new bootstrap.Modal(photoModal, {keyboard: false});
 photoItems.forEach(item => item.addEventListener("click", () => {
-    photoModal.show();
-}));
 
-// pagination
-const pagination = document.querySelector("main nav .pagination");
-
-let count = 3;
-let active = 1;
-
-function changePage(index) {
-    if (index > 0 && index <= count && index !== active) {
-        pagination.children[active].classList.remove("active");
-        pagination.children[index].classList.add("active");
-        active = index;
-
-        if (index === 1) {
-            pagination.firstElementChild.classList.add("disabled");
-        } else {
-            pagination.firstElementChild.classList.remove("disabled");
-        }
-
-        if (index === count) {
-            pagination.lastElementChild.classList.add("disabled");
-        } else {
-            pagination.lastElementChild.classList.remove("disabled");
-        }
-
-        // TODO: change data to display
-    }
-}
-
-// TODO: long pagination
-const pages = [...Array(count).keys()].map(index => {
-    const page = document.createElement("li");
-    page.className = index === 0 ? "page-item active" : "page-item";
-    page.innerHTML = `<a class="page-link" href="#">${index + 1}</a>`
+    const userName = item.querySelector(".user-name").textContent;
+    const userAvatar = item.querySelector(".user-avatar img").src;
+    const userPath = item.querySelector(".user-path").textContent;
+    const imgSrc = item.querySelector("img").src;
+    const title = item.querySelector(".title").textContent;
+    const desc = item.querySelector(".desc").textContent;
+    const mode = item.querySelector(".mode").textContent;
+    const reactCount = item.querySelector(".react-count").textContent;
+    const updatedAt = item.querySelector(".updated-at").textContent;
     
-    page.addEventListener('click', () => changePage(index + 1));
+    photoModal.querySelector(".modal-title .name").textContent = userName;
+    photoModal.querySelector(".modal-title img").src = userAvatar;
+    photoModal.querySelector(".modal-title a").href = userPath;
+    photoModal.querySelector(".modal-body img").src = imgSrc;
+    photoModal.querySelector(".card-title").textContent = title;
+    photoModal.querySelector(".card-text").textContent = desc;
+    if (mode == "private") {
+        photoModal.querySelector(".badge").style.display = "inline";
+    } else {
+        photoModal.querySelector(".badge").style.display = "none";
+    }
+    photoModal.querySelector(".react span").textContent = compactFormatter.format(reactCount);
+    photoModal.querySelector(".ago").textContent = getRelativeTime(new Date(updatedAt));
 
-    pagination.insertBefore(page, pagination.lastElementChild);
-})
+    // add edit link
+    const editPath = item.querySelector(".edit-path").textContent;
+    document.querySelector("#edit-photo").href = editPath;
 
-pagination.firstElementChild.classList.add("disabled");
-pagination.firstElementChild.addEventListener('click', () => changePage(active - 1));
-pagination.lastElementChild.addEventListener('click', () => changePage(active + 1));
+    // add delete event
+    const detelePath = item.querySelector(".delete-path").textContent;
+    document.querySelector("#delete-photo").addEventListener("click", () => {
+        http.delete(detelePath, {}, null).then((response) => {
+            const url = new URL(window.location.href);
+            http.get(url.pathname, { tab: "photo", notice: response.message }, null).then(() => {
+                window.location.reload();
+            });
+        });
+    });
+
+    // add reaction info    
+    const photoId = item.querySelector(".id").textContent;
+    const reacted = item.querySelector(".reacted").textContent;
+    const reactButton = photoModal.querySelector(".react");
+    if (reacted === "true") {
+        toggleReact(reactButton.querySelector("i"));
+    }
+    reactButton.setAttribute("data-post-id", photoId);
+    photoModalInstance.show();
+}));
