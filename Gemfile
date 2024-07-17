@@ -58,6 +58,7 @@ gem 'rack-cors'
 
 # Use Kaminari for pagination
 gem 'kaminari'
+gem 'bootstrap5-kaminari-views'
 
 # Use Devise for authentication
 gem "devise", "~> 4.9"

@@ -3,7 +3,7 @@ class Admin::PhotosController < ApplicationController
   layout "admin"
 
   def index
-    @photos = Photo.all
+    @photos = Photo.order(updated_at: :desc).page(params[:page]).per(16)
   end
 
   def edit

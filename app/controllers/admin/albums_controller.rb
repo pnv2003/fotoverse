@@ -3,7 +3,7 @@ class Admin::AlbumsController < ApplicationController
   layout "admin"
 
   def index
-    @albums = Album.all
+    @albums = Album.order(updated_at: :desc).page(params[:page]).per(16)
   end
 
   def edit
