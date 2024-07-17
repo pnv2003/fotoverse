@@ -1,1 +1,1 @@
-<%= render partial: "application/edit_album", locals: { path: admin_album_path(@album.id), model: @album } %>
+<%= render partial: "application/album_form", locals: { path: admin_album_path(@album.id), album: @album, title: "Edit Album" } %>
