@@ -55,6 +55,11 @@
             </li>
         </ul>
         <div id="photos" class="content display">
+            <div class="item">
+                <%= link_to new_photo_path do %>
+                    <%= image_tag "add-image.png", alt: "Add Photo" %>
+                <% end %>
+            </div>
             <% @photos.each do |photo| %>
                 <div class="item">
                     <%= image_tag photo.medium.url.url, alt: "My Photo" %>
@@ -78,6 +83,11 @@
             <% end %>
         </div>
         <div id="albums" class="content display">
+            <div class="item">
+                <%= link_to new_album_path do %>
+                    <%= image_tag "add-image.png", alt: "Add Album" %>
+                <% end %>
+            </div>
             <% @albums.each do |album| %>
                 <div class="item">
                     <%= image_tag album.media.first.url.url, alt: "My Album" %>
