@@ -12,13 +12,13 @@ MAX_FOLLOW_COUNT = 100
 MAX_REACT_COUNT = 100
 
 # admin
-User.create(fname: "Phuong", lname: "Ngo", email: "pnv2003@gmail.com", password: "123", admin: true, active: true)
+User.create(fname: "Phuong", lname: "Ngo", email: "pnv2003@gmail.com", password: "123", admin: true, active: true, confirmed_at: Time.now)
 
 # known users
-User.create(fname: "Jameson", lname: "Kezzer", email: "jj@jj.jj", password: "jjj", admin: false, active: true)
-u = User.create(fname: "Jackpot", lname: "Kattis", email: "kk@kk.kk", password: "kkk", admin: false, active: true)
+User.create(fname: "Jameson", lname: "Kezzer", email: "jj@jj.jj", password: "jjj", admin: false, active: true, confirmed_at: Time.now)
+u = User.create(fname: "Jackpot", lname: "Kattis", email: "kk@kk.kk", password: "kkk", admin: false, active: true, confirmed_at: Time.now)
 100.times do
-  post = u.posts.new(
+  post = u.posts.create(
     type: ['Photo', 'Album'].sample,
     title: Faker::Company.name,
     description: Faker::Quote.matz,
@@ -33,7 +33,10 @@ u = User.create(fname: "Jackpot", lname: "Kattis", email: "kk@kk.kk", password: 
     end
   end
   post.save
+  u.save
 end
+
+puts "Done: known users"
 
 # random users
 Faker::Number.between(from: 10, to: 30).times do
@@ -47,7 +50,7 @@ Faker::Number.between(from: 10, to: 30).times do
   )
 
   Faker::Number.between(from: 1, to: 10).times do
-    post = user.posts.new(
+    post = user.posts.create(
       type: ['Photo', 'Album'].sample,
       title: Faker::Company.name,
       description: Faker::Quote.matz,
@@ -65,6 +68,8 @@ Faker::Number.between(from: 10, to: 30).times do
   end
 end
 
+puts "Done: random users"
+
 # random follows
 idx = 1
 user_ids = User.ids
@@ -77,6 +82,8 @@ user_pairs.each do |p|
   end
 end
 
+puts "Done: follows"
+
 # random reactions
 idx = 1
 post_ids = Post.ids
@@ -88,3 +95,5 @@ user_post_pairs.each do |p|
     break if idx == MAX_REACT_COUNT
   end
 end
+
+puts "Done: reactions"
