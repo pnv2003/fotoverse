@@ -37,6 +37,23 @@ en:
   first_name: "First name"
   last_name: "Last name"
 
+  photo: "Photo"
+  album: "Album"
+  photos: "Photos"
+  albums: "Albums"
+  follow: "Follow"
+  following: "Following"
+  followers: "Followers"
+  ago: "ago"
+  private: "Private"
+
+  nav:
+    feeds: "Feeds"
+    discover: "Discover"
+    new: "New"
+    profile: "Profile"
+    search: "Search"
+
   welcome:
     slogan1: "Capture the Moments"
     slogan2: "Share the World"

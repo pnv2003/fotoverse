@@ -49,6 +49,23 @@ vi:
   first_name: "Tên"
   last_name: "Họ"
 
+  photo: "Ảnh"
+  album: "Bộ sưu tập"
+  photos: "Ảnh"
+  albums: "Bộ sưu tập"
+  follow: "Theo dõi"
+  following: "Đang theo dõi"
+  followers: "Người theo dõi"
+  ago: "trước"
+  private: "Riêng tư"
+
+  nav:
+    feeds: "Bảng tin"
+    discover: "Khám phá"
+    new: "Đăng bài"
+    profile: "Hồ sơ"
+    search: "Tìm kiếm"
+
   welcome:
     slogan1: "Capture the Moments"
     slogan2: "Share the World"
