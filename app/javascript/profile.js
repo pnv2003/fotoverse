@@ -352,10 +352,15 @@ element.addEventListener('scroll', (e) => {
     if (element.scrollTop + element.offsetHeight>= element.scrollHeight ){
        
         if (activeTabName === 'photos') {
+            if (photoPage == 0) return;
             photoPage++;
             http.get(window.location.pathname, { content: "photos", page: photoPage }, null)
             .then(response => response.json())
             .then(content => {
+                if (content.length == 0) {
+                    photoPage = 0;
+                    return;
+                }
                 content.forEach((photo) => {
                     const item = document.createElement("div");
                     item.className = "item";
@@ -396,9 +401,14 @@ element.addEventListener('scroll', (e) => {
                 });
             });
         } else if (activeTabName === "albums") {
+            if (albumPage == 0) return;
             albumPage++;
             http.get(window.location.pathname, { content: "albums", page: albumPage }, null).then((response) => {
                 const content = response;
+                if (content.length == 0) {
+                    albumPage = 0;
+                    return;
+                }
                 content.forEach((album) => {
                     const item = document.createElement("div");
                     item.className = "item";
@@ -452,9 +462,14 @@ element.addEventListener('scroll', (e) => {
                 });
             });
         } else if (activeTabName === "followers") {
+            if (followerPage == 0) return;
             followerPage++;
             http.get(window.location.pathname, { content: "followers", page: followerPage }, null).then((response) => {
                 const content = response;
+                if (content.length == 0) {
+                    followerPage = 0;
+                    return;
+                }
                 content.forEach((follower) => {
                     const item = document.createElement("div");
                     item.className = "item";
@@ -497,9 +512,14 @@ element.addEventListener('scroll', (e) => {
                 });
             });
         } else if (activeTabName === "following") {
+            if (followingPage == 0) return;
             followingPage++;
             http.get(window.location.pathname, { content: "following", page: followingPage }, null).then((response) => {
                 const content = response;
+                if (content.length == 0) {
+                    followingPage = 0;
+                    return;
+                }
                 content.forEach((followed) => {
                     const item = document.createElement("div");
                     item.className = "item";
