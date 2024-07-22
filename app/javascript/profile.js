@@ -357,7 +357,7 @@ element.addEventListener('scroll', (e) => {
             http.get(window.location.pathname, { content: "photos", page: photoPage }, null)
             .then(response => response.json())
             .then(content => {
-                if (content.length == 0) {
+                if (!content) {
                     photoPage = 0;
                     return;
                 }
@@ -403,9 +403,10 @@ element.addEventListener('scroll', (e) => {
         } else if (activeTabName === "albums") {
             if (albumPage == 0) return;
             albumPage++;
-            http.get(window.location.pathname, { content: "albums", page: albumPage }, null).then((response) => {
-                const content = response;
-                if (content.length == 0) {
+            http.get(window.location.pathname, { content: "albums", page: albumPage }, null)
+            .then(response => response.json())
+            .then(content => {
+                if (!content) {
                     albumPage = 0;
                     return;
                 }
@@ -464,9 +465,10 @@ element.addEventListener('scroll', (e) => {
         } else if (activeTabName === "followers") {
             if (followerPage == 0) return;
             followerPage++;
-            http.get(window.location.pathname, { content: "followers", page: followerPage }, null).then((response) => {
-                const content = response;
-                if (content.length == 0) {
+            http.get(window.location.pathname, { content: "followers", page: followerPage }, null)
+            .then(response => response.json())
+            .then(content => {
+                if (!content) {
                     followerPage = 0;
                     return;
                 }
@@ -485,26 +487,30 @@ element.addEventListener('scroll', (e) => {
                     info.className = "info";
 
                     const name = document.createElement("p");
+                    name.className = "name";
                     name.textContent = follower.fname + ' ' + follower.lname;
                     info.appendChild(name);
 
                     const metrics = document.createElement("div");
                     metrics.className = "metrics";
                     const photoCount = document.createElement("p");
-                    photoCount.textContent = `${follower.posts.filter(post => post.type === "Photo").length}`;
+                    photoCount.textContent = `${follower.posts.filter(post => post.type === "Photo").length} photos`;
                     const albumCount = document.createElement("p");
-                    albumCount.textContent = `${follower.posts.filter(post => post.type === "Album").length}`;
+                    albumCount.textContent = `${follower.posts.filter(post => post.type === "Album").length} albums`;
                     metrics.appendChild(photoCount);
                     metrics.appendChild(albumCount);
                     info.appendChild(metrics);
 
+                    item.appendChild(avatar);
+                    item.appendChild(info);
+
                     const userId = document.querySelector("#current_user_id");
                     if (follower.followers.map(user => user.id).includes(userId)) {
-                        info.innerHTML += `
+                        item.innerHTML += `
                             <button class="follow btn btn-primary" data-follower-id="${userId}" data-followed-id="${follower.id}">Following</button>
                         `;
                     } else {
-                        info.innerHTML += `
+                        item.innerHTML += `
                             <button class="follow btn btn-outline-primary" data-follower-id="${userId}" data-followed-id="${follower.id}">Follow</button>
                         `;
                     }
@@ -514,9 +520,10 @@ element.addEventListener('scroll', (e) => {
         } else if (activeTabName === "following") {
             if (followingPage == 0) return;
             followingPage++;
-            http.get(window.location.pathname, { content: "following", page: followingPage }, null).then((response) => {
-                const content = response;
-                if (content.length == 0) {
+            http.get(window.location.pathname, { content: "following", page: followingPage }, null)
+            .then(response => response.json())
+            .then(content => {
+                if (!content) {
                     followingPage = 0;
                     return;
                 }
@@ -535,26 +542,30 @@ element.addEventListener('scroll', (e) => {
                     info.className = "info";
 
                     const name = document.createElement("p");
+                    name.className = "name";
                     name.textContent = followed.fname + ' ' + followed.lname;
                     info.appendChild(name);
 
                     const metrics = document.createElement("div");
                     metrics.className = "metrics";
                     const photoCount = document.createElement("p");
-                    photoCount.textContent = `${followed.posts.filter(post => post.type === "Photo").length}`;
+                    photoCount.textContent = `${followed.posts.filter(post => post.type === "Photo").length} photos`;
                     const albumCount = document.createElement("p");
-                    albumCount.textContent = `${followed.posts.filter(post => post.type === "Album").length}`;
+                    albumCount.textContent = `${followed.posts.filter(post => post.type === "Album").length} albums`;
                     metrics.appendChild(photoCount);
                     metrics.appendChild(albumCount);
                     info.appendChild(metrics);
 
+                    item.appendChild(avatar);
+                    item.appendChild(info);
+
                     const userId = document.querySelector("#current_user_id");
                     if (followed.followers.map(user => user.id).includes(userId)) {
-                        info.innerHTML += `
+                        item.innerHTML += `
                             <button class="follow btn btn-primary" data-follower-id="${userId}" data-followed-id="${followed.id}">Following</button>
                         `;
                     } else {
-                        info.innerHTML += `
+                        item.innerHTML += `
                             <button class="follow btn btn-outline-primary" data-follower-id="${userId}" data-followed-id="${followed.id}">Follow</button>
                         `;
                     }
