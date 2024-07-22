@@ -16,11 +16,11 @@ class UsersController < ApplicationController
         render json: albums, include: { media: { only: :url }, reactors: { only: :id } }
 
       elsif (tab == "followers")
-        followers = @user.followers.page(params[:page]).per(16)
+        followers = @user.followers.page(params[:page]).per(10)
         render json: followers, include: { posts: { only: [:id, :type] }, followers: { only: :id } }
 
       elsif (tab == "following")
-        followings = @user.followings.page(params[:page]).per(16)
+        followings = @user.followings.page(params[:page]).per(10)
         render json: followings
 
       end
@@ -30,8 +30,8 @@ class UsersController < ApplicationController
     # initil load
     @photos = @user.posts.where(type: "Photo").page(params[:page]).per(16)
     @albums = @user.posts.where(type: "Album").page(params[:page]).per(16)
-    @followers = @user.followers.page(params[:page]).per(16)
-    @followings = @user.followings.page(params[:page]).per(16)
+    @followers = @user.followers.page(params[:page]).per(10)
+    @followings = @user.followings.page(params[:page]).per(10)
 
     if (params[:tab].present?)
       @tab = params[:tab]
