@@ -5,7 +5,18 @@ main.signup {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 4rem;
+    padding-top: 1rem;
+    background-image: url(background.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+main.signup h2 {
+    font-size: 3rem;
+    color: white;
+    margin-bottom: 1rem;
 }
 
 main.signup form {

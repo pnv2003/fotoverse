@@ -1,0 +1,13 @@
+vi:
+  login: "Đăng nhập"
+  signup: "Đăng ký"
+  logout: "Đăng xuất"
+
+  welcome:
+    slogan1: "Capture the Moments,"
+    slogan2: "Share the World"
+    snap: "Snap"
+    share: "Share"
+    inspire: "Inspire"
+
+  

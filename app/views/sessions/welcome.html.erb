@@ -1,22 +1,41 @@
 <div class="welcome">
     <header>
         <h1>Fotoverse</h1>
+        <div class="lang">
+            <% if I18n.locale == :vi %>
+                <%= link_to locale: :en do %>
+                    <div class="flag">
+                        <%= image_tag "vietnam.png" %>
+                    </div>
+                    <span>VI</span>
+                <% end %>
+            <% else %>
+                <%= link_to locale: :vi do %>
+                    <div class="flag">
+                        <%= image_tag "united-kingdom.png" %>
+                    </div>
+                    <span>EN</span>
+                <% end %>
+            <% end %>
+        </div>
     </header>
     <main>
-
         <h1 class="display-1 fw-bolder">
             <span class="text-gradient d-inline">
-                Your New Visual Playground
+                <%= I18n.t 'welcome.slogan1' %>
+            </span>
+            <span class="text-gradient d-inline">
+                <%= I18n.t 'welcome.slogan2' %>
             </span>
         </h1>
 
         <div class="verbs">
-            <p>Snap &middot; Share &middot; Inspire</p>
+            <p><%= I18n.t 'welcome.snap' %> &middot; <%= I18n.t 'welcome.share' %> &middot; <%= I18n.t 'welcome.inspire' %></p>
         </div>
 
         <div class="action">
-            <%= button_to "Login", new_user_session_path, method: :get, class: "btn btn-outline-primary btn-lg"%>
-            <%= button_to "Sign Up", new_user_registration_path, method: :get, class: "btn btn-primary btn-lg"%>
+            <%= button_to I18n.t('login'), new_user_session_path, method: :get, class: "btn btn-outline-light btn-lg"%>
+            <%= button_to I18n.t('signup'), new_user_registration_path, method: :get, class: "btn btn-light btn-lg"%>
         </div>
         
     </main>

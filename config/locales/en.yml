@@ -28,4 +28,14 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  login: "Log in"
+  signup: "Sign up"
+  logout: "Log out"
+
+  welcome:
+    slogan1: "Capture the Moments,"
+    slogan2: "Share the World"
+    snap: "Snap"
+    share: "Share"
+    inspire: "Inspire"
+    
