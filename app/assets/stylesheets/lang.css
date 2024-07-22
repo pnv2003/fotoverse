@@ -19,3 +19,7 @@
     height: 3rem;
     width: 3rem;
 }
+
+.lang span {
+    font-size: 1.5rem;
+}

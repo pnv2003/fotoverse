@@ -3,7 +3,6 @@ main.login {
     width: 100%;
     flex-direction: column;
     align-items: center;
-    padding-top: 7rem;
     background-image: url(background.jpg);
     background-position: center;
     background-repeat: no-repeat;
@@ -15,6 +14,7 @@ main.login h2 {
     font-size: 3rem;
     color: white;
     margin-bottom: 1rem;
+    padding-top: 3rem;
 }
 
 main.login form {

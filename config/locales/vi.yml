@@ -2,12 +2,31 @@ vi:
   login: "Đăng nhập"
   signup: "Đăng ký"
   logout: "Đăng xuất"
+  email: "Email"
+  password: "Mật khẩu"
+  password_confirmation: "Xác nhận mật khẩu"
+  first_name: "Tên"
+  last_name: "Họ"
 
   welcome:
-    slogan1: "Capture the Moments,"
+    slogan1: "Capture the Moments"
     slogan2: "Share the World"
     snap: "Snap"
     share: "Share"
     inspire: "Inspire"
 
+  auth:
+    remember_me: "Ghi nhớ đăng nhập"
+    login_with: "Đăng nhập với"
+    forgot_password: "Quên mật khẩu?"
+    or: "HOẶC"
+    dont_have_account: "Chưa có tài khoản?"
+    sign_up_with: "Đăng ký với"
+    by_signing_up: "Với việc đăng ký, bạn đồng ý với "
+    of_us: "của chúng tôi"
+    terms: "Điều khoản"
+    and: "và"
+    privacy_policy: "Chính sách bảo mật"
+    cookies_policy: "Chính sách cookie"
+    already_have_account: "Đã có tài khoản?"
   
