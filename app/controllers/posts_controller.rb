@@ -2,8 +2,8 @@ class PostsController < ApplicationController
   layout "user"
 
   def discover
-    @photos = Photo.where(mode: "public").order(created_at: :desc).page(params[:page]).per(8)
-    @albums = Album.where(mode: "public").order(created_at: :desc).page(params[:page]).per(8)
+    @photos = Photo.where(mode: "public").order(created_at: :desc).page(params[:page]).per(16)
+    @albums = Album.where(mode: "public").order(created_at: :desc).page(params[:page]).per(16)
 
     if (params[:tab].present?)
       @tab = params[:tab]
@@ -35,8 +35,8 @@ class PostsController < ApplicationController
   end
 
   def feeds
-    @photos = Photo.where(user_id: current_user.followings.ids, mode: "public").order(created_at: :desc)
-    @albums = Album.where(user_id: current_user.followings.ids, mode: "public").order(created_at: :desc)
+    @photos = Photo.where(user_id: current_user.followings.ids, mode: "public").order(created_at: :desc).page(params[:page]).per(16)
+    @albums = Album.where(user_id: current_user.followings.ids, mode: "public").order(created_at: :desc).page(params[:page]).per(16)
 
     if (params[:tab].present?)
       @tab = params[:tab]
