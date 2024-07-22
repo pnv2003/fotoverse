@@ -369,7 +369,7 @@ element.addEventListener('scroll', (e) => {
                     info.style.display = "none";
 
                     // kinda hardcode
-                    const userId = document.querySelector("#current_user_id")
+                    const userId = document.querySelector("#current_user_id").textContent;
                     info.innerHTML = `
                         <span class="id">${photo.id}</span>
                         <span class="title">${photo.title}</span>
@@ -412,7 +412,7 @@ element.addEventListener('scroll', (e) => {
                     info.style.display = "none";
 
                     // kinda hardcode
-                    const userId = document.querySelector("#current_user_id")
+                    const userId = document.querySelector("#current_user_id").textContent;
                     info.innerHTML = `
                         <span class="id">${album.id}</span>
                         <span class="title">${album.title}</span>

@@ -11,15 +11,60 @@ class PostsController < ApplicationController
       @tab = "photos"
     end
 
-    respond_to do |format|
-      format.html
-      format.js
+    if params[:content].present?
+      if params[:content] == "photos"
+        render json: @photos, include: {
+          medium: { only: :url },
+          reactors: { only: :id },
+          user: {
+            only: [:id, :fname, :lname, :avatar],
+            include: { followers: { only: :id } }
+          }
+        }
+      elsif params[:content] == "albums"
+        render json: @albums, include: {
+          media: { only: :url },
+          reactors: { only: :id },
+          user: {
+            only: [:id, :fname, :lname, :avatar],
+            include: { followers: { only: :id } }
+          }
+        }
+      end
     end
   end
 
   def feeds
     @photos = Photo.where(user_id: current_user.followings.ids, mode: "public").order(created_at: :desc)
     @albums = Album.where(user_id: current_user.followings.ids, mode: "public").order(created_at: :desc)
+
+    if (params[:tab].present?)
+      @tab = params[:tab]
+    else
+      @tab = "photos"
+    end
+
+    if params[:content].present?
+      if params[:content] == "photos"
+        render json: @photos, include: {
+          medium: { only: :url },
+          reactors: { only: :id },
+          user: {
+            only: [:id, :fname, :lname, :avatar],
+            include: { followers: { only: :id } }
+          }
+        }
+      elsif params[:content] == "albums"
+        render json: @albums, include: {
+          media: { only: :url },
+          reactors: { only: :id },
+          user: {
+            only: [:id, :fname, :lname, :avatar],
+            include: { followers: { only: :id } }
+          }
+        }
+      end
+    end
   end
 
   def destroy

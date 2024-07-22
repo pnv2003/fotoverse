@@ -1,5 +1,6 @@
 import { debounce } from "./utils/exec";
 import http from "./utils/request";
+import { getRelativeTime } from "./utils/datetime";
 
 // tab
 const photos = document.querySelector("#photos");
@@ -42,127 +43,135 @@ photoTab.addEventListener('click', () => changeTab(photoTab, photos));
 albumTab.addEventListener('click', () => changeTab(albumTab, albums));
 
 // modal
-const photoItems = document.querySelectorAll("#photos .card");
-const albumItems = document.querySelectorAll("#albums .card");
-
 const photoModal = document.querySelector("#photoModal");
 const albumModal = document.querySelector("#albumModal");
 
 const photoModalInstance = new bootstrap.Modal(photoModal, {keyboard: false});
 const albumModalInstance = new bootstrap.Modal(albumModal, {keyboard: false});
 
-photoItems.forEach(item => item.querySelector(".card-img-top").addEventListener("click", () => {
-    const avatarSrc = item.querySelector(".card-header img").src;
-    const username = item.querySelector(".card-header .name").textContent;
-    const profileLink = item.querySelector(".card-header a").href;
-    const photoSrc = item.querySelector(".card-img-top").src;
-    const title = item.querySelector(".card-title").textContent;
-    const description = item.querySelector(".card-text").textContent;
-    const reacted = item.querySelector(".react i").classList.contains("fa-solid");
-    const reactCount = item.querySelector(".react span").textContent;
-    const timeAgo = item.querySelector(".ago").textContent;
+const populateModalContent = (item, type) => {
+    if (type === "photo") {
+        item.querySelector(".card-img-top").addEventListener("click", () => {
+            const avatarSrc = item.querySelector(".card-header img").src;
+            const username = item.querySelector(".card-header .name").textContent;
+            const profileLink = item.querySelector(".card-header a").href;
+            const photoSrc = item.querySelector(".card-img-top").src;
+            const title = item.querySelector(".card-title").textContent;
+            const description = item.querySelector(".card-text").textContent;
+            const reacted = item.querySelector(".react i").classList.contains("fa-solid");
+            const reactCount = item.querySelector(".react span").textContent;
+            const timeAgo = item.querySelector(".ago").textContent;
+        
+            photoModal.querySelector(".modal-header img").src = avatarSrc;
+            photoModal.querySelector(".modal-header .name").textContent = username;
+            photoModal.querySelector(".modal-header a").href = profileLink;
+            photoModal.querySelector(".card-img-top").src = photoSrc;
+            photoModal.querySelector(".card-title").textContent = title;
+            photoModal.querySelector(".card-text").textContent = description;
+            photoModal.querySelector(".ago").textContent = timeAgo;
+        
+            // add reaction info
+            const photoId = item.getAttribute("data-post-id");
+            const reactButton = photoModal.querySelector(".react");
+            if (reacted) {
+                toggleReact(reactButton.querySelector("i"));
+            }
+            reactButton.querySelector("span").textContent = reactCount;
+            reactButton.setAttribute("data-post-id", photoId);
+        
+            // add follow info
+            const followInfo = item.querySelector(".follow");
+            const followButton = photoModal.querySelector(".follow");
+            if (followInfo) {
+                followButton.setAttribute("data-follower-id", followInfo.getAttribute("data-follower-id"));
+                followButton.setAttribute("data-followed-id", followInfo.getAttribute("data-followed-id"));
+                if (followInfo.textContent === "Following") {
+                    toggleFollow(followButton);
+                }
+            } else {
+                followButton.style.display = "none";
+            }
+        
+            photoModalInstance.show();
+        });
+    } else if (type === "album") {
+        item.querySelector(".card-img-top").addEventListener("click", () => {
 
-    photoModal.querySelector(".modal-header img").src = avatarSrc;
-    photoModal.querySelector(".modal-header .name").textContent = username;
-    photoModal.querySelector(".modal-header a").href = profileLink;
-    photoModal.querySelector(".card-img-top").src = photoSrc;
-    photoModal.querySelector(".card-title").textContent = title;
-    photoModal.querySelector(".card-text").textContent = description;
-    photoModal.querySelector(".ago").textContent = timeAgo;
-
-    // add reaction info
-    const photoId = item.getAttribute("data-post-id");
-    const reactButton = photoModal.querySelector(".react");
-    if (reacted) {
-        toggleReact(reactButton.querySelector("i"));
+            const images = item.querySelectorAll(".images img");
+            const avatarSrc = item.querySelector(".card-header img").src;
+            const username = item.querySelector(".card-header .name").textContent;
+            const profileLink = item.querySelector(".card-header a").href;
+            const albumSrc = item.querySelector(".card-img-top").src;
+            const title = item.querySelector(".card-title").textContent;
+            const description = item.querySelector(".card-text").textContent;
+            const reacted = item.querySelector(".react i").classList.contains("fa-solid");
+            const reactCount = item.querySelector(".react span").textContent;
+            const photoCount = item.querySelector(".count").textContent;
+            const timeAgo = item.querySelector(".ago").textContent;
+        
+            albumModal.querySelector(".modal-header img").src = avatarSrc;
+            albumModal.querySelector(".modal-header .name").textContent = username;
+            albumModal.querySelector(".modal-header a").href = profileLink;
+            albumModal.querySelector(".card-title").textContent = title;
+            albumModal.querySelector(".card-text").textContent = description;
+            albumModal.querySelector(".ago").textContent = timeAgo;
+        
+            // insert images to album carousel
+            const carousel = albumModal.querySelector(".carousel-inner");
+            const indicators = albumModal.querySelector(".carousel-indicators");
+            carousel.innerHTML = "";
+            indicators.innerHTML = "";
+            images.forEach((image, index) => {
+                const active = index === 0 ? "active" : "";
+                carousel.innerHTML += `
+                    <div class="carousel-item ${active}">
+                        <img src="${image.src}" class="d-block w-100" alt="...">
+                    </div>
+                `;
+        
+                if (index == 0) {
+                    indicators.innerHTML += `
+                        <button type="button" data-bs-target="#carouselAlbumIndicators" data-bs-slide-to="${index}" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    `;
+                } else {
+                    indicators.innerHTML += `
+                        <button type="button" data-bs-target="#carouselAlbumIndicators" data-bs-slide-to="${index}" aria-label="Slide ${index + 1}"></button>
+                    `;
+                }
+            });
+        
+            // add reaction info
+            const albumId = item.getAttribute("data-post-id");
+            const reactButton = albumModal.querySelector(".react");
+            if (reacted) {
+                toggleReact(reactButton.querySelector("i"));
+            }
+            reactButton.querySelector("span").textContent = reactCount;
+            reactButton.setAttribute("data-post-id", albumId);
+        
+            // add follow info
+            const followInfo = item.querySelector(".follow");
+            const followButton = albumModal.querySelector(".follow");
+            if (followInfo) {
+                followButton.setAttribute("data-follower-id", followInfo.getAttribute("data-follower-id"));
+                followButton.setAttribute("data-followed-id", followInfo.getAttribute("data-followed-id"));
+                if (followInfo.textContent === "Following") {
+                    toggleFollow(followButton);
+                }
+            } else {
+                followButton.style.display = "none";
+            }
+        
+            albumModalInstance.show();
+        });
     }
-    reactButton.querySelector("span").textContent = reactCount;
-    reactButton.setAttribute("data-post-id", photoId);
+}
 
-    // add follow info
-    const followInfo = item.querySelector(".follow");
-    const followButton = photoModal.querySelector(".follow");
-    if (followInfo) {
-        followButton.setAttribute("data-follower-id", followInfo.getAttribute("data-follower-id"));
-        followButton.setAttribute("data-followed-id", followInfo.getAttribute("data-followed-id"));
-        if (followInfo.textContent === "Following") {
-            toggleFollow(followButton);
-        }
-    } else {
-        followButton.style.display = "none";
-    }
+const photoItems = document.querySelectorAll("#photos .card");
+const albumItems = document.querySelectorAll("#albums .card");
 
-    photoModalInstance.show();
-}));
-albumItems.forEach(item => item.querySelector(".card-img-top").addEventListener("click", () => {
-
-    const images = item.querySelectorAll(".images img");
-    const avatarSrc = item.querySelector(".card-header img").src;
-    const username = item.querySelector(".card-header .name").textContent;
-    const profileLink = item.querySelector(".card-header a").href;
-    const albumSrc = item.querySelector(".card-img-top").src;
-    const title = item.querySelector(".card-title").textContent;
-    const description = item.querySelector(".card-text").textContent;
-    const reacted = item.querySelector(".react i").classList.contains("fa-solid");
-    const reactCount = item.querySelector(".react span").textContent;
-    const photoCount = item.querySelector(".count").textContent;
-    const timeAgo = item.querySelector(".ago").textContent;
-
-    albumModal.querySelector(".modal-header img").src = avatarSrc;
-    albumModal.querySelector(".modal-header .name").textContent = username;
-    albumModal.querySelector(".modal-header a").href = profileLink;
-    albumModal.querySelector(".card-title").textContent = title;
-    albumModal.querySelector(".card-text").textContent = description;
-    albumModal.querySelector(".ago").textContent = timeAgo;
-
-    // insert images to album carousel
-    const carousel = albumModal.querySelector(".carousel-inner");
-    const indicators = albumModal.querySelector(".carousel-indicators");
-    carousel.innerHTML = "";
-    indicators.innerHTML = "";
-    images.forEach((image, index) => {
-        const active = index === 0 ? "active" : "";
-        carousel.innerHTML += `
-            <div class="carousel-item ${active}">
-                <img src="${image.src}" class="d-block w-100" alt="...">
-            </div>
-        `;
-
-        if (index == 0) {
-            indicators.innerHTML += `
-                <button type="button" data-bs-target="#carouselAlbumIndicators" data-bs-slide-to="${index}" class="active" aria-current="true" aria-label="Slide 1"></button>
-            `;
-        } else {
-            indicators.innerHTML += `
-                <button type="button" data-bs-target="#carouselAlbumIndicators" data-bs-slide-to="${index}" aria-label="Slide ${index + 1}"></button>
-            `;
-        }
-    });
-
-    // add reaction info
-    const albumId = item.getAttribute("data-post-id");
-    const reactButton = albumModal.querySelector(".react");
-    if (reacted) {
-        toggleReact(reactButton.querySelector("i"));
-    }
-    reactButton.querySelector("span").textContent = reactCount;
-    reactButton.setAttribute("data-post-id", albumId);
-
-    // add follow info
-    const followInfo = item.querySelector(".follow");
-    const followButton = albumModal.querySelector(".follow");
-    if (followInfo) {
-        followButton.setAttribute("data-follower-id", followInfo.getAttribute("data-follower-id"));
-        followButton.setAttribute("data-followed-id", followInfo.getAttribute("data-followed-id"));
-        if (followInfo.textContent === "Following") {
-            toggleFollow(followButton);
-        }
-    } else {
-        followButton.style.display = "none";
-    }
-
-    albumModalInstance.show();
-}));
+photoItems.forEach(item => populateModalContent(item, "photo"));
+albumItems.forEach(item => populateModalContent(item, "album"));
 
 // react
 const reactButtons = document.querySelectorAll(".react");
@@ -299,4 +308,218 @@ followButtons.forEach(button => {
         toggleFollow(button);
         debouncedFollow();
     });
+});
+
+// lazy load
+const element = document.querySelector("main")
+element.style.overflow = 'scroll';
+let lastScrollTop = 0;
+
+let photoPage = 1;
+let albumPage = 1;
+let followerPage = 1;
+let followingPage = 1;
+
+element.addEventListener('scroll', (e) => {
+
+    if (element.scrollTop < lastScrollTop) {
+      // upscroll 
+      return;
+    }
+
+    lastScrollTop = element.scrollTop <= 0 ? 0 : element.scrollTop;
+    if (element.scrollTop + element.offsetHeight>= element.scrollHeight ){
+
+        const userId = document.querySelector("#current_user_id").textContent;
+        if (activeTabName === 'photos') {
+            photoPage++;
+            http.get(window.location.pathname, { content: "photos", page: photoPage }, null)
+            .then(response => response.json())
+            .then(content => {
+                content.forEach((photo) => {
+                    const card = document.createElement("div");
+                    card.className = "card text-body-secondary";
+                    card.setAttribute("data-post-id", photo.id);
+                    
+                    const cardHeader = document.createElement("div");
+                    cardHeader.className = "card-header";
+                    const userLink = document.createElement("a");
+                    userLink.href = `/users/${photo.user_id}`;
+                    userLink.innerHTML = `
+                        <div class="user">
+                            <img src="${photo.user.avatar.url}" alt="avatar">
+                            <p class="name">${photo.user.fname + ' ' + photo.user.lname}</p>
+                        </div>
+                    `;
+                    cardHeader.appendChild(userLink);
+
+                    const followButton = document.createElement("button");
+                    if (photo.user_id != userId) {
+                        if (photo.user.followers.map(user => user.id).includes(userId)) {
+                            followButton.textContent = "Following";
+                            followButton.className = "btn btn-outline-primary follow";
+                            followButton.setAttribute("data-follower-id", userId);
+                            followButton.setAttribute("data-followed-id", photo.user_id);
+                        } else {
+                            followButton.textContent = "Follow";
+                            followButton.className = "btn btn-primary follow";
+                            followButton.setAttribute("data-follower-id", userId);
+                            followButton.setAttribute("data-followed-id", photo.user_id);
+                        }
+                    }
+                    cardHeader.appendChild(followButton);
+
+                    const image = document.createElement("div");
+                    image.className = "image";
+                    image.innerHTML = `
+                        <img src="${photo.medium.url.url}" class="card-img-top" alt="photo">
+                    `;
+
+                    const cardBody = document.createElement("div");
+                    cardBody.className = "card-body";
+                    cardBody.innerHTML = `
+                        <h5 class="card-title">${photo.title}</h5>
+                        <p class="card-text">${photo.description}</p>
+                    `;
+
+                    const cardFooter = document.createElement("div");
+                    cardFooter.className = "card-footer text-body-secondary";
+                    const react = document.createElement("p");
+                    react.className = "react";
+                    react.setAttribute("data-post-id", photo.id);
+                    react.setAttribute("data-user-id", userId);
+                    if (photo.reactors.map(user => user.id).includes(userId)) {
+                        react.innerHTML = `
+                            <i class="fa-solid fa-heart fa-xl" style="color: #ed333b;"></i>
+                        `;
+                    } else {
+                        react.innerHTML = `
+                            <i class="fa-regular fa-heart fa-xl"></i>
+                        `;
+                    }
+                    react.innerHTML += `
+                        <span>${photo.reactors.length}</span>
+                    `;
+
+                    const ago = document.createElement("p");
+                    ago.className = "ago";
+                    ago.textContent = getRelativeTime(new Date(photo.updated_at));
+
+                    cardFooter.appendChild(react);
+                    cardFooter.appendChild(ago);
+
+
+                    card.appendChild(cardHeader);
+                    card.appendChild(image);
+                    card.appendChild(cardBody);
+                    card.appendChild(cardFooter);
+
+                    populateModalContent(card, "photo");
+                    photos.appendChild(card);
+                });
+            });
+        } else if (activeTabName === 'albums') {
+
+            albumPage++;
+            http.get(window.location.pathname, { content: "albums", page: albumPage }, null)
+            .then(response => response.json())
+            .then(content => {
+                content.forEach((album) => {
+                    const card = document.createElement("div");
+                    card.className = "card text-body-secondary";
+                    card.setAttribute("data-post-id", album.id);
+                    
+                    const cardHeader = document.createElement("div");
+                    cardHeader.className = "card-header";
+                    const userLink = document.createElement("a");
+                    userLink.href = `/users/${album.user_id}`;
+                    userLink.innerHTML = `
+                        <div class="user">
+                            <img src="${album.user.avatar.url}" alt="avatar">
+                            <p class="name">${album.user.fname + ' ' + album.user.lname}</p>
+                        </div>
+                    `;
+                    cardHeader.appendChild(userLink);
+
+                    const followButton = document.createElement("button");
+                    if (album.user_id != userId) {
+                        if (album.user.followers.map(user => user.id).includes(userId)) {
+                            followButton.textContent = "Following";
+                            followButton.className = "btn btn-outline-primary follow";
+                            followButton.setAttribute("data-follower-id", userId);
+                            followButton.setAttribute("data-followed-id", album.user_id);
+                        } else {
+                            followButton.textContent = "Follow";
+                            followButton.className = "btn btn-primary follow";
+                            followButton.setAttribute("data-follower-id", userId);
+                            followButton.setAttribute("data-followed-id", album.user_id);
+                        }
+                    }
+                    cardHeader.appendChild(followButton);
+
+                    const image = document.createElement("div");
+                    image.className = "image";
+                    image.innerHTML = `
+                        <img src="${album.media[0].url}" class="card-img-top" alt="album">
+                    `;
+
+                    const images = document.createElement("div");
+                    images.className = "images";
+                    images.style.display = "none";
+                    album.media.forEach((medium) => {
+                        images.innerHTML += `
+                            <img src="${medium.url.url}" alt="photo">
+                        `;
+                    });
+
+                    const cardBody = document.createElement("div");
+                    cardBody.className = "card-body";
+                    cardBody.innerHTML = `
+                        <h5 class="card-title">${album.title}</h5>
+                        <p class="card-text">${album.description}</p>
+                    `;
+
+                    const cardFooter = document.createElement("div");
+                    cardFooter.className = "card-footer text-body-secondary";
+                    const react = document.createElement("p");
+                    react.className = "react";
+                    react.setAttribute("data-post-id", album.id);
+                    react.setAttribute("data-user-id", userId);
+                    if (album.reactors.map(user => user.id).includes(userId)) {
+                        react.innerHTML = `
+                            <i class="fa-solid fa-heart fa-xl" style="color: #ed333b;"></i>
+                        `;
+                    } else {
+                        react.innerHTML = `
+                            <i class="fa-regular fa-heart fa-xl"></i>
+                        `;
+                    }
+                    react.innerHTML += `
+                        <span>${album.reactors.length}</span>
+                    `;
+                    
+                    const ago = document.createElement("p");
+                    ago.className = "ago";
+                    ago.textContent = getRelativeTime(new Date(album.updated_at));
+
+                    cardFooter.appendChild(react);
+                    cardFooter.appendChild(ago);
+
+                    const count = document.createElement("p");
+                    count.className = "count";
+                    count.textContent = album.media.length;
+                    
+                    card.appendChild(cardHeader);
+                    card.appendChild(image);
+                    card.appendChild(images);
+                    card.appendChild(cardBody);
+                    card.appendChild(cardFooter);
+                    card.appendChild(count);
+
+                    populateModalContent(card, "album");
+                    albums.appendChild(card);
+                });
+            })
+        }
+    }
 });
