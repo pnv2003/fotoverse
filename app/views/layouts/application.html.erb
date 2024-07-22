@@ -23,6 +23,10 @@
   </head>
 
   <body>
+    <%# for my JavaScript friends %>
+    <% if current_user %>
+      <p id="current_user_id" style="display: none"><%= current_user.id %></p>
+    <% end %>
     <%= yield :header %>
     <%= yield %>
 
