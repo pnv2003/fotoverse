@@ -48,7 +48,19 @@ en:
   following: "Following"
   followers: "Followers"
   ago: "ago"
+
+  new_photo: "New Photo"
+  new_album: "New Album"
+  title: "Title"
+  description: "Description"
+  sharing_mode: "Sharing mode"
+  public: "Public"
   private: "Private"
+  select_or_drop: "Select or drop your fancy photos here"
+  add_photo: "Add Photo"
+  edit_photo: "Edit Photo"
+  edit_album: "Edit Album"
+  save: "Save"
 
   nav:
     feeds: "Feeds"

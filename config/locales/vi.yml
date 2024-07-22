@@ -60,7 +60,19 @@ vi:
   following: "Đang theo dõi"
   followers: "Người theo dõi"
   ago: "trước"
+
+  new_photo: "Thêm ảnh mới"
+  new_album: "Bộ sưu tập mới"
+  title: "Tiêu đề"
+  description: "Mô tả"
+  sharing_mode: "Chế độ chia sẻ"
+  public: "Công khai"
   private: "Riêng tư"
+  select_or_drop: "Chọn hoặc kéo thả ảnh vào đây"
+  add_photo: "Thêm ảnh"
+  edit_photo: "Chỉnh sửa ảnh"
+  edit_album: "Chỉnh sửa bộ sưu tập"
+  save: "Lưu"
 
   nav:
     feeds: "Bảng tin"
