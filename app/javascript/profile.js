@@ -507,11 +507,11 @@ element.addEventListener('scroll', (e) => {
                     const userId = document.querySelector("#current_user_id");
                     if (follower.followers.map(user => user.id).includes(userId)) {
                         item.innerHTML += `
-                            <button class="follow btn btn-primary" data-follower-id="${userId}" data-followed-id="${follower.id}">Following</button>
+                            <button class="follow btn btn-outline-primary" data-follower-id="${userId}" data-followed-id="${follower.id}">Following</button>
                         `;
                     } else {
                         item.innerHTML += `
-                            <button class="follow btn btn-outline-primary" data-follower-id="${userId}" data-followed-id="${follower.id}">Follow</button>
+                            <button class="follow btn btn-primary" data-follower-id="${userId}" data-followed-id="${follower.id}">Follow</button>
                         `;
                     }
                     followers.appendChild(item);
@@ -562,11 +562,11 @@ element.addEventListener('scroll', (e) => {
                     const userId = document.querySelector("#current_user_id");
                     if (followed.followers.map(user => user.id).includes(userId)) {
                         item.innerHTML += `
-                            <button class="follow btn btn-primary" data-follower-id="${userId}" data-followed-id="${followed.id}">Following</button>
+                            <button class="follow btn btn-outline-primary" data-follower-id="${userId}" data-followed-id="${followed.id}">Following</button>
                         `;
                     } else {
                         item.innerHTML += `
-                            <button class="follow btn btn-outline-primary" data-follower-id="${userId}" data-followed-id="${followed.id}">Follow</button>
+                            <button class="follow btn btn-primary" data-follower-id="${userId}" data-followed-id="${followed.id}">Follow</button>
                         `;
                     }
                     following.appendChild(item);
