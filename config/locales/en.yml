@@ -36,6 +36,9 @@ en:
   password_confirmation: "Password confirmation"
   first_name: "First name"
   last_name: "Last name"
+  logout_confirm: "Are you sure you want to log out?"
+  cancel: "Cancel"
+  confirm: "Confirm"
 
   photo: "Photo"
   album: "Album"

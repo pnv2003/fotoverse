@@ -24,9 +24,14 @@
 
   <body>
     <%# for my JavaScript friends %>
-    <% if current_user %>
-      <p id="current_user_id" style="display: none"><%= current_user.id %></p>
-    <% end %>
+    <div style="display: none">
+      <% if current_user %>
+        <p id="current_user_id"><%= current_user.id %></p>
+        <p id="i18n_follow"><%= I18n.t('follow') %></p>
+        <p id="i18n_following"><%= I18n.t('following') %></p>
+        <p id="i18n_ago"><%= I18n.t('ago') %></p>
+      <% end %>
+    </div>
     <%= yield :header %>
     <%= yield %>
 
@@ -72,15 +77,15 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="logoutModalLabel">Logout</h1>
+              <h1 class="modal-title fs-5" id="logoutModalLabel"><%= I18n.t('logout') %></h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              Are you sure you want to log out?
+              <%= I18n.t('logout_confirm') %>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-primary confirm">Confirm</button>
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%= I18n.t('cancel') %></button>
+              <button type="button" class="btn btn-primary confirm"><%= I18n.t('confirm') %></button>
             </div>
           </div>
         </div>
