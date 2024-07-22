@@ -332,10 +332,15 @@ element.addEventListener('scroll', (e) => {
 
         const userId = document.querySelector("#current_user_id").textContent;
         if (activeTabName === 'photos') {
+            if (photoPage == 0) return;
             photoPage++;
             http.get(window.location.pathname, { content: "photos", page: photoPage }, null)
             .then(response => response.json())
             .then(content => {
+                if (!content) {
+                    photoPage = 0;
+                    return;
+                }
                 content.forEach((photo) => {
                     const card = document.createElement("div");
                     card.className = "card text-body-secondary";
@@ -419,11 +424,15 @@ element.addEventListener('scroll', (e) => {
                 });
             });
         } else if (activeTabName === 'albums') {
-
+            if (albumPage == 0) return;
             albumPage++;
             http.get(window.location.pathname, { content: "albums", page: albumPage }, null)
             .then(response => response.json())
             .then(content => {
+                if (!content) {
+                    albumPage = 0;
+                    return;
+                }
                 content.forEach((album) => {
                     const card = document.createElement("div");
                     card.className = "card text-body-secondary";
