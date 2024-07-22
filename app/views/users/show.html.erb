@@ -5,10 +5,10 @@
         </div>
         <div class="profile">
             <div class="metrics">
-                <p><strong><%= @photos.count %></strong> photos</p>
-                <p><strong><%= @albums.count %></strong> albums</p>
-                <p><strong><%= @followers.count %></strong> followers</p>
-                <p><strong><%= @followings.count %></strong> following</p>
+                <p><strong><%= @photos.count %></strong> <%= I18n.t('photos').downcase %></p>
+                <p><strong><%= @albums.count %></strong> <%= I18n.t('albums').downcase %></p>
+                <p><strong><%= @followers.count %></strong> <%= I18n.t('followers').downcase %></p>
+                <p><strong><%= @followings.count %></strong> <%= I18n.t('following').downcase %></p>
             </div>
             <div class="info">
                 <p class="name"><%= @user.fname + ' ' + @user.lname %></p>
@@ -16,7 +16,7 @@
             </div>
             <div class="action">
                 <% if current_user.id == @user.id %>
-                    <%= link_to "Edit Profile", edit_user_registration_path, class: "btn btn-primary edit", data: { turbo: false } %>
+                    <%= link_to I18n.t('edit_profile'), edit_user_registration_path, class: "btn btn-primary edit", data: { turbo: false } %>
                 <% else %>
                     <% if @followers.ids.include?(current_user.id) %>
                         <button 
@@ -33,7 +33,7 @@
                             type="button"
                         >Follow</button>
                     <% end %>
-                    <a class="btn btn-secondary email" href="#">Email</a>                    
+                    <a class="btn btn-secondary email" href="#"><%= I18n.t('email') %></a>                    
                 <% end %>
             </div>
         </div>
@@ -42,16 +42,16 @@
         <ul class="nav nav-tabs">
             <p id="activeTab" style="display: none"><%= @tab %></p>
             <li id="tab-photos" class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Photos</a>
+                <a class="nav-link active" aria-current="page" href="#"><%= I18n.t('photos') %></a>
             </li>
             <li id="tab-albums" class="nav-item">
-                <a class="nav-link" href="#">Albums</a>
+                <a class="nav-link" href="#"><%= I18n.t('albums') %></a>
             </li>
             <li id="tab-followers" class="nav-item">
-                <a class="nav-link" href="#">Followers</a>
+                <a class="nav-link" href="#"><%= I18n.t('followers') %></a>
             </li>
             <li id="tab-following" class="nav-item">
-                <a class="nav-link" href="#">Following</a>
+                <a class="nav-link" href="#"><%= I18n.t('following') %></a>
             </li>
         </ul>
         <div id="photos" class="content display">

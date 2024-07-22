@@ -34,6 +34,7 @@ en:
   email: "Email"
   password: "Password"
   password_confirmation: "Password confirmation"
+  current_password: "Current password"
   first_name: "First name"
   last_name: "Last name"
   logout_confirm: "Are you sure you want to log out?"
@@ -60,7 +61,13 @@ en:
   add_photo: "Add Photo"
   edit_photo: "Edit Photo"
   edit_album: "Edit Album"
+  edit_profile: "Edit Profile"
   save: "Save"
+  avatar: "Avatar"
+  crop_your_avatar: "Crop your avatar"
+  update: "Update"
+  unhappy: "Unhappy"
+  back: "Back"
 
   nav:
     feeds: "Feeds"
@@ -90,4 +97,7 @@ en:
     privacy_policy: "Privacy Policy"
     cookies_policy: "Cookies Policy"
     already_have_account: "Already have an account?"
+    cancel_my_account: "Cancel my account"
+    leave_blank: "leave blank if you don't want to change it"
+    we_need_your_password: "We need your current password to confirm your changes"
     

@@ -46,6 +46,7 @@ vi:
   email: "Email"
   password: "Mật khẩu"
   password_confirmation: "Xác nhận mật khẩu"
+  current_password: "Mật khẩu hiện tại"
   first_name: "Tên"
   last_name: "Họ"
   logout_confirm: "Bạn có chắc chắn muốn đăng xuất?"
@@ -72,7 +73,13 @@ vi:
   add_photo: "Thêm ảnh"
   edit_photo: "Chỉnh sửa ảnh"
   edit_album: "Chỉnh sửa bộ sưu tập"
+  edit_profile: "Chỉnh sửa hồ sơ"
   save: "Lưu"
+  avatar: "Ảnh đại diện"
+  crop_your_avatar: "Cắt ảnh đại diện của bạn"
+  update: "Cập nhật"
+  unhappy: "Không hài lòng"
+  back: "Quay lại"
 
   nav:
     feeds: "Bảng tin"
@@ -102,4 +109,7 @@ vi:
     privacy_policy: "Chính sách bảo mật"
     cookies_policy: "Chính sách cookie"
     already_have_account: "Đã có tài khoản?"
+    cancel_my_account: "Hủy tài khoản"
+    leave_blank: "để trống nếu bạn không muốn thay đổi"
+    we_need_your_password: "Chúng tôi cần mật khẩu hiện tại của bạn để xác nhận thay đổi của bạn"
   
