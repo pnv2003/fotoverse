@@ -1,4 +1,45 @@
 vi:
+  # time ago in words
+  datetime:
+    distance_in_words:
+      khoảng_x_giờ:
+        one: khoảng %{count} giờ
+        other: khoảng %{count} giờ
+      khoảng_x_months:
+        one: khoảng %{count} tháng
+        other: khoảng %{count} tháng
+      khoảng_x_years:
+        one: khoảng %{count} năm
+        other: khoảng %{count} năm
+      almost_x_years:
+        one: gần %{count} năm
+        other: gần %{count} năm
+      half_a_minute: nửa phút
+      less_than_x_seconds:
+        one: ít hơn %{count} giây
+        other: ít hơn %{count} giây
+      less_than_x_minutes:
+        one: ít hơn một phút
+        other: ít hơn %{count} phút
+      over_x_years:
+        one: over %{count} year
+        other: over %{count} years
+      x_seconds:
+        one: "%{count} giây"
+        other: "%{count} giây"
+      x_minutes:
+        one: "%{count} phút"
+        other: "%{count} phút"
+      x_days:
+        one: "%{count} ngày"
+        other: "%{count} ngày"
+      x_months:
+        one: "%{count} tháng"
+        other: "%{count} tháng"
+      x_years:
+        one: "%{count} năm"
+        other: "%{count} năm"
+
   login: "Đăng nhập"
   signup: "Đăng ký"
   logout: "Đăng xuất"
