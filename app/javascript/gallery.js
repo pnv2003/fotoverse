@@ -197,7 +197,6 @@ function toggleReact(icon, count = null) {
 reactButtons.forEach(button => {
     const icon = button.querySelector("i");
     const count = button.querySelector("span");
-    console.log("react");
     button.setAttribute("data-reacted", icon.classList.contains("fa-solid"));
     const debouncedReact = debounce(() => {
         if (button.getAttribute("data-reacted") === "false" && icon.classList.contains("fa-solid")) {
@@ -317,8 +316,6 @@ let lastScrollTop = 0;
 
 let photoPage = 1;
 let albumPage = 1;
-let followerPage = 1;
-let followingPage = 1;
 
 element.addEventListener('scroll', (e) => {
 
@@ -337,7 +334,7 @@ element.addEventListener('scroll', (e) => {
             http.get(window.location.pathname, { content: "photos", page: photoPage }, null)
             .then(response => response.json())
             .then(content => {
-                if (!content) {
+                if (content.length == 0) {
                     photoPage = 0;
                     return;
                 }
@@ -429,7 +426,7 @@ element.addEventListener('scroll', (e) => {
             http.get(window.location.pathname, { content: "albums", page: albumPage }, null)
             .then(response => response.json())
             .then(content => {
-                if (!content) {
+                if (content.length == 0) {
                     albumPage = 0;
                     return;
                 }

@@ -357,7 +357,7 @@ element.addEventListener('scroll', (e) => {
             http.get(window.location.pathname, { content: "photos", page: photoPage }, null)
             .then(response => response.json())
             .then(content => {
-                if (!content) {
+                if (content.length == 0) {
                     photoPage = 0;
                     return;
                 }
@@ -406,7 +406,7 @@ element.addEventListener('scroll', (e) => {
             http.get(window.location.pathname, { content: "albums", page: albumPage }, null)
             .then(response => response.json())
             .then(content => {
-                if (!content) {
+                if (content.length == 0) {
                     albumPage = 0;
                     return;
                 }
@@ -468,7 +468,7 @@ element.addEventListener('scroll', (e) => {
             http.get(window.location.pathname, { content: "followers", page: followerPage }, null)
             .then(response => response.json())
             .then(content => {
-                if (!content) {
+                if (content.length == 0) {
                     followerPage = 0;
                     return;
                 }
@@ -523,7 +523,7 @@ element.addEventListener('scroll', (e) => {
             http.get(window.location.pathname, { content: "following", page: followingPage }, null)
             .then(response => response.json())
             .then(content => {
-                if (!content) {
+                if (content.length == 0) {
                     followingPage = 0;
                     return;
                 }
