@@ -22,8 +22,8 @@ vi:
         one: ít hơn một phút
         other: ít hơn %{count} phút
       over_x_years:
-        one: over %{count} year
-        other: over %{count} years
+        one: "trong vòng %{count} năm"
+        other: "trong vòng %{count} năm"
       x_seconds:
         one: "%{count} giây"
         other: "%{count} giây"
