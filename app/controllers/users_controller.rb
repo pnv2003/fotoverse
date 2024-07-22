@@ -3,10 +3,35 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @photos = @user.posts.where(type: "Photo")
-    @albums = @user.posts.where(type: "Album")
-    @followers = @user.followers
-    @followings = @user.followings
+
+    if (params[:content].present?)
+      # lazy load
+      tab = params[:content]
+      if (tab == "photos")
+        photos = @user.posts.where(type: "Photo").page(params[:page]).per(16)
+        render json: photos, include: { medium: { only: :url }, reactors: { only: :id } }
+
+      elsif (tab == "albums")
+        albums = @user.posts.where(type: "Album").page(params[:page]).per(16)
+        render json: albums, include: { media: { only: :url }, reactors: { only: :id } }
+
+      elsif (tab == "followers")
+        followers = @user.followers.page(params[:page]).per(16)
+        render json: followers, include: { posts: { only: [:id, :type] }, followers: { only: :id } }
+
+      elsif (tab == "following")
+        followings = @user.followings.page(params[:page]).per(16)
+        render json: followings
+
+      end
+      return
+    end
+
+    # initil load
+    @photos = @user.posts.where(type: "Photo").page(params[:page]).per(16)
+    @albums = @user.posts.where(type: "Album").page(params[:page]).per(16)
+    @followers = @user.followers.page(params[:page]).per(16)
+    @followings = @user.followings.page(params[:page]).per(16)
 
     if (params[:tab].present?)
       @tab = params[:tab]
