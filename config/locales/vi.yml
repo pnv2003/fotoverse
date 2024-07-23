@@ -103,6 +103,7 @@ vi:
   actions: "Hành động"
   edit_user: "Chỉnh sửa người dùng"
   delete_user_confirm: "Bạn có chắc chắn muốn xóa người dùng này?"
+  cancel_my_account_confirm: "Bạn có chắc chắn muốn hủy tài khoản của mình?"
 
   nav:
     feeds: "Bảng tin"

@@ -141,3 +141,13 @@ document.querySelector("#update").addEventListener('click', (e) => {
 		}
     }
 });
+
+// cancel account
+document.querySelector(".cancel-account").addEventListener('click', () => {
+	const modal = new bootstrap.Modal('#deleteModal');
+	modal.show();
+});
+
+document.querySelector("#deleteModal .confirm").addEventListener('click', () => {
+	document.querySelector(".cancel-account").nextElementSibling.submit();
+});

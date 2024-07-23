@@ -62,10 +62,9 @@
 
   <h3><%= I18n.t('auth.cancel_my_account') %></h3>
 
-  <p><%= I18n.t('unhappy')%>?</p>
-  <div><%= button_to I18n.t('auth.cancel_my_account'), user_registration_path, class: "btn btn-danger" %></div>
-
-  <%= link_to I18n.t('back'), :back, class: "btn btn-primary" %>
+  <span><%= I18n.t('unhappy')%>?</span>
+  <button class="btn btn-danger cancel-account" type="button"><%= I18n.t('auth.cancel_my_account') %></button>
+  <%= button_to "Cancel account", user_registration_path, method: :delete, style: "display: none" %>
 
   <div class="modal fade" id="cropperModal" tabindex="-1" aria-labelledby="cropperModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -83,6 +82,24 @@
             </div>
         </div>
     </div>
+  </div>
+
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="deleteModalLabel"><%= I18n.t('auth.delete_account') %></h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                  <%= I18n.t('delete_user_confirm') %>
+              </div>
+                  <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%= I18n.t('cancel') %></button>
+                  <button type="button" class="btn btn-primary confirm"><%= I18n.t('confirm') %></button>
+              </div>
+          </div>
+      </div>
   </div>
 </main>
 
