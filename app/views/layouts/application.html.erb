@@ -92,5 +92,6 @@
   <script type="text/javascript">
     window.I18n = <%= current_translations.to_json.html_safe %>;
     window.currentUser = <%= current_user.to_json.html_safe %>;
+    window.currentLocale = '<%= I18n.locale %>';
   </script>
 </html>

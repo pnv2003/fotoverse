@@ -409,7 +409,7 @@ element.addEventListener('scroll', (e) => {
 
                     const ago = document.createElement("p");
                     ago.className = "ago";
-                    ago.textContent = getRelativeTime(new Date(photo.updated_at));
+                    ago.textContent = getRelativeTime(new Date(photo.updated_at), currentLocale);
 
                     cardFooter.appendChild(react);
                     cardFooter.appendChild(ago);
@@ -510,7 +510,7 @@ element.addEventListener('scroll', (e) => {
                     
                     const ago = document.createElement("p");
                     ago.className = "ago";
-                    ago.textContent = getRelativeTime(new Date(album.updated_at));
+                    ago.textContent = getRelativeTime(new Date(album.updated_at), currentLocale);
 
                     cardFooter.appendChild(react);
                     cardFooter.appendChild(ago);

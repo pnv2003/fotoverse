@@ -86,7 +86,7 @@ const populateModalContent = (item, type) => {
                 photoModal.querySelector(".badge").style.display = "none";
             }
             photoModal.querySelector(".react span").textContent = compactFormatter.format(reactCount);
-            photoModal.querySelector(".ago").textContent = getRelativeTime(new Date(updatedAt));
+            photoModal.querySelector(".ago").textContent = getRelativeTime(new Date(updatedAt), currentLocale);
         
             // add edit link
             const editPath = item.querySelector(".edit-path").textContent;
@@ -155,7 +155,7 @@ const populateModalContent = (item, type) => {
                 albumModal.querySelector(".badge").style.display = "none";
             }
             albumModal.querySelector(".react span").textContent = compactFormatter.format(reactCount);
-            albumModal.querySelector(".ago").textContent = getRelativeTime(new Date(updatedAt));
+            albumModal.querySelector(".ago").textContent = getRelativeTime(new Date(updatedAt), currentLocale);
         
             // add edit link
             const editPath = item.querySelector(".edit-path").textContent;
