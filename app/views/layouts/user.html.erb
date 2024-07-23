@@ -10,34 +10,34 @@
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item">
                             <% if current_page?(feeds_path) %>
-                                <a class="nav-link active" aria-current="page" href="#">Feeds</a>
+                                <a class="nav-link active" aria-current="page" href="#"><%= I18n.t('nav.feeds') %></a>
                             <% else %>
                                 <%= link_to I18n.t('nav.feeds'), feeds_path, class: "nav-link", data: {turbo: false}%>
                             <% end %>
                         </li>
                         <li class="nav-item">
                             <% if current_page?(discover_path) %>
-                                <a class="nav-link active" aria-current="page" href="#">Discover</a>
+                                <a class="nav-link active" aria-current="page" href="#"><%= I18n.t('nav.discover') %></a>
                             <% else %>
                                 <%= link_to I18n.t('nav.discover'), discover_path, class: "nav-link", data: {turbo: false}%>
                             <% end %>
                         </li>                  
                         <li class="nav-item dropdown">
                             <% if current_page?(new_photo_path) || current_page?(new_album_path) %>
-                                <a class="nav-link active dropdown-toggle" aria-current="page" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">New</a>
+                                <a class="nav-link active dropdown-toggle" aria-current="page" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><%= I18n.t('nav.new') %></a>
                             <% else %>
                                 <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><%= I18n.t('nav.new') %></a>
                             <% end %>
 
                             <ul class="dropdown-menu">
                                 <% if current_page?(new_photo_path) %>
-                                    <li><a class="dropdown-item" href="#">Photo</a></li>
+                                    <li><a class="dropdown-item" href="#"><%= I18n.t('photo') %></a></li>
                                 <% else %>
                                     <li><%= link_to I18n.t('photo'), new_photo_path, class: "dropdown-item", data: {turbo: false} %></li>
                                 <% end %>
 
                                 <% if current_page?(new_album_path) %>
-                                    <li><a class="dropdown-item" href="#">Album</a></li>
+                                    <li><a class="dropdown-item" href="#"><%= I18n.t('album') %></a></li>
                                 <% else %>
                                     <li><%= link_to I18n.t('album'), new_album_path, class: "dropdown-item", data: {turbo: false} %></li>
                                 <% end %>
