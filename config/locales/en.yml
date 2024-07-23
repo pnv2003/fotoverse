@@ -68,6 +68,10 @@ en:
   update: "Update"
   unhappy: "Unhappy"
   back: "Back"
+  edit: "Edit"
+  delete: "Delete"
+  photo_details: "Photo Details"
+  album_details: "Album Details"
 
   nav:
     feeds: "Feeds"

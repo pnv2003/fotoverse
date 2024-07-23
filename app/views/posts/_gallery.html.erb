@@ -1,8 +1,8 @@
 <main class="gallery">
     <div class="btn-group">
         <p id="activeTab" style="display: none"><%= tab %></p>
-        <a id="tab-photos" href="#" class="btn btn-primary active" aria-current="page"><%= I18n.t('photos') %></a>
-        <a id="tab-albums" href="#" class="btn btn-primary"><%= I18n.t('albums') %></a>
+        <a id="tab-photos" class="btn btn-primary active" aria-current="page"><%= I18n.t('photos') %></a>
+        <a id="tab-albums" class="btn btn-primary"><%= I18n.t('albums') %></a>
     </div>
     <div id="photos" class="content">
         <% photos.each do |photo| %>

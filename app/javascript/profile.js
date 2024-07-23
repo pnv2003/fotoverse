@@ -350,6 +350,8 @@ element.addEventListener('scroll', (e) => {
 
     lastScrollTop = element.scrollTop <= 0 ? 0 : element.scrollTop;
     if (element.scrollTop + element.offsetHeight>= element.scrollHeight ){
+
+        console.log("load more");
        
         if (activeTabName === 'photos') {
             if (photoPage == 0) return;
@@ -357,6 +359,7 @@ element.addEventListener('scroll', (e) => {
             http.get(window.location.pathname, { content: "photos", page: photoPage }, null)
             .then(response => response.json())
             .then(content => {
+                console.log("load more photos");
                 if (content.length == 0) {
                     photoPage = 0;
                     return;
@@ -405,6 +408,7 @@ element.addEventListener('scroll', (e) => {
             http.get(window.location.pathname, { content: "albums", page: albumPage }, null)
             .then(response => response.json())
             .then(content => {
+                console.log("load more albums");
                 if (content.length == 0) {
                     albumPage = 0;
                     return;
@@ -414,7 +418,7 @@ element.addEventListener('scroll', (e) => {
                     item.className = "item";
 
                     const img = document.createElement("img");
-                    img.src = album.medium.url.url;
+                    img.src = album.media[0].url.url;
                     img.alt = "My Album";
 
                     const info = document.createElement("div");

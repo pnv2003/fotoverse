@@ -16,3 +16,7 @@ header.guest h1 {
     font-style: normal;
     color: white;
 }
+
+.nav-tabs li a {
+    cursor: pointer;
+}

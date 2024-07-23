@@ -80,6 +80,10 @@ vi:
   update: "Cập nhật"
   unhappy: "Không hài lòng"
   back: "Quay lại"
+  edit: "Chỉnh sửa"
+  delete: "Xóa"
+  photo_details: "Chi tiết ảnh"
+  album_details: "Chi tiết bộ sưu tập"
 
   nav:
     feeds: "Bảng tin"

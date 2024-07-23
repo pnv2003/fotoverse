@@ -33,6 +33,11 @@ class UsersController < ApplicationController
     @followers = @user.followers.page(params[:page]).per(5)
     @followings = @user.followings.page(params[:page]).per(5)
 
+    @photo_count = @user.posts.where(type: "Photo").count
+    @album_count = @user.posts.where(type: "Album").count
+    @follower_count = @user.followers.count
+    @following_count = @user.followings.count
+
     if (params[:tab].present?)
       @tab = params[:tab]
     else
