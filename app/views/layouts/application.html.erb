@@ -58,11 +58,12 @@
         </div>
       <% end %>
 
-      <% if flash[:error] != nil %>
+      <% if flash[:error] != nil || flash[:alert] != nil %>
         <div id="toast-error" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
           <div class="d-flex">
             <div class="toast-body">
               <%= flash[:error] %>
+              <%= flash[:alert] %>
             </div>
             <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
           </div>
