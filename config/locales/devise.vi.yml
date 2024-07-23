@@ -1,6 +1,6 @@
 # Additional translations at https://github.com/heartcombo/devise/wiki/I18n
 
-en:
+vi:
   devise:
     confirmations:
       confirmed: "Địa chỉ của bạn đã được xác nhận thành công."
