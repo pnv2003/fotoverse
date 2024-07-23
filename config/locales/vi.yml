@@ -40,6 +40,15 @@ vi:
         one: "%{count} năm"
         other: "%{count} năm"
 
+  # kaminari pagination
+  views:
+    pagination:
+      first: "&laquo; Đầu"
+      last: "Cuối &raquo;"
+      previous: "&lsaquo; Trước"
+      next: "Sau &rsaquo;"
+      truncate: "&hellip;"
+
   login: "Đăng nhập"
   signup: "Đăng ký"
   logout: "Đăng xuất"
