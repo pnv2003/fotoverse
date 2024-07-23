@@ -102,6 +102,7 @@ vi:
   inactive: "Không hoạt động"
   actions: "Hành động"
   edit_user: "Chỉnh sửa người dùng"
+  delete_user_confirm: "Bạn có chắc chắn muốn xóa người dùng này?"
 
   nav:
     feeds: "Bảng tin"

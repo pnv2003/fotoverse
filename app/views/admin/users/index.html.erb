@@ -34,7 +34,8 @@
                     </td>
                     <td>
                         <%= link_to I18n.t('edit'), edit_admin_user_path(user.id), class: "btn btn-primary" %>
-                        <button class="btn btn-danger" type="button"><%= I18n.t('delete') %></button>
+                        <button class="btn btn-danger delete" type="button" data-user-id="<%= user.id %>" data-user-email="<%= user.email %>"><%= I18n.t('delete') %></button>
+                        <%= button_to "Delete", admin_user_path(user.id), method: :delete, id: "delete-user-" + user.id.to_s, style: "display: none" %>
                     </td>
                 </tr>
             <% end %>
@@ -42,6 +43,24 @@
     </table>
 
     <%= paginate @users, theme: 'bootstrap-5', pagination_class: "pagination-lg" %>
+
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="deleteModalLabel"><%= I18n.t('auth.delete_account') %></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <%= I18n.t('delete_user_confirm') %>
+                </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%= I18n.t('cancel') %></button>
+                    <button type="button" class="btn btn-primary confirm"><%= I18n.t('confirm') %></button>
+                </div>
+            </div>
+        </div>
+    </div>
 </main>
 
 <%= javascript_include_tag "admin_users" %>

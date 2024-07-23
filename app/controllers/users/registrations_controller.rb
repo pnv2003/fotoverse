@@ -73,4 +73,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def after_update_path_for(resource)
     user_path(resource)
   end
+
+  def after_destroy_path_for(resource)
+    if (current_user.admin?)
+      admin_users_path
+    else
+      root_path
+    end
+  end
 end
