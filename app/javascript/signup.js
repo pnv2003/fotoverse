@@ -1,4 +1,5 @@
 import { validate, validator } from "./utils/validate.js";
+import http from "./utils/request.js";
 
 const fname = document.querySelector("#user_fname");
 const lname = document.querySelector("#user_lname");
@@ -34,3 +35,15 @@ signup.addEventListener('click', (e) => {
         document.querySelector("form").submit();
     }
 });
+
+// error messages
+const deviseError = document.querySelector("#error_explanation");
+
+if (deviseError) {
+    console.log("GO");
+    const errorMessages = deviseError.querySelectorAll("li");
+    const msg = [...errorMessages].map((el) => el.innerText).join(", ");
+    http.get(`/${currentLocale}/users/sign_up`, { error: msg }, false).then((res) => {
+        window.location.href = `/${currentLocale}/users/sign_up`;
+    });
+}
