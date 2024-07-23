@@ -27,11 +27,6 @@
     <div style="display: none">
       <% if current_user %>
         <p id="current_user_id"><%= current_user.id %></p>
-        <p id="i18n_follow"><%= I18n.t('follow') %></p>
-        <p id="i18n_following"><%= I18n.t('following') %></p>
-        <p id="i18n_ago"><%= I18n.t('ago') %></p>
-        <p id="i18n_photos"><%= I18n.t('photos') %></p>
-        <p id="i18n_albums"><%= I18n.t('albums') %></p>
       <% end %>
     </div>
     <%= yield :header %>
