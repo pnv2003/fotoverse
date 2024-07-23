@@ -373,8 +373,7 @@ element.addEventListener('scroll', (e) => {
                     info.className = "info";
                     info.style.display = "none";
 
-                    // kinda hardcode
-                    const userId = document.querySelector("#current_user_id").textContent;
+                    const userId = currentUser.id;
                     info.innerHTML = `
                         <span class="id">${photo.id}</span>
                         <span class="title">${photo.title}</span>
@@ -504,7 +503,7 @@ element.addEventListener('scroll', (e) => {
                     item.appendChild(avatar);
                     item.appendChild(info);
 
-                    const userId = document.querySelector("#current_user_id");
+                    const userId = currentUser.id;
                     if (follower.followers.map(user => user.id).includes(userId)) {
                         item.innerHTML += `
                             <button class="follow btn btn-outline-primary" data-follower-id="${userId}" data-followed-id="${follower.id}">Following</button>

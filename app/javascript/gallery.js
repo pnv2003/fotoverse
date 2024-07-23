@@ -155,7 +155,7 @@ const populateModalContent = (item, type) => {
             if (followInfo) {
                 followButton.setAttribute("data-follower-id", followInfo.getAttribute("data-follower-id"));
                 followButton.setAttribute("data-followed-id", followInfo.getAttribute("data-followed-id"));
-                if (followInfo.textContent === "Following") {
+                if (isFollowed(followInfo)) {
                     toggleFollow(followButton);
                 }
             } else {
@@ -250,21 +250,25 @@ document.querySelector("#albumModal img").addEventListener('dblclick', () => tog
 const followButtons = document.querySelectorAll(".follow");
 
 function toggleFollow(button) {
-    if (button.textContent === "Follow") {
+    if (isFollowed(button)) {
         button.classList.remove("btn-primary");
         button.classList.add("btn-outline-primary");
-        button.textContent = "Following";
+        button.textContent = I18n.following;
     } else {
         button.classList.remove("btn-outline-primary");
         button.classList.add("btn-primary");
-        button.textContent = "Follow";
+        button.textContent = I18n.follow;
     }
 }
 
+function isFollowed(button) {
+    return button.classList.contains("btn-outline-primary");
+}
+
 followButtons.forEach(button => {
-    button.setAttribute("data-status", button.textContent);
+    button.setAttribute("data-status", isFollowed(button) ? "Following" : "Follow");
     const debouncedFollow = debounce(() => {
-        if (button.getAttribute("data-status") === "Follow" && button.textContent === "Following") {
+        if (button.getAttribute("data-status") === "Follow" && isFollowed(button)) {
             http.post("/follows", {}, {
                 follow: {
                     follower_id: button.getAttribute("data-follower-id"),
@@ -282,7 +286,7 @@ followButtons.forEach(button => {
                 console.error(error);
                 toggleFollow(button);
             });
-        } else if (button.getAttribute("data-status") === "Following" && button.textContent === "Follow") {
+        } else if (button.getAttribute("data-status") === "Following" && !isFollowed(button)) {
             http.delete('/follows/1', {}, {
                 follow: {
                     follower_id: button.getAttribute("data-follower-id"),
@@ -327,7 +331,7 @@ element.addEventListener('scroll', (e) => {
     lastScrollTop = element.scrollTop <= 0 ? 0 : element.scrollTop;
     if (element.scrollTop + element.offsetHeight>= element.scrollHeight ){
 
-        const userId = document.querySelector("#current_user_id").textContent;
+        const userId = currentUser.id;
         if (activeTabName === 'photos') {
             if (photoPage == 0) return;
             photoPage++;
@@ -358,12 +362,12 @@ element.addEventListener('scroll', (e) => {
                     const followButton = document.createElement("button");
                     if (photo.user_id != userId) {
                         if (photo.user.followers.map(user => user.id).includes(userId)) {
-                            followButton.textContent = "Following";
+                            followButton.textContent = I18n.following;
                             followButton.className = "btn btn-sm btn-outline-primary follow";
                             followButton.setAttribute("data-follower-id", userId);
                             followButton.setAttribute("data-followed-id", photo.user_id);
                         } else {
-                            followButton.textContent = "Follow";
+                            followButton.textContent = I18n.follow;
                             followButton.className = "btn btn-sm btn-primary follow";
                             followButton.setAttribute("data-follower-id", userId);
                             followButton.setAttribute("data-followed-id", photo.user_id);
@@ -450,12 +454,12 @@ element.addEventListener('scroll', (e) => {
                     const followButton = document.createElement("button");
                     if (album.user_id != userId) {
                         if (album.user.followers.map(user => user.id).includes(userId)) {
-                            followButton.textContent = "Following";
+                            followButton.textContent = I18n.following;
                             followButton.className = "btn btn-sm btn-outline-primary follow";
                             followButton.setAttribute("data-follower-id", userId);
                             followButton.setAttribute("data-followed-id", album.user_id);
                         } else {
-                            followButton.textContent = "Follow";
+                            followButton.textContent = I18n.follow;
                             followButton.className = "btn btn-sm btn-primary follow";
                             followButton.setAttribute("data-follower-id", userId);
                             followButton.setAttribute("data-followed-id", album.user_id);

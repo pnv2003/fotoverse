@@ -37,6 +37,7 @@ main.gallery .card .count {
 main.gallery :is(.card-header, .modal-header) a {
     text-decoration: none;
     color: black;
+    font-size: 0.9rem;
 }
 
 main.gallery :is(.card-header, .modal-header) .user {

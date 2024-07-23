@@ -21,14 +21,14 @@
                                 data-followed-id="<%= photo.user.id  %>" 
                                 class="btn btn-sm btn-outline-primary follow" 
                                 type="button"
-                            >Following</button>
+                            ><%= I18n.t('following') %></button>
                         <% else %>
                             <button 
                                 data-follower-id="<%= current_user.id %>" 
                                 data-followed-id="<%= photo.user.id  %>" 
                                 class="btn btn-sm btn-primary follow" 
                                 type="button"
-                            >Follow</button>
+                            ><%= I18n.t('follow') %></button>
                         <% end %>
                     <% end %>
                 </div>
@@ -75,14 +75,14 @@
                                 data-followed-id="<%= album.user.id  %>" 
                                 class="btn btn-sm btn-outline-primary follow" 
                                 type="button"
-                            >Following</button>
+                            ><%= I18n.t('following') %></button>
                         <% else %>
                             <button 
                                 data-follower-id="<%= current_user.id %>" 
                                 data-followed-id="<%= album.user.id  %>" 
                                 class="btn btn-sm btn-primary follow" 
                                 type="button"
-                            >Follow</button>
+                            ><%= I18n.t('follow') %></button>
                         <% end %>
                     <% end %>
                 </div>
