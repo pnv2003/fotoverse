@@ -45,7 +45,7 @@
                             <span class="name">Bruh</span>
                         </a>
                     </h1>
-                    <span class="badge text-bg-warning">Private</span>
+                    <span class="badge text-bg-warning"><%= I18n.t('private') %></span>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body card">
@@ -79,8 +79,8 @@
                         <h5 class="card-title">X</h5>
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                         <div class="action">
-                            <%= link_to "Edit", edit_admin_album_path(1), id: "edit-album", class: "btn btn-primary" %>
-                            <button id="delete-album" type="button" class="btn btn-danger">Delete</button>
+                            <%= link_to I18n.t('edit'), edit_admin_album_path(1), id: "edit-album", class: "btn btn-primary" %>
+                            <button id="delete-album" type="button" class="btn btn-danger"><%= I18n.t('delete') %></button>
                         </div>
                     </div>
                 </div>
