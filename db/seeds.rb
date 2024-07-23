@@ -8,17 +8,26 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-MAX_FOLLOW_COUNT = 100
-MAX_REACT_COUNT = 100
+def getfile(url)
+  stream = URI.open(url)
+  return stream if stream.respond_to?(:path)
+
+  Tempfile.new.tap do |file|
+    file.binmode
+    IO.copy_stream(stream, file)
+    stream.close
+    file.rewind
+  end
+end
 
 # admin
-User.create(fname: "Phuong", lname: "Ngo", email: "pnv2003@gmail.com", password: "123", avatar: URI.open(Faker::Avatar.image), admin: true, active: true, confirmed_at: Time.now)
+User.create(fname: "Phuong", lname: "Ngo", email: "pnv2003@gmail.com", password: "123", avatar: getfile(Faker::Avatar.image), admin: true, active: true, confirmed_at: Time.now)
 
 puts "Done: admin"
 
 # known users
-User.create(fname: "Jameson", lname: "Kezzer", email: "jj@jj.jj", password: "jjj", avatar: URI.open(Faker::Avatar.image), admin: false, active: true, confirmed_at: Time.now)
-u = User.create(fname: "Jackpot", lname: "Kattis", email: "kk@kk.kk", password: "kkk", avatar: URI.open(Faker::Avatar.image), admin: false, active: true, confirmed_at: Time.now)
+User.create(fname: "Jameson", lname: "Kezzer", email: "jj@jj.jj", password: "jjj", avatar: getfile(Faker::Avatar.image), admin: false, active: true, confirmed_at: Time.now)
+u = User.create(fname: "Jackpot", lname: "Kattis", email: "kk@kk.kk", password: "kkk", avatar: getfile(Faker::Avatar.image), admin: false, active: true, confirmed_at: Time.now)
 20.times do
   post = u.posts.create(
     type: ['Photo', 'Album'].sample,
@@ -28,10 +37,10 @@ u = User.create(fname: "Jackpot", lname: "Kattis", email: "kk@kk.kk", password: 
   )
 
   if post.type == "Photo"
-    post.medium = Medium.new(url: URI.open(Faker::LoremFlickr.image))
+    post.medium = Medium.new(url: getfile(Faker::LoremFlickr.image))
   else
     Faker::Number.between(from: 1, to: 25).times do
-      post.media.new(url: URI.open(Faker::LoremFlickr.image))
+      post.media.new(url: getfile(Faker::LoremFlickr.image))
     end
   end
   post.save
@@ -60,10 +69,10 @@ Faker::Number.between(from: 10, to: 30).times do
     )
 
     if post.type == "Photo"
-      post.medium = Medium.new(url: URI.open(Faker::LoremFlickr.image))
+      post.medium = Medium.new(url: getfile(Faker::LoremFlickr.image))
     else
       Faker::Number.between(from: 1, to: 25).times do
-        post.media.new(url: URI.open(Faker::LoremFlickr.image))
+        post.media.new(url: getfile(Faker::LoremFlickr.image))
       end
     end
     post.save
