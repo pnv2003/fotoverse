@@ -1,0 +1,252 @@
+<main class="profile">
+    <section class="upper">
+        <div class="avatar">
+            <%= image_tag @user.avatar.url, alt: "avatar", width: 200 %>
+        </div>
+        <div class="profile">
+            <div class="metrics">
+                <p><strong><%= @photo_count %></strong> <%= I18n.t('photos').downcase %></p>
+                <p><strong><%= @album_count %></strong> <%= I18n.t('albums').downcase %></p>
+                <p><strong><%= @follower_count %></strong> <%= I18n.t('followers').downcase %></p>
+                <p><strong><%= @following_count %></strong> <%= I18n.t('following').downcase %></p>
+            </div>
+            <div class="info">
+                <p class="name"><%= @user.fname + ' ' + @user.lname %></p>
+                <p class="desc">Hello, I'm <%= @user.fname %>. Contact me via my <a href="mailto:<%= @user.email %>">email</a>.</p>
+            </div>
+            <div class="action">
+                <% if current_user.id == @user.id %>
+                    <%= link_to I18n.t('edit_profile'), edit_user_registration_path, class: "btn btn-primary edit", data: { turbo: false } %>
+                <% else %>
+                    <% if @followers.ids.include?(current_user.id) %>
+                        <button 
+                            data-follower-id="<%= current_user.id %>" 
+                            data-followed-id="<%= @user.id  %>" 
+                            class="btn btn-outline-primary follow" 
+                            type="button"
+                        >Following</button>
+                    <% else %>
+                        <button 
+                            data-follower-id="<%= current_user.id %>" 
+                            data-followed-id="<%= @user.id  %>" 
+                            class="btn btn-primary follow" 
+                            type="button"
+                        >Follow</button>
+                    <% end %>
+                    <a class="btn btn-secondary email" href="#"><%= I18n.t('email') %></a>                    
+                <% end %>
+            </div>
+        </div>
+    </section>
+    <section class="lower">
+        <ul class="nav nav-tabs">
+            <p id="activeTab" style="display: none"><%= @tab %></p>
+            <li id="tab-photos" class="nav-item">
+                <a class="nav-link active" aria-current="page"><%= I18n.t('photos') %></a>
+            </li>
+            <li id="tab-albums" class="nav-item">
+                <a class="nav-link"><%= I18n.t('albums') %></a>
+            </li>
+            <li id="tab-followers" class="nav-item">
+                <a class="nav-link"><%= I18n.t('followers') %></a>
+            </li>
+            <li id="tab-following" class="nav-item">
+                <a class="nav-link"><%= I18n.t('following') %></a>
+            </li>
+        </ul>
+        <div id="photos" class="content display">
+            <div class="item">
+                <%= link_to new_photo_path do %>
+                    <%= image_tag "add-image.png", alt: "Add Photo" %>
+                <% end %>
+            </div>
+            <% @photos.each do |photo| %>
+                <div class="item">
+                    <%= image_tag photo.medium.url.url, alt: "My Photo" %>
+                    <div class="info" style="display: none">
+                        <p class="id"><%= photo.id %></p>
+                        <p class="title"><%= photo.title %></p>
+                        <p class="desc"><%= photo.description %></p>
+                        <p class="mode"><%= photo.mode %></p>
+                        <p class="reacted"><%= photo.reactors.ids.include?(current_user.id) %></p>
+                        <p class="react-count"><%= photo.reactions.count %></p>
+                        <p class="updated-at"><%= photo.updated_at %></p>
+                        <p class="edit-path"><%= edit_photo_path(photo.id) %></p>
+                        <p class="delete-path"><%= post_path(photo.id) %></p>
+                    </div>
+                    <% if photo.mode == "private" %>
+                        <div class="mode">
+                                <i class="fa-solid fa-lock"></i>
+                        </div>
+                    <% end %>
+                </div>
+            <% end %>
+        </div>
+        <div id="albums" class="content display">
+            <div class="item">
+                <%= link_to new_album_path do %>
+                    <%= image_tag "add-image.png", alt: "Add Album" %>
+                <% end %>
+            </div>
+            <% @albums.each do |album| %>
+                <div class="item">
+                    <%= image_tag album.media.first.url.url, alt: "My Album" %>
+                    <div class="info" style="display: none">
+                        <p class="id"><%= album.id %></p>
+                        <p class="title"><%= album.title %></p>
+                        <p class="desc"><%= album.description %></p>
+                        <p class="mode"><%= album.mode %></p>
+                        <p class="reacted"><%= album.reactors.ids.include?(current_user.id) %></p>
+                        <p class="react-count"><%= album.reactions.count %></p>
+                        <p class="updated-at"><%= album.updated_at %></p>
+                        <p class="edit-path"><%= edit_album_path(album.id) %></p>
+                        <p class="delete-path"><%= post_path(album.id) %></p>
+
+                        <% album.media.each do |medium| %>
+                            <%= image_tag medium.url.url, alt: "My Album Photo" %>
+                        <% end %>
+                        
+                    </div>
+                    <% if album.mode == "private" %>
+                        <div class="mode">
+                            <i class="fa-solid fa-lock"></i>
+                        </div>
+                    <% end %>
+                    <p class="count">
+                        <%= album.media.count %>
+                    </p>
+                </div>
+            <% end %>
+        </div>
+        <div id="followers" class="content users">
+            <% @followers.each do |follower| %>
+                <div class="item">
+                    <div class="avatar">
+                        <%= image_tag follower.avatar.url, alt: "avatar" %>
+                    </div>
+                    <div class="info">
+                        <p class="name"><%= follower.fname + ' ' + follower.lname %></p>
+                        <div class="metrics">
+                            <p><%= follower.posts.where(type: "Photo").count %> <%= I18n.t('photos').downcase %></p>
+                            <p><%= follower.posts.where(type: "Album").count %> <%= I18n.t('albums').downcase %></p>
+                        </div>
+                    </div>
+
+                    <% if follower.followers.ids.include?(current_user.id) %>
+                        <button data-follower-id="<%= current_user.id %>" data-followed-id="<%= follower.id %>" class="btn btn-outline-primary follow" type="button">Following</button>
+                    <% else %>
+                        <button data-follower-id="<%= current_user.id %>" data-followed-id="<%= follower.id %>" class="btn btn-primary follow" type="button">Follow</button>
+                    <% end %>
+                </div>
+            <% end %>
+        </div>
+        <div id="following" class="content users">
+            <% @followings.each do |following| %>
+                <div class="item">
+                    <div class="avatar">
+                        <%= image_tag following.avatar.url, alt: "avatar" %>
+                    </div>
+                    <div class="info">
+                        <p class="name"><%= following.fname + ' ' + following.lname %></p>
+                        <div class="metrics">
+                            <p><%= following.posts.where(type: "Photo").count %> <%= I18n.t('photos').downcase %></p>
+                            <p><%= following.posts.where(type: "Album").count %> <%= I18n.t('albums').downcase %></p>
+                        </div>
+                    </div>
+                    <% if following.followers.ids.include?(current_user.id) %>
+                        <button data-follower-id="<%= current_user.id %>" data-followed-id="<%= following.id %>" class="btn btn-outline-primary follow" type="button">Following</button>
+                    <% else %>
+                        <button data-follower-id="<%= current_user.id %>" data-followed-id="<%= following.id %>" class="btn btn-primary follow" type="button">Follow</button>
+                    <% end %>
+                </div>
+            <% end %>
+        </div>
+    </section>
+
+    <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="photoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="photoModalLabel"><%= I18n.t('photo_details') %></h1>
+                    <span class="badge text-bg-warning"><%= I18n.t('private') %></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body card">
+                    <%= image_tag "twitter.png", class: "card-img-top" %>
+                    <div class="card-body">
+                        <h5 class="card-title">X</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <div class="action">
+                            <%= link_to I18n.t('edit'), edit_photo_path(1), id: "edit-photo", class: "btn btn-primary" %>
+                            <button id="delete-photo" type="button" class="btn btn-danger"><%= I18n.t('delete') %></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p class="react" data-user-id="<%= current_user.id %>">
+                        <i class="fa-regular fa-heart fa-xl"></i>
+                        <span>100K</span>
+                    </p>
+                    <p class="ago">2 days ago</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="albumModal" tabindex="-1" aria-labelledby="albumModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="albumModalLabel"><%= I18n.t('album_details') %></h1>
+                    <span class="badge text-bg-warning"><%= I18n.t('private') %></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body card">
+                    <div id="carouselAlbumIndicators" class="card-img-top carousel slide">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselAlbumIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselAlbumIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselAlbumIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <%= image_tag "facebook.png", class: "d-block w-100" %>
+                            </div>
+                            <div class="carousel-item">
+                                <%= image_tag "google.png", class: "d-block w-100" %>
+                            </div>
+                            <div class="carousel-item">
+                                <%= image_tag "twitter.png", class: "d-block w-100" %>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselAlbumIndicators" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselAlbumIndicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        </div>
+                    <div class="card-body">
+                        <h5 class="card-title">X</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <div class="action">
+                            <%= link_to I18n.t('edit'), edit_album_path(1), id: "edit-album", class: "btn btn-primary" %>
+                            <button id="delete-album" type="button" class="btn btn-danger"><%= I18n.t('delete') %></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p class="react" data-user-id="<%= current_user.id %>">
+                        <i class="fa-regular fa-heart fa-xl"></i>
+                        <span>100K</span>
+                    </p>
+                    <p class="ago">2 days ago</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%= javascript_include_tag "profile", type: "module" %>

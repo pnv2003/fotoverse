@@ -1,0 +1,65 @@
+<main class="admin-photos">
+    <div id="photos" class="content display">
+        <% @photos.each do |photo| %>
+            <div class="item">
+                <%= image_tag photo.medium.url.url, alt: "photo" %>
+                <div class="info" style="display: none">
+                    <p class="id"><%= photo.id %></p>
+                    <p class="user-name"><%= photo.user.fname + ' ' + photo.user.lname %></p>
+                    <p class="user-avatar"><%= image_tag photo.user.avatar.url %></p>
+                    <p class="user-path"><%= edit_admin_user_path(photo.user_id) %></p>
+                    <p class="title"><%= photo.title %></p>
+                    <p class="desc"><%= photo.description %></p>
+                    <p class="mode"><%= photo.mode %></p>
+                    <p class="reacted"><%= photo.reactors.ids.include?(current_user.id) %></p>
+                    <p class="react-count"><%= photo.reactions.count %></p>
+                    <p class="updated-at"><%= photo.updated_at %></p>
+                    <p class="edit-path"><%= edit_admin_photo_path(photo.id) %></p>
+                    <p class="delete-path"><%= admin_photo_path(photo.id) %></p>
+                </div>
+            </div>
+        <% end %>
+    </div>
+    
+    <%= paginate @photos, theme: 'bootstrap-5', pagination_class: "pagination-lg" %>
+
+    <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        <a href="#">
+                            <%= image_tag "google.png" %>
+                            <span class="name">Bruh</span>
+                        </a>
+                    </h1>
+                    <span class="badge text-bg-warning"><%= I18n.t('private') %></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body card">
+                    <%= image_tag "twitter.png", class: "card-img-top" %>
+                    <div class="card-body">
+                        <h5 class="card-title">X</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <div class="action">
+                            <%= link_to I18n.t('edit'), edit_admin_photo_path(1), id: "edit-photo", class: "btn btn-primary" %>
+                            <button id="delete-photo" type="button" class="btn btn-danger"><%= I18n.t('delete') %></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p class="react">
+                        <i 
+                            class="fa-regular fa-heart fa-xl"
+                            data-user-id="<%= current_user.id %>"
+                        ></i>
+                        <span>100K</span>
+                    </p>
+                    <p class="ago">2 days ago</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%= javascript_include_tag "admin_photos", type: "module" %>

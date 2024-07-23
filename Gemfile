@@ -50,6 +50,22 @@ gem "stackprof"
 gem "sentry-ruby"
 gem "sentry-rails"
 
+# Use CarrierWave for file uploads
+gem 'carrierwave', '~> 3.0'
+
+# CORS support for Rack compatible web applications
+gem 'rack-cors'
+
+# Use Kaminari for pagination
+gem 'kaminari'
+gem 'bootstrap5-kaminari-views'
+
+# Use Devise for authentication
+gem "devise", "~> 4.9"
+
+# Generate fake data
+gem 'faker'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
@@ -64,6 +80,9 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+
+  gem "letter_opener"
+  gem 'letter_opener_web'
 end
 
 group :test do

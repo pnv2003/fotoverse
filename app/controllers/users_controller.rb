@@ -1,38 +1,69 @@
 class UsersController < ApplicationController
-  skip_before_action :authorized, only: [:new, :create]
-  before_action :authorized_as_admin, only: [:all, :destroy]
+  layout "user", only: [:show, :edit, :change_password]
 
-  def new
-    @user = User.new
-  end
+  def show
+    @user = User.find(params[:id])
 
-  def create
-    @user = User.new({**user_params, admin: false, active: true})
-    if @user.save
-      session[:user_id] = @user.id
-      redirect_to "/welcome", flash: { notice: "You have become a member!" }
+    if (params[:content].present?)
+      # lazy load
+      tab = params[:content]
+      if (tab == "photos")
+        photos = @user.posts.where(type: "Photo").order(updated_at: :desc).page(params[:page]).per(16)
+        render json: photos, include: { medium: { only: :url }, reactors: { only: :id } }
+
+      elsif (tab == "albums")
+        albums = @user.posts.where(type: "Album").order(updated_at: :desc).page(params[:page]).per(16)
+        render json: albums, include: { media: { only: :url }, reactors: { only: :id } }
+
+      elsif (tab == "followers")
+        followers = @user.followers.page(params[:page]).per(5)
+        render json: followers, include: { posts: { only: [:id, :type] }, followers: { only: :id } }
+
+      elsif (tab == "following")
+        followings = @user.followings.page(params[:page]).per(5)
+        render json: followings, include: { posts: { only: [:id, :type] }, followers: { only: :id } }
+
+      end
+      return
+    end
+
+    # initil load
+    @photos = @user.posts.where(type: "Photo").order(updated_at: :desc).page(params[:page]).per(16)
+    @albums = @user.posts.where(type: "Album").order(updated_at: :desc).page(params[:page]).per(16)
+    @followers = @user.followers.page(params[:page]).per(5)
+    @followings = @user.followings.page(params[:page]).per(5)
+
+    @photo_count = @user.posts.where(type: "Photo").count
+    @album_count = @user.posts.where(type: "Album").count
+    @follower_count = @user.followers.count
+    @following_count = @user.followings.count
+
+    if (params[:tab].present?)
+      @tab = params[:tab]
     else
-      redirect_to "/signup", flash: { error: "Failed to sign you up. Please try again."}
+      @tab = "photos"
+    end
+
+    if (params[:notice].present?)
+      render json: { status_code: 200, message: params[:notice] }, status: :ok
     end
   end
 
-  def show
-  end
-
-  def edit
-  end
-
-  def update
-  end
-
-  def destroy
-  end
-
-  def all
+  def update # update avatar only (everything else is handled by users/registrations_controller)
+    @user = User.find(params[:id])
+    if @user.update(user_info_params)
+      msg = "Profile updated!"
+      flash[:notice] = msg
+      render json: { status_code: 200, message: msg }, status: :ok
+    else
+      msg = "Failed to update profile: " + @user.errors.full_messages.join(", ")
+      flash[:error] = msg
+      render json: { status_code: 500, message: msg }, status: :internal_server_error
+    end
   end
 
   private
-  def user_params
-    params.require(:user).permit(:fname, :lname, :email, :password, :password_confirmation)
+  def user_info_params
+    params.require(:user).permit(:avatar)
   end
 end

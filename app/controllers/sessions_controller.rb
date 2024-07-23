@@ -1,31 +1,18 @@
 class SessionsController < ApplicationController
-  skip_before_action :authorized, only: [:welcome, :new, :create]
-
-  def new
-  end
-
-  def create
-    @user = User.find_by(email: params[:email])
-    if @user && @user.authenticate(params[:password])
-
-      session[:user_id] = @user.id
-
-      if @user.admin
-        redirect_to admin_photos_path, flash: { notice: "Login successful as admin." }
-      else
-        redirect_to feeds_path, flash: { notice: "Login successful." }
-      end
-
-    else
-      redirect_to "/login", flash: { error: "Login failed. Please try again." }
-    end
-  end
+  skip_before_action :authenticate_user!, only: [:welcome]
+  skip_before_action :authorize_user, only: [:welcome]
 
   def welcome
-  end
+    if user_signed_in?
+      if current_user.admin
+        redirect_to admin_photos_path
+      else
+        redirect_to feeds_path
+      end
+    end
 
-  def destroy
-    session[:user_id] = nil
-    redirect_to "/welcome", flash: { notice: "Logout successful."}
+    if params[:notice]
+      render json: { status_code: 200, message: params[:notice] }, status: :ok
+    end
   end
 end

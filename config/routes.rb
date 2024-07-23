@@ -8,26 +8,37 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "sessions#welcome"
 
-  resources :sessions, only: [:new, :create, :destroy]
-  resources :users, only: [:new, :create, :show, :edit, :update, :destroy]
-  get 'posts/all'
-  get 'posts/following'
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    sessions: 'users/sessions'
+  }
+
+  devise_scope :user do
+    get '/users/sign_out' => 'devise/sessions#destroy' # ?
+  end
+
+  resources :users, only: [:show, :update]
+  get 'posts/discover'
+  get 'posts/feeds'
   resources :posts, only: [:destroy]
   resources :photos, only: [:new, :create, :edit, :update]
   resources :albums, only: [:new, :create, :edit, :update]
 
   get 'welcome', to: 'sessions#welcome'
-  get 'login', to: 'sessions#new'
-  get 'signup', to: 'users#new'
 
-  get 'feeds', to: 'posts#following'
-  get 'discover', to: 'posts#all'
+  get 'feeds', to: 'posts#feeds'
+  get 'discover', to: 'posts#discover'
   get 'new/photo', to: 'photos#new'
   get 'new/album', to: 'albums#new'
-  get 'profile', to: 'users#show'
 
-  get 'admin/photos', to: 'photos#all'
-  get 'admin/albums', to: 'albums#all'
-  get 'admin/users', to: 'users#all'
-  get 'admin/users/edit', to: 'users#edit'
+  resources :follows, only: [:create, :destroy]
+  resources :reactions, only: [:create, :destroy]
+
+  namespace :admin do
+    resources :users, only: [:index, :edit, :update, :destroy]
+    resources :albums, only: [:index, :edit, :update, :destroy]
+    resources :photos, only: [:index, :edit, :update, :destroy]
+  end
+
+  mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end

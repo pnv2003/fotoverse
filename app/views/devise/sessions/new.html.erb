@@ -1,0 +1,49 @@
+<main class="login">
+  <%= render partial: "guest_header" %>
+  <h2><%= I18n.t('login') %></h2>
+
+  <%= form_for(resource, as: resource_name, url: user_session_path) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <p class="field">
+      <%= f.label :email, I18n.t('email'), class: "form-label" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      <span class="error text-danger"></span>
+    </p>
+
+    <p class="field">
+      <%= f.label :password, I18n.t('password'), class: "form-label" %>
+      <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+      <span class="error text-danger"></span>
+    </p>
+
+    <% if devise_mapping.rememberable? %>
+      <p class="field">
+        <%= f.check_box :remember_me, class: "form-check-input" %>
+        <%= f.label :remember_me, I18n.t('auth.remember_me'), class: "form-check-label" %>
+      </p>
+    <% end %>
+
+    <%= f.submit I18n.t('login'), id: "login", class: "btn btn-primary" %>
+
+    <div class="or"><%= I18n.t 'auth.or' %></div>
+
+    <div class="third-party">
+        <p><%= I18n.t('auth.login_with') %></p>
+        <div class="row row-cols-3">
+            <a href="#"> <%= image_tag 'google.png', size: "50", alt: "Google"%> </a>
+            <a href="#"> <%= image_tag 'facebook.png', size: "50", alt: "Facebook"%> </a>
+            <a href="#"> <%= image_tag 'twitter.png', size: "50", alt: "X"%> </a>
+        </div>
+    </div>
+
+    <p><%= link_to I18n.t('auth.forgot_password'), new_user_password_path %></p>
+
+    <hr>
+
+    <p><%= I18n.t('auth.dont_have_account') %> <%= link_to I18n.t('signup'), new_user_registration_path %></p>
+  <% end %>
+</main>
+
+<%= javascript_include_tag "login", type: "module" %>
+<%#= render "devise/shared/links" %>

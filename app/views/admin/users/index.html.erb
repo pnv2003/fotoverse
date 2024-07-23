@@ -1,0 +1,47 @@
+<main class="admin-users">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col"><%= I18n.t('first_name') %></th>
+                <th scope="col"><%= I18n.t('last_name') %></th>
+                <th scope="col"><%= I18n.t('email') %></th>
+                <th scope="col"><%= I18n.t('last_access') %></th>
+                <th scope="col"><%= I18n.t('status') %></th>
+                <th scope="col"><%= I18n.t('actions') %></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @users.each.with_index do |user, index| %>
+                <tr>
+                    <th scope="row"><%= index + 1 %></th>
+                    <td><%= user.fname %></td>
+                    <td><%= user.lname %></td>
+                    <td><%= user.email %></td>
+                    <td>
+                        <% if user.last_sign_in_at %>
+                            <%= user.last_sign_in_at %>
+                        <% else %>
+                            <span><%= I18n.t('no_access') %></span>
+                        <% end %>
+                    </td>
+                    <td>
+                        <% if user.active %>
+                            <span class="badge text-bg-success"><%= I18n.t('active') %></span>
+                        <% else %>
+                            <span class="badge text-bg-danger"><%= I18n.t('inactive') %></span>
+                        <% end %>
+                    </td>
+                    <td>
+                        <%= link_to I18n.t('edit'), edit_admin_user_path(user.id), class: "btn btn-primary" %>
+                        <button class="btn btn-danger" type="button"><%= I18n.t('delete') %></button>
+                    </td>
+                </tr>
+            <% end %>
+        </tbody>
+    </table>
+
+    <%= paginate @users, theme: 'bootstrap-5', pagination_class: "pagination-lg" %>
+</main>
+
+<%= javascript_include_tag "admin_users" %>

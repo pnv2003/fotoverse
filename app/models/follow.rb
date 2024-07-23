@@ -4,6 +4,7 @@ class Follow < ApplicationRecord
 
   validates :follower_id, presence: true
   validates :followed_id, presence: true
+  validates :follower_id, uniqueness: { scope: :followed_id }
   validate :not_following_self
 
   private

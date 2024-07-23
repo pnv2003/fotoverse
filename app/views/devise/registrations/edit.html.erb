@@ -1,0 +1,89 @@
+<main class="edit-profile">
+  <h2><%= I18n.t('edit_profile') %></h2>
+
+  <%= form_with url: user_path(current_user.id), model: @user, local: true, id: "avatar-form" do |f| %>
+    <p class="field">
+        <%= f.label :avatar, I18n.t('avatar'), class: "form-label" %>
+        <%= f.file_field :avatar, accept: "image/jpeg, image/gif, image/png, image/jpg", class: "form-control" %>
+        <span class="error text-danger"></span>
+        <div id="preview-avatar">
+            <%= image_tag @user.avatar.url, alt: "Avatar Preview" %>
+        </div>
+    </p>
+  <% end %>
+
+  <%= form_for(resource, as: resource_name, url: user_registration_path, html: { method: :put }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    
+    <p class="field">
+        <%= f.label :fname, I18n.t('first_name'), class: "form-label" %>
+        <%= f.text_field :fname, class: "form-control" %>
+        <span class="error text-danger"></span>
+    </p>
+    <p class="field">
+      <%= f.label :lname, I18n.t('last_name'), class: "form-label" %>
+      <%= f.text_field :lname, class: "form-control" %>
+      <span class="error text-danger"></span>
+    </p>
+    <p class="field">
+      <%= f.label :email, I18n.t('email'), class: "form-label" %>
+      <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
+      <span class="error text-danger"></span>
+    </p>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+
+    <p class="field">
+      <%= f.label :password, I18n.t('password'), class: "form-label" %> <i>(<%= I18n.t('auth.leave_blank') %>)</i><br />
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+      <span class="error text-danger"></span>
+      <% if @minimum_password_length %>
+        <br />
+        <em><%= @minimum_password_length %> characters minimum</em>
+      <% end %>
+    </p>
+
+    <p class="field">
+      <%= f.label :password_confirmation, I18n.t('password_confirmation'), class: "form-label" %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+      <span class="error text-danger"></span>
+    </p>
+
+    <p class="field">
+      <%= f.label :current_password, I18n.t('current_password'), class: "form-label" %> <i>(<%= I18n.t('auth.we_need_your_password') %>)</i><br />
+      <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
+      <span class="error text-danger"></span>
+    </p>
+
+    <%= f.submit I18n.t('update'), id: "update", class: "btn btn-primary" %>
+  <% end %>
+
+  <h3><%= I18n.t('auth.cancel_my_account') %></h3>
+
+  <p><%= I18n.t('unhappy')%>?</p>
+  <div><%= button_to I18n.t('auth.cancel_my_account'), user_registration_path, class: "btn btn-danger" %></div>
+
+  <%= link_to I18n.t('back'), :back, class: "btn btn-primary" %>
+
+  <div class="modal fade" id="cropperModal" tabindex="-1" aria-labelledby="cropperModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="cropperModalLabel"><%= I18n.t('crop_your_avatar') %></h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="result rounded" id="input-image"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%= I18n.t('cancel') %></button>
+                <button id="save" type="button" class="btn btn-primary"><%= I18n.t('save') %></button>
+            </div>
+        </div>
+    </div>
+  </div>
+</main>
+
+<%= javascript_include_tag "edit_profile", type: "module" %>

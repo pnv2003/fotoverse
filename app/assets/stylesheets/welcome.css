@@ -1,13 +1,26 @@
+.welcome {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url(background.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
 .welcome header {
     display: flex;
     padding: 2rem;
     width: 100%;
+    justify-content: space-between;
 }
 
 .welcome header h1 {
     font-family: "Leckerli One", cursive;
     font-weight: 4100;
     font-style: normal;
+    color: white;
 }
 
 .welcome main {
@@ -15,7 +28,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 7rem;
+    justify-content: center;
+    margin-bottom: 7rem;
     max-width: 80rem;
     padding: 0 10%;
 }
@@ -54,8 +68,23 @@
 }
 
 .welcome .text-gradient {
-    background: linear-gradient(90deg, rgba(9,38,121,1) 0%, rgba(0,212,255,1) 100%);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: white;
+}
+
+@media screen and (max-width: 1055px) {
+    .welcome main h1 {
+        font-size: 4rem;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .welcome main h1 {
+        font-size: 3rem;
+    }
+}
+
+@media screen and (max-width: 635px) {
+    .welcome main h1 {
+        font-size: 2rem;
+    }
 }

@@ -2,8 +2,19 @@
 
 main.signup {
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    margin-top: 7rem;
+    background-image: url(background.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+main.signup h2 {
+    font-size: 3rem;
+    color: white;
+    margin-bottom: 1rem;
 }
 
 main.signup form {
@@ -27,8 +38,30 @@ main.signup form h1 {
     font-family: "Leckerli One", cursive;
     font-weight: 400;
     font-style: normal;
-  }
+}
 
 main.signup .agree {
     text-align: center;
+}
+
+main.signup .third-party {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+main.signup .or {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+main.signup .or::before,
+main.signup .or::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid lightgray;
+  margin: 0 10px;
 }

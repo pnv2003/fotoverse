@@ -1,0 +1,57 @@
+<main class="signup">
+  <%= render partial: "guest_header" %>
+  <h2><%= I18n.t('signup') %></h2>
+
+  <%= form_for(resource, as: resource_name, url: user_registration_path) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <div class="third-party">
+      <p><%= I18n.t('auth.sign_up_with') %></p>
+      <div class="row row-cols-3">
+        <a href="#"> <%= image_tag 'google.png', size: "50", alt: "Google"%> </a>
+        <a href="#"> <%= image_tag 'facebook.png', size: "50", alt: "Facebook"%> </a>
+        <a href="#"> <%= image_tag 'twitter.png', size: "50", alt: "X"%> </a>
+      </div>
+    </div>
+
+    <div class="or"><%= I18n.t('auth.or') %></div>
+
+
+    <p class="field">
+      <%= f.label :fname, I18n.t('first_name'), class: "form-label" %>
+      <%= f.text_field :fname, class: "form-control", autofocus: true %>
+      <span class="error text-danger"></span>
+    </p>
+    <p class="field">
+      <%= f.label :lname, I18n.t('last_name'), class: "form-label" %>
+      <%= f.text_field :lname, class: "form-control" %>
+      <span class="error text-danger"></span>
+    </p>
+    <p class="field">
+      <%= f.label :email, I18n.t('email'), class: "form-label" %>
+      <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
+      <span class="error text-danger"></span>
+    </p>
+
+    <p class="field">
+      <%= f.label :password, I18n.t('password'), class: "form-label" %>
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+      <span class="error text-danger"></span>
+    </p>
+
+    <p class="field">
+      <%= f.label :password_confirmation, I18n.t('password_confirmation'), class: "form-label" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+      <span class="error text-danger"></span>
+    </p>
+
+    <p><%= I18n.t('auth.by_signing_up') %> <a href="#"><%= I18n.t('auth.terms') %></a>, <a href="#"><%= I18n.t('auth.privacy_policy') %></a> <%= I18n.t('auth.and') %> <a href="#"><%= I18n.t('auth.cookies_policy') %></a> <%= I18n.t('auth.of_us') %></p>
+    <%= f.submit I18n.t('signup'), id: "signup", class: "btn btn-primary" %>
+
+    <hr>
+
+    <p><%= I18n.t('auth.already_have_account') %> <%= link_to I18n.t('login'), new_user_session_path %></p>
+  <% end %>
+</main>
+
+<%= javascript_include_tag "signup", type: "module" %>
+<%#= render "devise/shared/links" %>

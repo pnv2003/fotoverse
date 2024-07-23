@@ -1,0 +1,109 @@
+main.admin-albums {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+main.admin-albums > * {
+    max-width: 70rem;
+}
+
+main.admin-albums nav {
+    position: fixed;
+    bottom: 0;
+}
+
+main.admin-albums .content.display {
+    display: grid;
+    gap: 0.5rem;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 4rem;
+}
+
+main.admin-albums .content.display .item {
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 5px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
+
+main.admin-albums .content.display .item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+main.admin-albums .content.display :is(.mode, .count) {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(64, 64, 64, 0.5);  
+    color: white;
+    aspect-ratio: 1 / 1;
+    width: 2rem;
+}
+
+main.admin-albums .content.display .mode {
+    top: 0.5rem;
+    left: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+}
+
+main.admin-albums .content.display .count {
+    top: 0.5rem;
+    right: 0.5rem;
+    padding: 0.2rem;
+    border-radius: 5px;
+}
+
+main.admin-albums .content.display img {
+    width: 100%;
+}
+
+main.admin-albums .modal-header a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-right: 1rem;
+}
+
+main.admin-albums .modal-header a img {
+    width: 2rem;
+    border-radius: 50%;
+}
+
+
+main.admin-albums .modal-body .action {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+main.admin-albums .modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between !important;
+    padding: 1rem 2rem;
+}
+
+main.admin-albums .modal-footer * {
+    padding: 0;
+    margin: 0;
+}
+
+main.admin-albums .modal-footer .react {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}

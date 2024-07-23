@@ -1,2 +1,1 @@
-<h1>Photos#new</h1>
-<p>Find me in app/views/photos/new.html.erb</p>
+<%= render partial: "application/photo_form", locals: { path: photos_path, photo: @photo, title: I18n.t('new_photo') } %>

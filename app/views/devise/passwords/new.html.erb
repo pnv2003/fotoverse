@@ -1,0 +1,24 @@
+<main class="forgot-password">
+  <h1>Forgot your password?</h1>
+
+  <%= form_for(resource, as: resource_name, url: user_password_path, html: { method: :post }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <p class="field">
+      <%= f.label :email, class: "form-label" %>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+      <span class="error text-danger"></span>
+    </p>
+
+    <%= f.submit "Send me reset password instructions", class: "btn btn-primary", id: "send" %>
+
+    <div class="or">OR</div>
+
+    <p><%= link_to "Create new account", new_user_registration_path %></p>
+    <p><%= link_to "Back to login", new_user_session_path %><br /></p>
+
+  <% end %>
+</main>
+
+<%= javascript_include_tag "forgot_password", type: "module" %>
+<%#= render "devise/shared/links" %>

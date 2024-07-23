@@ -1,0 +1,102 @@
+<main class="admin-albums">
+    <div id="albums" class="content display">
+
+        <% @albums.each do |album| %>
+            <div class="item">
+                <%= image_tag album.media.first.url.url, alt: "album" %>
+
+                <div class="info" style="display: none">
+                    <p class="id"><%= album.id %></p>
+                    <p class="user-name"><%= album.user.fname + ' ' + album.user.lname %></p>
+                    <p class="user-avatar"><%= image_tag album.user.avatar.url %></p>
+                    <p class="user-path"><%= edit_admin_user_path(album.user_id) %></p>
+                    <p class="title"><%= album.title %></p>
+                    <p class="desc"><%= album.description %></p>
+                    <p class="mode"><%= album.mode %></p>
+                    <p class="reacted"><%= album.reactors.ids.include?(current_user.id) %></p>
+                    <p class="react-count"><%= album.reactions.count %></p>
+                    <p class="updated-at"><%= album.updated_at %></p>
+                    <p class="edit-path"><%= edit_admin_album_path(album.id) %></p>
+                    <p class="delete-path"><%= admin_album_path(album.id) %></p>
+
+                    <% album.media.each do |medium| %>
+                        <%= image_tag medium.url.url, alt: "Album Photo" %>
+                    <% end %>
+                </div>
+                <% if album.mode == "private" %>
+                    <div class="mode">
+                        <i class="fa-solid fa-lock"></i>
+                    </div>
+                <% end %>
+                <p class="count"><%= album.media.count %></p>
+            </div>
+        <% end %>
+    </div>
+
+    <%= paginate @albums, theme: 'bootstrap-5', pagination_class: "pagination-lg" %>
+
+    <div class="modal fade" id="albumModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        <a href="#">
+                            <%= image_tag "google.png" %>
+                            <span class="name">Bruh</span>
+                        </a>
+                    </h1>
+                    <span class="badge text-bg-warning"><%= I18n.t('private') %></span>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body card">
+                    <div id="carouselExampleIndicators" class="card-img-top carousel slide">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <%= image_tag "facebook.png", class: "d-block w-100" %>
+                            </div>
+                            <div class="carousel-item">
+                                <%= image_tag "google.png", class: "d-block w-100" %>
+                            </div>
+                            <div class="carousel-item">
+                                <%= image_tag "twitter.png", class: "d-block w-100" %>
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        </div>
+                    <div class="card-body">
+                        <h5 class="card-title">X</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <div class="action">
+                            <%= link_to I18n.t('edit'), edit_admin_album_path(1), id: "edit-album", class: "btn btn-primary" %>
+                            <button id="delete-album" type="button" class="btn btn-danger"><%= I18n.t('delete') %></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <p class="react">
+                        <i 
+                            class="fa-regular fa-heart fa-xl"
+                            data-user-id="<%= current_user.id %>"
+                        ></i>
+                        <span>100K</span>
+                    </p>
+                    <p class="ago">2 days ago</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%= javascript_include_tag "admin_albums", type: "module" %>
