@@ -81,7 +81,6 @@ en:
   inactive: "Inactive"
   actions: "Actions"
   edit_user: "Edit User"
-  delete_account: "Delete Account"
 
   nav:
     feeds: "Feeds"
@@ -114,4 +113,5 @@ en:
     cancel_my_account: "Cancel my account"
     leave_blank: "leave blank if you don't want to change it"
     we_need_your_password: "We need your current password to confirm your changes"
+    delete_account: "Delete Account"
     

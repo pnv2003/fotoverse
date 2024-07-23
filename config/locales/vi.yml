@@ -102,7 +102,6 @@ vi:
   inactive: "Không hoạt động"
   actions: "Hành động"
   edit_user: "Chỉnh sửa người dùng"
-  delete_account: "Xóa tài khoản"
 
   nav:
     feeds: "Bảng tin"
@@ -135,4 +134,5 @@ vi:
     cancel_my_account: "Hủy tài khoản"
     leave_blank: "để trống nếu bạn không muốn thay đổi"
     we_need_your_password: "Chúng tôi cần mật khẩu hiện tại của bạn để xác nhận thay đổi của bạn"
+    delete_account: "Xóa tài khoản"
   
