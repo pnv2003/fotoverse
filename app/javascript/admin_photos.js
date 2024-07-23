@@ -32,7 +32,7 @@ photoItems.forEach(item => item.addEventListener("click", () => {
         photoModal.querySelector(".badge").style.display = "none";
     }
     photoModal.querySelector(".react span").textContent = compactFormatter.format(reactCount);
-    photoModal.querySelector(".ago").textContent = getRelativeTime(new Date(updatedAt));
+    photoModal.querySelector(".ago").textContent = getRelativeTime(new Date(updatedAt), currentLocale);
 
     // add edit link
     const editPath = item.querySelector(".edit-path").textContent;
