@@ -10,7 +10,7 @@
                 <div class="card-header">
                     <%= link_to user_path(photo.user_id) do %>
                         <div class="user">
-                            <%= image_tag photo.user.avatar.url, alt: "avatar" %>
+                            <%= image_tag photo.user.avatar.url, alt: "avatar", class: "avatar" %>
                             <p class="name"><%= photo.user.fname + ' ' + photo.user.lname %></p>
                         </div>
                     <% end %>
