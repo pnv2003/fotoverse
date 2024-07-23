@@ -17,6 +17,8 @@
             <div class="action">
                 <% if current_user.id == @user.id %>
                     <%= link_to I18n.t('edit_profile'), edit_user_registration_path, class: "btn btn-primary edit", data: { turbo: false } %>
+                    <%= link_to I18n.t('add_photo'), new_photo_path, class: "btn btn-info" %>
+                    <%= link_to I18n.t('add_album'), new_album_path, class: "btn btn-info" %>
                 <% else %>
                     <% if @followers.ids.include?(current_user.id) %>
                         <button 
@@ -55,11 +57,6 @@
             </li>
         </ul>
         <div id="photos" class="content display">
-            <div class="item">
-                <%= link_to new_photo_path do %>
-                    <%= image_tag "add-image.png", alt: "Add Photo" %>
-                <% end %>
-            </div>
             <% @photos.each do |photo| %>
                 <div class="item">
                     <%= image_tag photo.medium.url.url, alt: "My Photo" %>
@@ -83,11 +80,6 @@
             <% end %>
         </div>
         <div id="albums" class="content display">
-            <div class="item">
-                <%= link_to new_album_path do %>
-                    <%= image_tag "add-image.png", alt: "Add Album" %>
-                <% end %>
-            </div>
             <% @albums.each do |album| %>
                 <div class="item">
                     <%= image_tag album.media.first.url.url, alt: "My Album" %>
