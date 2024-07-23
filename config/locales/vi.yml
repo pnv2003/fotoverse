@@ -85,6 +85,16 @@ vi:
   photo_details: "Chi tiết ảnh"
   album_details: "Chi tiết bộ sưu tập"
 
+  users: "Người dùng"
+  last_access: "Truy cập gần nhất"
+  no_access: "Không truy cập"
+  status: "Trạng thái"
+  active: "Hoạt động"
+  inactive: "Không hoạt động"
+  actions: "Hành động"
+  edit_user: "Chỉnh sửa người dùng"
+  delete_account: "Xóa tài khoản"
+
   nav:
     feeds: "Bảng tin"
     discover: "Khám phá"

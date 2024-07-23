@@ -73,6 +73,16 @@ en:
   photo_details: "Photo Details"
   album_details: "Album Details"
 
+  users: "Users"
+  last_access: "Last access"
+  no_access: "No access"
+  status: "Status"
+  active: "Active"
+  inactive: "Inactive"
+  actions: "Actions"
+  edit_user: "Edit User"
+  delete_account: "Delete Account"
+
   nav:
     feeds: "Feeds"
     discover: "Discover"

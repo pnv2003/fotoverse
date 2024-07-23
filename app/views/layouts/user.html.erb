@@ -55,7 +55,7 @@
                             <%= link_to I18n.t('logout'), destroy_user_session_path, method: :delete, class: "nav-link", style: "display: none", id: "real-logout" %>
                         </li>
                     </ul>
-                     <div class="lang">
+                    <div class="lang">
                         <% if I18n.locale == :vi %>
                             <%= link_to locale: :en do %>
                                 <div class="flag">

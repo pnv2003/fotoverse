@@ -10,33 +10,50 @@
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item">
                             <% if current_page?(admin_photos_path) %>
-                                <a class="nav-link active" aria-current="page" href="#">Photos</a>
+                                <a class="nav-link active" aria-current="page" href="#"><%= I18n.t('photos') %></a>
                             <% else %>
-                                <%= link_to "Photos", admin_photos_path, class: "nav-link", data: {turbo: false} %>
+                                <%= link_to I18n.t('photos'), admin_photos_path, class: "nav-link", data: {turbo: false} %>
                             <% end %>
                         </li>
                         <li class="nav-item">
                             <% if current_page?(admin_albums_path) %>
-                                <a class="nav-link active" aria-current="page" href="#">Albums</a>
+                                <a class="nav-link active" aria-current="page" href="#"><%= I18n.t('albums') %></a>
                             <% else %>
-                                <%= link_to "Albums", admin_albums_path, class: "nav-link", data: {turbo: false} %>
+                                <%= link_to I18n.t('albums'), admin_albums_path, class: "nav-link", data: {turbo: false} %>
                             <% end %>
                         </li>
                         <li class="nav-item">
                             <% if current_page?(admin_users_path) %>
-                                <a class="nav-link active" aria-current="page" href="#">Users</a>
+                                <a class="nav-link active" aria-current="page" href="#"><%= I18n.t('users') %></a>
                             <% else %>
-                                <%= link_to "Users", admin_users_path, class: "nav-link", data: {turbo: false} %>
+                                <%= link_to I18n.t('users'), admin_users_path, class: "nav-link", data: {turbo: false} %>
                             <% end %>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" id="nav-logout">Logout</a>
-                            <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link", style: "display: none", id: "real-logout" %>
+                            <a href="#" class="nav-link" id="nav-logout"><%= I18n.t('logout') %></a>
+                            <%= link_to I18n.t('logout'), destroy_user_session_path, method: :delete, class: "nav-link", style: "display: none", id: "real-logout" %>
                         </li>
                     </ul>
+                    <div class="lang">
+                        <% if I18n.locale == :vi %>
+                            <%= link_to locale: :en do %>
+                                <div class="flag">
+                                    <%= image_tag "vietnam.png" %>
+                                </div>
+                                <span>VI</span>
+                            <% end %>
+                        <% else %>
+                            <%= link_to locale: :vi do %>
+                                <div class="flag">
+                                    <%= image_tag "united-kingdom.png" %>
+                                </div>
+                                <span>EN</span>
+                            <% end %>
+                        <% end %>
+                    </div>
                     <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                        <input class="form-control me-2" type="search" placeholder="<%= I18n.t('nav.search') %>" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit"><%= I18n.t('nav.search') %></button>
                     </form>
                 </div>
             </div>
