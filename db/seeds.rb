@@ -73,7 +73,7 @@ end
 puts "Done: random users"
 
 # random follows
-Faker::Number.between(from: 50, to: 100).times do
+Faker::Number.between(from: 100, to: 200).times do
   user_id_1 = User.ids.sample
   user_id_2 = User.ids.sample
   if user_id_1 != user_id_2
@@ -84,7 +84,7 @@ end
 puts "Done: follows"
 
 # random reactions
-Faker::Number.between(from: 50, to: 100).times do
+Faker::Number.between(from: 100, to: 200).times do
   user_id = User.ids.sample
   post_id = Post.ids.sample
   Reaction.create(user_id: user_id, post_id: post_id)
