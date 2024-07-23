@@ -43,6 +43,9 @@ main.gallery :is(.card-header, .modal-header) .user {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+}
+
+main.gallery .modal-header .user {
     margin-right: 1rem;
 }
 

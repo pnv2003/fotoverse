@@ -359,12 +359,12 @@ element.addEventListener('scroll', (e) => {
                     if (photo.user_id != userId) {
                         if (photo.user.followers.map(user => user.id).includes(userId)) {
                             followButton.textContent = "Following";
-                            followButton.className = "btn btn-outline-primary follow";
+                            followButton.className = "btn btn-sm btn-outline-primary follow";
                             followButton.setAttribute("data-follower-id", userId);
                             followButton.setAttribute("data-followed-id", photo.user_id);
                         } else {
                             followButton.textContent = "Follow";
-                            followButton.className = "btn btn-primary follow";
+                            followButton.className = "btn btn-sm btn-primary follow";
                             followButton.setAttribute("data-follower-id", userId);
                             followButton.setAttribute("data-followed-id", photo.user_id);
                         }
@@ -451,12 +451,12 @@ element.addEventListener('scroll', (e) => {
                     if (album.user_id != userId) {
                         if (album.user.followers.map(user => user.id).includes(userId)) {
                             followButton.textContent = "Following";
-                            followButton.className = "btn btn-outline-primary follow";
+                            followButton.className = "btn btn-sm btn-outline-primary follow";
                             followButton.setAttribute("data-follower-id", userId);
                             followButton.setAttribute("data-followed-id", album.user_id);
                         } else {
                             followButton.textContent = "Follow";
-                            followButton.className = "btn btn-primary follow";
+                            followButton.className = "btn btn-sm btn-primary follow";
                             followButton.setAttribute("data-follower-id", userId);
                             followButton.setAttribute("data-followed-id", album.user_id);
                         }
