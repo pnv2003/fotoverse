@@ -3,7 +3,7 @@ class Admin::UsersController < ApplicationController
   layout "admin"
 
   def index
-    @users = User.where(admin: false).order(:fname).page(params[:page]).per(15)
+    @users = User.where(admin: false).order(updated_at: :desc).page(params[:page]).per(15)
   end
 
   def edit
