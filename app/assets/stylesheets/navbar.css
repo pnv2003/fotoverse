@@ -1,3 +1,22 @@
 nav.navbar {
     background: linear-gradient(90deg, rgba(9,38,121,1) 0%, rgba(0,212,255,1) 100%);
 }
+
+header.guest {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;   
+    width: 100%;
+}
+
+header.guest h1 {
+    font-family: "Leckerli One", cursive;
+    font-weight: 4100;
+    font-style: normal;
+    color: white;
+}
+
+.nav-tabs li a {
+    cursor: pointer;
+}

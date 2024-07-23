@@ -1,0 +1,26 @@
+.lang, .lang a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: white;
+}
+
+.lang .flag {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lang .flag img {
+    object-fit: cover;
+    height: 2rem;
+    width: 2rem;
+}
+
+.lang span {
+    /* font-size: 1.5rem; */
+    margin-right: 1rem;
+}

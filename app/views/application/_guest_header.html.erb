@@ -1,0 +1,20 @@
+<header class="guest">
+    <h1>Fotoverse</h1>
+    <div class="lang">
+        <% if I18n.locale == :vi %>
+            <%= link_to locale: :en do %>
+                <div class="flag">
+                    <%= image_tag "vietnam.png" %>
+                </div>
+                <span>VI</span>
+            <% end %>
+        <% else %>
+            <%= link_to locale: :vi do %>
+                <div class="flag">
+                    <%= image_tag "united-kingdom.png" %>
+                </div>
+                <span>EN</span>
+            <% end %>
+        <% end %>
+    </div>
+</header>

@@ -10,55 +10,72 @@
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         <li class="nav-item">
                             <% if current_page?(feeds_path) %>
-                                <a class="nav-link active" aria-current="page" href="#">Feeds</a>
+                                <a class="nav-link active" aria-current="page" href="#"><%= I18n.t('nav.feeds') %></a>
                             <% else %>
-                                <%= link_to "Feeds", feeds_path, class: "nav-link", data: {turbo: false}%>
+                                <%= link_to I18n.t('nav.feeds'), feeds_path, class: "nav-link", data: {turbo: false}%>
                             <% end %>
                         </li>
                         <li class="nav-item">
                             <% if current_page?(discover_path) %>
-                                <a class="nav-link active" aria-current="page" href="#">Discover</a>
+                                <a class="nav-link active" aria-current="page" href="#"><%= I18n.t('nav.discover') %></a>
                             <% else %>
-                                <%= link_to "Discover", discover_path, class: "nav-link", data: {turbo: false}%>
+                                <%= link_to I18n.t('nav.discover'), discover_path, class: "nav-link", data: {turbo: false}%>
                             <% end %>
                         </li>                  
                         <li class="nav-item dropdown">
                             <% if current_page?(new_photo_path) || current_page?(new_album_path) %>
-                                <a class="nav-link active dropdown-toggle" aria-current="page" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">New</a>
+                                <a class="nav-link active dropdown-toggle" aria-current="page" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><%= I18n.t('nav.new') %></a>
                             <% else %>
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">New</a>
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><%= I18n.t('nav.new') %></a>
                             <% end %>
 
                             <ul class="dropdown-menu">
                                 <% if current_page?(new_photo_path) %>
-                                    <li><a class="dropdown-item" href="#">Photo</a></li>
+                                    <li><a class="dropdown-item" href="#"><%= I18n.t('photo') %></a></li>
                                 <% else %>
-                                    <li><%= link_to "Photo", new_photo_path, class: "dropdown-item", data: {turbo: false} %></li>
+                                    <li><%= link_to I18n.t('photo'), new_photo_path, class: "dropdown-item", data: {turbo: false} %></li>
                                 <% end %>
 
                                 <% if current_page?(new_album_path) %>
-                                    <li><a class="dropdown-item" href="#">Album</a></li>
+                                    <li><a class="dropdown-item" href="#"><%= I18n.t('album') %></a></li>
                                 <% else %>
-                                    <li><%= link_to "Album", new_album_path, class: "dropdown-item", data: {turbo: false} %></li>
+                                    <li><%= link_to I18n.t('album'), new_album_path, class: "dropdown-item", data: {turbo: false} %></li>
                                 <% end %>
                             </ul>
                         </li>
                         <li class="nav-item">
                             <% if params[:controller] == 'users' && params[:action] == 'show' %>
-                                <%= link_to "Profile", user_path(current_user.id), id: "nav-profile", class: "nav-link active", aria: { current: "page" }, data: {turbo: false}%>
+                                <%= link_to I18n.t('nav.profile'), user_path(current_user.id), id: "nav-profile", class: "nav-link active", aria: { current: "page" }, data: {turbo: false}%>
                             <% else %>
-                                <%= link_to "Profile", user_path(current_user.id), id: "nav-profile", class: "nav-link", data: {turbo: false}%>
+                                <%= link_to I18n.t('nav.profile'), user_path(current_user.id), id: "nav-profile", class: "nav-link", data: {turbo: false}%>
                             <% end %>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link" id="nav-logout">Logout</a>
-                            <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link", style: "display: none", id: "real-logout" %>
+                            <a href="#" class="nav-link" id="nav-logout"><%= I18n.t('logout') %></a>
+                            <%= link_to I18n.t('logout'), destroy_user_session_path, method: :delete, class: "nav-link", style: "display: none", id: "real-logout" %>
                         </li>
                     </ul>
+                    <div class="lang">
+                        <% if I18n.locale == :vi %>
+                            <%= link_to locale: :en do %>
+                                <div class="flag">
+                                    <%= image_tag "vietnam.png" %>
+                                </div>
+                                <span>VI</span>
+                            <% end %>
+                        <% else %>
+                            <%= link_to locale: :vi do %>
+                                <div class="flag">
+                                    <%= image_tag "united-kingdom.png" %>
+                                </div>
+                                <span>EN</span>
+                            <% end %>
+                        <% end %>
+                    </div>
                     <%# TODO %>
                     <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                        <input class="form-control me-2" type="search" placeholder="<%= I18n.t('nav.search') %>" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit"><%= I18n.t('nav.search') %></button>
                     </form>
                 </div>
             </div>

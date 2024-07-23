@@ -53,7 +53,7 @@ albumItems.forEach(item => item.addEventListener("click", () => {
         albumModal.querySelector(".badge").style.display = "none";
     }
     albumModal.querySelector(".react span").textContent = compactFormatter.format(reactCount);
-    albumModal.querySelector(".ago").textContent = getRelativeTime(new Date(updatedAt));
+    albumModal.querySelector(".ago").textContent = getRelativeTime(new Date(updatedAt), currentLocale);
 
     // add edit link
     const editPath = item.querySelector(".edit-path").textContent;

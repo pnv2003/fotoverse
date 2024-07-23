@@ -86,7 +86,7 @@ const populateModalContent = (item, type) => {
                 photoModal.querySelector(".badge").style.display = "none";
             }
             photoModal.querySelector(".react span").textContent = compactFormatter.format(reactCount);
-            photoModal.querySelector(".ago").textContent = getRelativeTime(new Date(updatedAt));
+            photoModal.querySelector(".ago").textContent = getRelativeTime(new Date(updatedAt), currentLocale);
         
             // add edit link
             const editPath = item.querySelector(".edit-path").textContent;
@@ -155,7 +155,7 @@ const populateModalContent = (item, type) => {
                 albumModal.querySelector(".badge").style.display = "none";
             }
             albumModal.querySelector(".react span").textContent = compactFormatter.format(reactCount);
-            albumModal.querySelector(".ago").textContent = getRelativeTime(new Date(updatedAt));
+            albumModal.querySelector(".ago").textContent = getRelativeTime(new Date(updatedAt), currentLocale);
         
             // add edit link
             const editPath = item.querySelector(".edit-path").textContent;
@@ -350,6 +350,8 @@ element.addEventListener('scroll', (e) => {
 
     lastScrollTop = element.scrollTop <= 0 ? 0 : element.scrollTop;
     if (element.scrollTop + element.offsetHeight>= element.scrollHeight ){
+
+        console.log("load more");
        
         if (activeTabName === 'photos') {
             if (photoPage == 0) return;
@@ -357,6 +359,7 @@ element.addEventListener('scroll', (e) => {
             http.get(window.location.pathname, { content: "photos", page: photoPage }, null)
             .then(response => response.json())
             .then(content => {
+                console.log("load more photos");
                 if (content.length == 0) {
                     photoPage = 0;
                     return;
@@ -373,8 +376,7 @@ element.addEventListener('scroll', (e) => {
                     info.className = "info";
                     info.style.display = "none";
 
-                    // kinda hardcode
-                    const userId = document.querySelector("#current_user_id").textContent;
+                    const userId = currentUser.id;
                     info.innerHTML = `
                         <span class="id">${photo.id}</span>
                         <span class="title">${photo.title}</span>
@@ -406,6 +408,7 @@ element.addEventListener('scroll', (e) => {
             http.get(window.location.pathname, { content: "albums", page: albumPage }, null)
             .then(response => response.json())
             .then(content => {
+                console.log("load more albums");
                 if (content.length == 0) {
                     albumPage = 0;
                     return;
@@ -415,7 +418,7 @@ element.addEventListener('scroll', (e) => {
                     item.className = "item";
 
                     const img = document.createElement("img");
-                    img.src = album.medium.url.url;
+                    img.src = album.media[0].url.url;
                     img.alt = "My Album";
 
                     const info = document.createElement("div");
@@ -504,7 +507,7 @@ element.addEventListener('scroll', (e) => {
                     item.appendChild(avatar);
                     item.appendChild(info);
 
-                    const userId = document.querySelector("#current_user_id");
+                    const userId = currentUser.id;
                     if (follower.followers.map(user => user.id).includes(userId)) {
                         item.innerHTML += `
                             <button class="follow btn btn-outline-primary" data-follower-id="${userId}" data-followed-id="${follower.id}">Following</button>

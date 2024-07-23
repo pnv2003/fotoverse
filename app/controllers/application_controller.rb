@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :authorize_user
   before_action :flash_message
+  around_action :switch_locale
 
   def authorize_user
     if user_signed_in?
@@ -25,5 +26,14 @@ class ApplicationController < ActionController::Base
     elsif params[:notice]
       flash[:notice] = params[:notice]
     end
+  end
+
+  def switch_locale(&action)
+    locale = params[:locale] || I18n.default_locale
+    I18n.with_locale(locale, &action)
+  end
+
+  def default_url_options
+    { locale: I18n.locale }
   end
 end

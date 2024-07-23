@@ -3,12 +3,12 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Last Access</th>
-                <th scope="col">Status</th>
-                <th scope="col">Actions</th>
+                <th scope="col"><%= I18n.t('first_name') %></th>
+                <th scope="col"><%= I18n.t('last_name') %></th>
+                <th scope="col"><%= I18n.t('email') %></th>
+                <th scope="col"><%= I18n.t('last_access') %></th>
+                <th scope="col"><%= I18n.t('status') %></th>
+                <th scope="col"><%= I18n.t('actions') %></th>
             </tr>
         </thead>
         <tbody>
@@ -22,19 +22,19 @@
                         <% if user.last_sign_in_at %>
                             <%= user.last_sign_in_at %>
                         <% else %>
-                            <span>No Access</span>
+                            <span><%= I18n.t('no_access') %></span>
                         <% end %>
                     </td>
                     <td>
                         <% if user.active %>
-                            <span class="badge text-bg-success">Active</span>
+                            <span class="badge text-bg-success"><%= I18n.t('active') %></span>
                         <% else %>
-                            <span class="badge text-bg-danger">Inactive</span>
+                            <span class="badge text-bg-danger"><%= I18n.t('inactive') %></span>
                         <% end %>
                     </td>
                     <td>
-                        <%= link_to "Edit", edit_admin_user_path(user.id), class: "btn btn-primary" %>
-                        <button class="btn btn-danger" type="button">Delete</button>
+                        <%= link_to I18n.t('edit'), edit_admin_user_path(user.id), class: "btn btn-primary" %>
+                        <button class="btn btn-danger" type="button"><%= I18n.t('delete') %></button>
                     </td>
                 </tr>
             <% end %>

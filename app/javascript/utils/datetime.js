@@ -7,13 +7,14 @@ const units = {
     second: 1000
 };
 
-const rtf = new Intl.RelativeTimeFormat('en', { numeric: 'auto' });
-
-export const getRelativeTime = (d1, d2 = new Date()) => {
-    const elapsed = d1 - d2;
+export const getRelativeTime = (date, locale = 'en') => {
+    const now = new Date();
+    const elapsed = date - now;
   
     // "Math.abs" accounts for both "past" & "future" scenarios
     for (var u in units) 
-        if (Math.abs(elapsed) > units[u] || u == 'second') 
+        if (Math.abs(elapsed) > units[u] || u == 'second') { 
+            const rtf = new Intl.RelativeTimeFormat(locale, { numeric: 'auto' });
             return rtf.format(Math.round(elapsed/units[u]), u);
+        }
 }

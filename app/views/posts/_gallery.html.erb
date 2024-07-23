@@ -1,8 +1,8 @@
 <main class="gallery">
     <div class="btn-group">
         <p id="activeTab" style="display: none"><%= tab %></p>
-        <a id="tab-photos" href="#" class="btn btn-primary active" aria-current="page">Photos</a>
-        <a id="tab-albums" href="#" class="btn btn-primary">Albums</a>
+        <a id="tab-photos" class="btn btn-primary active" aria-current="page"><%= I18n.t('photos') %></a>
+        <a id="tab-albums" class="btn btn-primary"><%= I18n.t('albums') %></a>
     </div>
     <div id="photos" class="content">
         <% photos.each do |photo| %>
@@ -19,16 +19,16 @@
                             <button 
                                 data-follower-id="<%= current_user.id %>" 
                                 data-followed-id="<%= photo.user.id  %>" 
-                                class="btn btn-outline-primary follow" 
+                                class="btn btn-sm btn-outline-primary follow" 
                                 type="button"
-                            >Following</button>
+                            ><%= I18n.t('following') %></button>
                         <% else %>
                             <button 
                                 data-follower-id="<%= current_user.id %>" 
                                 data-followed-id="<%= photo.user.id  %>" 
-                                class="btn btn-primary follow" 
+                                class="btn btn-sm btn-primary follow" 
                                 type="button"
-                            >Follow</button>
+                            ><%= I18n.t('follow') %></button>
                         <% end %>
                     <% end %>
                 </div>
@@ -52,7 +52,7 @@
                         <% end %>
                         <span><%= photo.reactions.count %></span>
                     </p>
-                    <p class="ago"><%= time_ago_in_words(photo.updated_at) %> ago</p>
+                    <p class="ago"><%= time_ago_in_words(photo.updated_at) %> <%= I18n.t('ago') %></p>
                 </div>                
             </div>
         <% end %>
@@ -73,16 +73,16 @@
                             <button 
                                 data-follower-id="<%= current_user.id %>" 
                                 data-followed-id="<%= album.user.id  %>" 
-                                class="btn btn-outline-primary follow" 
+                                class="btn btn-sm btn-outline-primary follow" 
                                 type="button"
-                            >Following</button>
+                            ><%= I18n.t('following') %></button>
                         <% else %>
                             <button 
                                 data-follower-id="<%= current_user.id %>" 
                                 data-followed-id="<%= album.user.id  %>" 
-                                class="btn btn-primary follow" 
+                                class="btn btn-sm btn-primary follow" 
                                 type="button"
-                            >Follow</button>
+                            ><%= I18n.t('follow') %></button>
                         <% end %>
                     <% end %>
                 </div>
@@ -97,9 +97,6 @@
                 <div class="card-body">
                     <h5 class="card-title"><%= album.title %></h5>
                     <p class="card-text"><%= album.description %></p>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#albumModal">
-                        Details
-                    </button>
                 </div>
                 <div class="card-footer text-body-secondary">
                     <p 
@@ -114,7 +111,7 @@
                         <% end %>
                         <span><%= album.reactions.count %></span>
                     </p>
-                    <p class="ago"><%= time_ago_in_words(album.updated_at) %> ago</p>
+                    <p class="ago"><%= time_ago_in_words(album.updated_at) %> <%= I18n.t('ago') %></p>
                 </div>
                 <p class="count">
                     <%= album.media.count %>
