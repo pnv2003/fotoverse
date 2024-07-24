@@ -55,20 +55,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
   def after_sign_up_path_for(resource)
-    if Rails.env.development?
-      '/letter_opener'
-    else
+    # if Rails.env.development?
+    #   '/letter_opener'
+    # else
       super(resource)
-    end
+    # end
   end
 
   # The path used after sign up for inactive accounts.
   def after_inactive_sign_up_path_for(resource)
-    if Rails.env.development?
-      '/letter_opener'
-    else
+    # if Rails.env.development?
+    #   '/letter_opener'
+    # else
       super(resource)
-    end
+    # end
   end
 
   def after_update_path_for(resource)

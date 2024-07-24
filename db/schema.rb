@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_15_095605) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_24_043909) do
   create_table "follows", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "followed_id", null: false
     t.bigint "follower_id", null: false
@@ -72,6 +72,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_15_095605) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
+    t.string "provider"
+    t.string "uid"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
