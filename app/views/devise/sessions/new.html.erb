@@ -37,7 +37,9 @@
               <%= button_to omniauth_authorize_path(:user, :google_oauth2, locale: I18n.locale), class: "not-button" do %>
                 <%= image_tag 'google.png', size: "50", alt: "Google"%>
               <% end %>
-              <a href="#"> <%= image_tag 'facebook.png', size: "50", alt: "Facebook"%> </a>
+              <%= button_to omniauth_authorize_path(:user, :facebook, locale: I18n.locale), class: "not-button" do %>
+                <%= image_tag 'facebook.png', size: "50", alt: "Facebook"%>
+              <% end %>
               <a href="#"> <%= image_tag 'twitter.png', size: "50", alt: "X"%> </a>
           </div>
       </div>
