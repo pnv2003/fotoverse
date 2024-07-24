@@ -17,27 +17,26 @@ main.login h2 {
     padding-top: 3rem;
 }
 
-main.login form {
+main.login .wrapper {
     width: 400px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     background-color: #F9F9F9;
     padding: 2rem;
 }
 
-main.login form > * {
+main.login .wrapper form#new_user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main.login .wrapper form#new_user > * {
     width: 300px;
 }
 
-main.login form h1, main.login form p:not(.field) {
+main.login .wrapper h1, main.login .wrapper p:not(.field) {
     text-align: center;
-}
-
-main.login form h1 {
-    font-family: "Leckerli One", cursive;
-    font-weight: 400;
-    font-style: normal;
 }
 
 main.login .third-party {
@@ -45,6 +44,20 @@ main.login .third-party {
     flex-direction: column;
     align-items: center;
     margin-bottom: 2rem;
+}
+
+main.login .third-party button form {
+    padding: 0;
+}
+
+main.login .third-party button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main.login .third-party button img {
+    object-fit: cover;
 }
 
 main.login .or {

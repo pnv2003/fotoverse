@@ -5,12 +5,13 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check
 
+  # Defines the root path route ("/")
   root "sessions#welcome"
 
-  scope "/:locale" do
-    # Defines the root path route ("/")
+  devise_for :users, only: :omniauth_callbacks, controllers: {omniauth_callbacks: 'users/omniauth_callbacks'}
 
-    devise_for :users, controllers: {
+  scope "(:locale)", locale: /en|vi/ do
+    devise_for :users, skip: :omniauth_callbacks, controllers: {
       registrations: 'users/registrations',
       sessions: 'users/sessions'
     }
