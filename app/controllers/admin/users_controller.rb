@@ -26,6 +26,17 @@ class Admin::UsersController < ApplicationController
     end
 
     @user = User.find(params[:id])
+
+    # ban user
+    if @user.active == true && user_params[:active] == "false"
+      UserMailer.ban(@user, current_user).deliver_later
+    end
+
+    # unban user
+    if @user.active == false && user_params[:active] == "true"
+      UserMailer.unban(@user, current_user).deliver_later
+    end
+
     if @user.update(user_params)
       msg = "User updated!"
       flash[:notice] = msg
@@ -48,6 +59,6 @@ class Admin::UsersController < ApplicationController
 
   private
   def user_info_params
-    params.require(:user).permit(:avatar, :fname, :lname, :email, :password, :password_confirmation)
+    params.require(:user).permit(:avatar, :fname, :lname, :email, :password, :password_confirmation, :active)
   end
 end

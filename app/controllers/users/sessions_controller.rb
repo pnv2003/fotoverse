@@ -11,7 +11,7 @@ class Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     super
-    if current_user
+    if current_user && !current_user.admin
       AccessMailer.with(user: current_user).notify.deliver_later
     end
   end
