@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :confirmable, :trackable, :omniauthable, omniauth_providers: [:google_oauth2, :facebook]
+         :confirmable, :trackable, :omniauthable, omniauth_providers: [:google_oauth2, :facebook, :twitter]
   # has_secure_password
 
   has_many :follows_as_followed, class_name: "Follow", foreign_key: :followed_id, inverse_of: :followed, dependent: :destroy
@@ -32,6 +32,9 @@ class User < ApplicationRecord
         user.fname = auth.info.first_name
         user.lname = auth.info.last_name
       elsif auth.provider == "facebook"
+        user.fname = auth.info.name.split(" ")[0]
+        user.lname = auth.info.name.split(" ")[1]
+      elsif auth.provider == "twitter"
         user.fname = auth.info.name.split(" ")[0]
         user.lname = auth.info.name.split(" ")[1]
       end
