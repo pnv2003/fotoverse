@@ -8,16 +8,27 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-MAX_FOLLOW_COUNT = 100
-MAX_REACT_COUNT = 100
+def getfile(url)
+  stream = URI.open(url)
+  return stream if stream.respond_to?(:path)
+
+  Tempfile.new.tap do |file|
+    file.binmode
+    IO.copy_stream(stream, file)
+    stream.close
+    file.rewind
+  end
+end
 
 # admin
-User.create(fname: "Phuong", lname: "Ngo", email: "pnv2003@gmail.com", password: "123", admin: true, active: true, confirmed_at: Time.now)
+User.create(fname: "Phuong", lname: "Ngo", email: "pnv2003@gmail.com", password: "123", avatar: getfile(Faker::Avatar.image), admin: true, active: true, confirmed_at: Time.now)
+
+puts "Done: admin"
 
 # known users
-User.create(fname: "Jameson", lname: "Kezzer", email: "jj@jj.jj", password: "jjj", admin: false, active: true, confirmed_at: Time.now)
-u = User.create(fname: "Jackpot", lname: "Kattis", email: "kk@kk.kk", password: "kkk", admin: false, active: true, confirmed_at: Time.now)
-100.times do
+User.create(fname: "Jameson", lname: "Kezzer", email: "jj@jj.jj", password: "jjj", avatar: getfile(Faker::Avatar.image), admin: false, active: true, confirmed_at: Time.now)
+u = User.create(fname: "Jackpot", lname: "Kattis", email: "kk@kk.kk", password: "kkk", avatar: getfile(Faker::Avatar.image), admin: false, active: true, confirmed_at: Time.now)
+20.times do
   post = u.posts.create(
     type: ['Photo', 'Album'].sample,
     title: Faker::Company.name,
@@ -26,10 +37,10 @@ u = User.create(fname: "Jackpot", lname: "Kattis", email: "kk@kk.kk", password: 
   )
 
   if post.type == "Photo"
-    post.medium = Medium.new
+    post.medium = Medium.new(url: getfile(Faker::LoremFlickr.image))
   else
     Faker::Number.between(from: 1, to: 25).times do
-      post.media.new
+      post.media.new(url: getfile(Faker::LoremFlickr.image))
     end
   end
   post.save
@@ -58,10 +69,10 @@ Faker::Number.between(from: 10, to: 30).times do
     )
 
     if post.type == "Photo"
-      post.medium = Medium.new
+      post.medium = Medium.new(url: getfile(Faker::LoremFlickr.image))
     else
       Faker::Number.between(from: 1, to: 25).times do
-        post.media.new
+        post.media.new(url: getfile(Faker::LoremFlickr.image))
       end
     end
     post.save
@@ -71,29 +82,21 @@ end
 puts "Done: random users"
 
 # random follows
-idx = 1
-user_ids = User.ids
-user_pairs = user_ids.product(user_ids)
-user_pairs.each do |p|
-  if p[0] != p[1] && [true, false].sample
-    Follow.create(follower_id: p[0], followed_id: p[1])
-    idx += 1
-    break if idx == MAX_FOLLOW_COUNT
+Faker::Number.between(from: 100, to: 200).times do
+  user_id_1 = User.ids.sample
+  user_id_2 = User.ids.sample
+  if user_id_1 != user_id_2
+    Follow.create(follower_id: user_id_1, followed_id: user_id_2)
   end
 end
 
 puts "Done: follows"
 
 # random reactions
-idx = 1
-post_ids = Post.ids
-user_post_pairs = user_ids.product(post_ids)
-user_post_pairs.each do |p|
-  if [true, false].sample
-    Reaction.create(user_id: p[0], post_id: p[1])
-    idx += 1
-    break if idx == MAX_REACT_COUNT
-  end
+Faker::Number.between(from: 100, to: 200).times do
+  user_id = User.ids.sample
+  post_id = Post.ids.sample
+  Reaction.create(user_id: user_id, post_id: post_id)
 end
 
 puts "Done: reactions"

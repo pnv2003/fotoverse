@@ -6,14 +6,14 @@ class User < ApplicationRecord
          :confirmable, :trackable
   # has_secure_password
 
-  has_many :follows_as_followed, class_name: "Follow", foreign_key: :followed_id, inverse_of: :followed
+  has_many :follows_as_followed, class_name: "Follow", foreign_key: :followed_id, inverse_of: :followed, dependent: :destroy
   has_many :followers, class_name: "User", through: :follows_as_followed, source: :follower
 
-  has_many :follows_as_follower, class_name: "Follow", foreign_key: :follower_id, inverse_of: :follower
+  has_many :follows_as_follower, class_name: "Follow", foreign_key: :follower_id, inverse_of: :follower, dependent: :destroy
   has_many :followings, class_name: "User", through: :follows_as_follower, source: :followed
 
-  has_many :posts
-  has_many :reactions
+  has_many :posts, dependent: :destroy
+  has_many :reactions, dependent: :destroy
   has_many :reacted_posts, class_name: "Post", through: :reactions, source: :post
 
   validates :fname, length: { maximum: 25 }

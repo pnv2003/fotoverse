@@ -30,3 +30,11 @@ main.edit-profile form > * {
 main.edit-profile form button#save-info {
     margin-top: 0.5rem;
 }
+
+main.edit-profile :is(button.cancel-account, input[type="submit"], a) {
+    padding: 1rem 0;
+}
+
+main.edit-profile button.cancel-account {
+    width: 20rem;
+}
