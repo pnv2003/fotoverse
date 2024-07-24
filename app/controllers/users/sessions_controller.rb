@@ -9,9 +9,12 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+  def create
+    super
+    if current_user
+      AccessMailer.with(user: current_user).notify.deliver_later
+    end
+  end
 
   # DELETE /resource/sign_out
   # def destroy

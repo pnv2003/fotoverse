@@ -43,9 +43,20 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-  config.action_mailer.delivery_method = :letter_opener
+  # config.action_mailer.delivery_method = :letter_opener
 
-  config.action_mailer.perform_deliveries = true
+  # config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+
+  # SMTP with Brevo
+  config.action_mailer.smtp_settings = {
+    address: 'smtp-relay.brevo.com',
+    port: 587,
+    user_name: Rails.application.credentials.brevo[:username],
+    password: Rails.application.credentials.brevo[:password],
+    authentication: "plain",
+    enable_starttls_auto: true
+  }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
