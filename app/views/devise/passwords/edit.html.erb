@@ -1,25 +1,37 @@
-<h2>Change your password</h2>
+<main class="forgot-password">
+  <%= render partial: "guest_header" %>
+  <h1><%= I18n.t('auth.change_password') %></h1>
 
-<%= form_for(resource, as: resource_name, url: user_password_path, html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
+  <%= form_for(resource, as: resource_name, url: user_password_path, html: { method: :put }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <%= f.hidden_field :reset_password_token %>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
-    <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
-  </div>
+    <p class="field">
+      <%= f.label :password, I18n.t('auth.new_password'), class: "form-label" %><br />
+      <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> <%= I18n.t('auth.characters_minimum') %>)</em><br />
+      <% end %>
+      <%= f.password_field :password, autofocus: true, autocomplete: "new-password", class: "form-control" %>
+      <span class="error text-danger"></span>
+    </p>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <p class="field">
+      <%= f.label :password_confirmation, I18n.t('auth.confirm_new_password'), class: "form-label" %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+      <span class="error text-danger"></span>
+    </p>
 
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
+    <%= f.submit I18n.t('auth.change_password'), id: "send", class: "btn btn-primary" %>
 
-<%= render "devise/shared/links" %>
+    <div class="or"><%= I18n.t('auth.or') %></div>
+
+    <div class="horizontal">
+      <p><%= link_to I18n.t('login'), new_user_session_path %></p>
+      <p><%= link_to I18n.t('signup'), new_user_registration_path %></p>
+    </div>
+    <p><%= link_to I18n.t('auth.not_received_confirmation'), new_user_confirmation_path %></p>
+  <% end %>
+</main>
+
+<%= javascript_include_tag "reset_password", type: "module" %>
+<%#= render "devise/shared/links" %>
