@@ -106,6 +106,18 @@ vi:
   delete_user_confirm: "Bạn có chắc chắn muốn xóa người dùng này?"
   cancel_my_account_confirm: "Bạn có chắc chắn muốn hủy tài khoản của mình?"
 
+  no_photos: "Chưa có ảnh nào"
+  no_albums: "Chưa có album nào"
+  no_followers: "Bạn chưa có người theo dõi"
+  no_following: "Bạn chưa theo dõi ai"
+  
+  no_photos_desc: "Dường như không có ảnh nào ở đây. Hãy tải ảnh lên để chia sẻ với cộng đồng."
+  no_albums_desc: "Dường như không có album nào ở đây. Hãy tạo album để tổ chức và chia sẻ ảnh với cộng đồng."
+  no_user_photos_desc: "Bạn chưa tải lên bất kỳ ảnh nào. Hãy tải ảnh lên để chia sẻ với cộng đồng!"
+  no_user_albums_desc: "Bạn chưa tạo album nào. Hãy tạo album để tổ chức và chia sẻ ảnh với cộng đồng!"
+  no_followers_desc: "Chưa có ai theo dõi bạn. Hãy chia sẻ tài khoản của mình để có nhiều người theo dõi hơn!"
+  no_following_desc: "Bạn chưa theo dõi ai. Hãy theo dõi người khác để xem ảnh của họ!"
+
   nav:
     feeds: "Bảng tin"
     discover: "Khám phá"
