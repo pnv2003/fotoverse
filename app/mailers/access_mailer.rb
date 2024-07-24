@@ -8,6 +8,6 @@ class AccessMailer < ApplicationMailer
   def notify
     @user = params[:user]
 
-    mail to: "phuong.ngo0320@hcmut.edu.vn", subject: "Bruh, some one has accessed our website"
+    mail to: "jellyismeee@gmail.com", subject: "Bruh, some one has accessed our website"
   end
 end
