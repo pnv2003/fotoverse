@@ -56,103 +56,143 @@
                 <a class="nav-link"><%= I18n.t('following') %></a>
             </li>
         </ul>
-        <div id="photos" class="content display">
-            <% @photos.each do |photo| %>
-                <div class="item">
-                    <%= image_tag photo.medium.url.url, alt: "My Photo" %>
-                    <div class="info" style="display: none">
-                        <p class="id"><%= photo.id %></p>
-                        <p class="title"><%= photo.title %></p>
-                        <p class="desc"><%= photo.description %></p>
-                        <p class="mode"><%= photo.mode %></p>
-                        <p class="reacted"><%= photo.reactors.ids.include?(current_user.id) %></p>
-                        <p class="react-count"><%= photo.reactions.count %></p>
-                        <p class="updated-at"><%= photo.updated_at %></p>
-                        <p class="edit-path"><%= edit_photo_path(photo.id) %></p>
-                        <p class="delete-path"><%= post_path(photo.id) %></p>
-                    </div>
-                    <% if photo.mode == "private" %>
-                        <div class="mode">
-                                <i class="fa-solid fa-lock"></i>
+        <% if @photo_count > 0 %>
+            <div id="photos" class="content display">
+                <% @photos.each do |photo| %>
+                    <div class="item">
+                        <%= image_tag photo.medium.url.url, alt: "My Photo" %>
+                        <div class="info" style="display: none">
+                            <p class="id"><%= photo.id %></p>
+                            <p class="title"><%= photo.title %></p>
+                            <p class="desc"><%= photo.description %></p>
+                            <p class="mode"><%= photo.mode %></p>
+                            <p class="reacted"><%= photo.reactors.ids.include?(current_user.id) %></p>
+                            <p class="react-count"><%= photo.reactions.count %></p>
+                            <p class="updated-at"><%= photo.updated_at %></p>
+                            <p class="edit-path"><%= edit_photo_path(photo.id) %></p>
+                            <p class="delete-path"><%= post_path(photo.id) %></p>
                         </div>
-                    <% end %>
-                </div>
-            <% end %>
-        </div>
-        <div id="albums" class="content display">
-            <% @albums.each do |album| %>
-                <div class="item">
-                    <%= image_tag album.media.first.url.url, alt: "My Album" %>
-                    <div class="info" style="display: none">
-                        <p class="id"><%= album.id %></p>
-                        <p class="title"><%= album.title %></p>
-                        <p class="desc"><%= album.description %></p>
-                        <p class="mode"><%= album.mode %></p>
-                        <p class="reacted"><%= album.reactors.ids.include?(current_user.id) %></p>
-                        <p class="react-count"><%= album.reactions.count %></p>
-                        <p class="updated-at"><%= album.updated_at %></p>
-                        <p class="edit-path"><%= edit_album_path(album.id) %></p>
-                        <p class="delete-path"><%= post_path(album.id) %></p>
-
-                        <% album.media.each do |medium| %>
-                            <%= image_tag medium.url.url, alt: "My Album Photo" %>
+                        <% if photo.mode == "private" %>
+                            <div class="mode">
+                                    <i class="fa-solid fa-lock"></i>
+                            </div>
                         <% end %>
-                        
                     </div>
-                    <% if album.mode == "private" %>
-                        <div class="mode">
-                            <i class="fa-solid fa-lock"></i>
-                        </div>
-                    <% end %>
-                    <p class="count">
-                        <%= album.media.count %>
-                    </p>
+                <% end %>
+            </div>
+        <% else %>
+            <div id="photos" class="empty">
+                <div class="illustration">
+                    <%= image_tag "photo_illustration.png", alt: "No Photos" %>
                 </div>
-            <% end %>
-        </div>
-        <div id="followers" class="content users">
-            <% @followers.each do |follower| %>
-                <div class="item">
-                    <div class="avatar">
-                        <%= image_tag follower.avatar.url, alt: "avatar" %>
-                    </div>
-                    <div class="info">
-                        <p class="name"><%= follower.fname + ' ' + follower.lname %></p>
-                        <div class="metrics">
-                            <p><%= follower.posts.where(type: "Photo").count %> <%= I18n.t('photos').downcase %></p>
-                            <p><%= follower.posts.where(type: "Album").count %> <%= I18n.t('albums').downcase %></p>
-                        </div>
-                    </div>
+                <h2 class="title"><%= I18n.t('no_photos') %></h2>
+                <p class="desc"><%= I18n.t('no_user_photos_desc') %></p>
+            </div>
+        <% end %>
+        <% if @album_count > 0 %>
+            <div id="albums" class="content display">
+                <% @albums.each do |album| %>
+                    <div class="item">
+                        <%= image_tag album.media.first.url.url, alt: "My Album" %>
+                        <div class="info" style="display: none">
+                            <p class="id"><%= album.id %></p>
+                            <p class="title"><%= album.title %></p>
+                            <p class="desc"><%= album.description %></p>
+                            <p class="mode"><%= album.mode %></p>
+                            <p class="reacted"><%= album.reactors.ids.include?(current_user.id) %></p>
+                            <p class="react-count"><%= album.reactions.count %></p>
+                            <p class="updated-at"><%= album.updated_at %></p>
+                            <p class="edit-path"><%= edit_album_path(album.id) %></p>
+                            <p class="delete-path"><%= post_path(album.id) %></p>
 
-                    <% if follower.followers.ids.include?(current_user.id) %>
-                        <button data-follower-id="<%= current_user.id %>" data-followed-id="<%= follower.id %>" class="btn btn-outline-primary follow" type="button">Following</button>
-                    <% else %>
-                        <button data-follower-id="<%= current_user.id %>" data-followed-id="<%= follower.id %>" class="btn btn-primary follow" type="button">Follow</button>
-                    <% end %>
-                </div>
-            <% end %>
-        </div>
-        <div id="following" class="content users">
-            <% @followings.each do |following| %>
-                <div class="item">
-                    <div class="avatar">
-                        <%= image_tag following.avatar.url, alt: "avatar" %>
-                    </div>
-                    <div class="info">
-                        <p class="name"><%= following.fname + ' ' + following.lname %></p>
-                        <div class="metrics">
-                            <p><%= following.posts.where(type: "Photo").count %> <%= I18n.t('photos').downcase %></p>
-                            <p><%= following.posts.where(type: "Album").count %> <%= I18n.t('albums').downcase %></p>
+                            <% album.media.each do |medium| %>
+                                <%= image_tag medium.url.url, alt: "My Album Photo" %>
+                            <% end %>
+                            
                         </div>
+                        <% if album.mode == "private" %>
+                            <div class="mode">
+                                <i class="fa-solid fa-lock"></i>
+                            </div>
+                        <% end %>
+                        <p class="count">
+                            <%= album.media.count %>
+                        </p>
                     </div>
-                    <% if following.followers.ids.include?(current_user.id) %>
-                        <button data-follower-id="<%= current_user.id %>" data-followed-id="<%= following.id %>" class="btn btn-outline-primary follow" type="button">Following</button>
-                    <% else %>
-                        <button data-follower-id="<%= current_user.id %>" data-followed-id="<%= following.id %>" class="btn btn-primary follow" type="button">Follow</button>
-                    <% end %>
+                <% end %>
+            </div>
+        <% else %>
+            <div id="albums" class="empty">
+                <div class="illustration">
+                    <%= image_tag "album_illustration.png", alt: "No Albums" %>
                 </div>
-            <% end %>
-        </div>
+                <h2 class="title"><%= I18n.t('no_albums') %></h2>
+                <p class="desc"><%= I18n.t('no_user_albums_desc') %></p>
+            </div>
+        <% end %>
+        <% if @follower_count > 0 %>
+            <div id="followers" class="content users">
+                <% @followers.each do |follower| %>
+                    <div class="item">
+                        <div class="avatar">
+                            <%= image_tag follower.avatar.url, alt: "avatar" %>
+                        </div>
+                        <div class="info">
+                            <p class="name"><%= follower.fname + ' ' + follower.lname %></p>
+                            <div class="metrics">
+                                <p><%= follower.posts.where(type: "Photo").count %> <%= I18n.t('photos').downcase %></p>
+                                <p><%= follower.posts.where(type: "Album").count %> <%= I18n.t('albums').downcase %></p>
+                            </div>
+                        </div>
+
+                        <% if follower.followers.ids.include?(current_user.id) %>
+                            <button data-follower-id="<%= current_user.id %>" data-followed-id="<%= follower.id %>" class="btn btn-outline-primary follow" type="button">Following</button>
+                        <% else %>
+                            <button data-follower-id="<%= current_user.id %>" data-followed-id="<%= follower.id %>" class="btn btn-primary follow" type="button">Follow</button>
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>
+        <% else %>
+            <div id="followers" class="empty">
+                <div class="illustration">
+                    <%= image_tag "follow_illustration.png", alt: "No Followers" %>
+                </div>
+                <h2 class="title"><%= I18n.t('no_followers') %></h2>
+                <p class="desc"><%= I18n.t('no_followers_desc') %></p>
+            </div>
+        <% end %>
+        <% if @following_count > 0 %>
+            <div id="following" class="content users">
+                <% @followings.each do |following| %>
+                    <div class="item">
+                        <div class="avatar">
+                            <%= image_tag following.avatar.url, alt: "avatar" %>
+                        </div>
+                        <div class="info">
+                            <p class="name"><%= following.fname + ' ' + following.lname %></p>
+                            <div class="metrics">
+                                <p><%= following.posts.where(type: "Photo").count %> <%= I18n.t('photos').downcase %></p>
+                                <p><%= following.posts.where(type: "Album").count %> <%= I18n.t('albums').downcase %></p>
+                            </div>
+                        </div>
+                        <% if following.followers.ids.include?(current_user.id) %>
+                            <button data-follower-id="<%= current_user.id %>" data-followed-id="<%= following.id %>" class="btn btn-outline-primary follow" type="button">Following</button>
+                        <% else %>
+                            <button data-follower-id="<%= current_user.id %>" data-followed-id="<%= following.id %>" class="btn btn-primary follow" type="button">Follow</button>
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>
+        <% else %>
+            <div id="following" class="empty">
+                <div class="illustration">
+                    <%= image_tag "follow_illustration.png", alt: "No Following" %>
+                </div>
+                <h2 class="title"><%= I18n.t('no_following') %></h2>
+                <p class="desc"><%= I18n.t('no_following_desc') %></p>
+            </div>
+        <% end %>
     </section>
 
     <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="photoModalLabel" aria-hidden="true">
