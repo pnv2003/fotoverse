@@ -59,6 +59,7 @@ en:
   private: "Private"
   select_or_drop: "Select or drop your fancy photos here"
   add_photo: "Add Photo"
+  add_album: "Add Album"
   edit_photo: "Edit Photo"
   edit_album: "Edit Album"
   edit_profile: "Edit Profile"
