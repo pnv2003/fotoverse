@@ -33,7 +33,7 @@ u = User.create!(fname: "Jackpot", lname: "Kattis", email: "kk@kk.kk", password:
   post = u.posts.create!(
     type: ['Photo', 'Album'].sample,
     title: Faker::Company.name,
-    description: desc <= 300 ? desc : Faker::Lorem.paragraph_by_chars(number: Faker::Number.between(from: 1, to: 300)),
+    description: desc.length <= 300 ? desc : Faker::Lorem.paragraph_by_chars(number: Faker::Number.between(from: 1, to: 300)),
     mode: ['public', 'private'].sample
   )
 
@@ -66,7 +66,7 @@ Faker::Number.between(from: 20, to: 30).times do
     post = user.posts.create!(
       type: ['Photo', 'Album'].sample,
       title: Faker::Company.name,
-      description: desc <= 300 ? desc : Faker::Lorem.paragraph_by_chars(number: Faker::Number.between(from: 1, to: 300)),
+      description: desc.length <= 300 ? desc : Faker::Lorem.paragraph_by_chars(number: Faker::Number.between(from: 1, to: 300)),
       mode: ['public', 'private'].sample
     )
 
