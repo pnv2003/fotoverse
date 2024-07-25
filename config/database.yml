@@ -12,6 +12,7 @@ default: &default
   username: phuong
   password: pnv2003
   socket: /var/run/mysqld/mysqld.sock
+  url: postgresql://phuong:WAGnOLJvQ3WA1hCEIchygvdvQEHr6wYc@dpg-cqgqeg5ds78s73aq5lq0-a/fotoverse
 
 development:
   <<: *default
