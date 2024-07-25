@@ -39,7 +39,7 @@ class User < ApplicationRecord
         user.lname = auth.info.name.split(" ")[1]
       end
 
-      user.provide = auth.provider
+      user.provider = auth.provider
       user.uid = auth.uid
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
