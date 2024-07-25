@@ -21,15 +21,15 @@ def getfile(url)
 end
 
 # admin
-User.create(fname: "Phuong", lname: "Ngo", email: "pnv2003@gmail.com", password: "123", avatar: getfile(Faker::Avatar.image), admin: true, active: true, confirmed_at: Time.now)
+User.create!(fname: "Phuong", lname: "Ngo", email: "pnv2003@gmail.com", password: "123", avatar: getfile(Faker::Avatar.image), admin: true, active: true, confirmed_at: Time.now)
 
 puts "Done: admin"
 
 # known users
-User.create(fname: "Jameson", lname: "Kezzer", email: "jj@jj.jj", password: "jjj", avatar: getfile(Faker::Avatar.image), admin: false, active: true, confirmed_at: Time.now)
-u = User.create(fname: "Jackpot", lname: "Kattis", email: "kk@kk.kk", password: "kkk", avatar: getfile(Faker::Avatar.image), admin: false, active: true, confirmed_at: Time.now)
+User.create!(fname: "Jameson", lname: "Kezzer", email: "jj@jj.jj", password: "jjj", avatar: getfile(Faker::Avatar.image), admin: false, active: true, confirmed_at: Time.now)
+u = User.create!(fname: "Jackpot", lname: "Kattis", email: "kk@kk.kk", password: "kkk", avatar: getfile(Faker::Avatar.image), admin: false, active: true, confirmed_at: Time.now)
 50.times do
-  post = u.posts.create(
+  post = u.posts.create!(
     type: ['Photo', 'Album'].sample,
     title: Faker::Company.name,
     description: Faker::Quote.matz,
@@ -51,7 +51,7 @@ puts "Done: known users"
 
 # random users
 Faker::Number.between(from: 20, to: 30).times do
-  user = User.create(
+  user = User.create!(
     fname: Faker::Name.first_name,
     lname: Faker::Name.last_name,
     email: Faker::Internet.email,
@@ -61,7 +61,7 @@ Faker::Number.between(from: 20, to: 30).times do
   )
 
   Faker::Number.between(from: 1, to: 10).times do
-    post = user.posts.create(
+    post = user.posts.create!(
       type: ['Photo', 'Album'].sample,
       title: Faker::Company.name,
       description: Faker::Quote.matz,
@@ -90,7 +90,7 @@ Faker::Number.between(from: 200, to: 500).times do
   end
   user_id_1, user_id_2 = user_pairs.shuffle!.pop
   if user_id_1 != user_id_2
-    Follow.create(follower_id: user_id_1, followed_id: user_id_2)
+    Follow.create!(follower_id: user_id_1, followed_id: user_id_2)
   end
 end
 
@@ -105,7 +105,7 @@ Faker::Number.between(from: 200, to: 500).times do
     break
   end
   user_id, post_id = user_post_pairs.shuffle!.pop
-  Reaction.create(user_id: user_id, post_id: post_id)
+  Reaction.create!(user_id: user_id, post_id: post_id)
 end
 
 puts "Done: reactions"
