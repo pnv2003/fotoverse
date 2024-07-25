@@ -74,6 +74,8 @@ gem "omniauth-google-oauth2"
 gem "omniauth-facebook"
 gem "omniauth-twitter"
 
+gem 'net-pop', github: 'ruby/net-pop'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
