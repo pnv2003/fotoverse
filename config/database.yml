@@ -18,7 +18,7 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  url: postgresql://phuong:WAGnOLJvQ3WA1hCEIchygvdvQEHr6wYc@dpg-cqgqeg5ds78s73aq5lq0-a/fotoverse
+  url: postgresql://phuong:LmapyOtU6c5K1yUK9TnQhLM4RNzCLmsB@dpg-cqgsfidds78s73aquvcg-a/fotoverse_y9mn
 
 development:
   <<: *default
