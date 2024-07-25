@@ -28,7 +28,7 @@ puts "Done: admin"
 # known users
 User.create(fname: "Jameson", lname: "Kezzer", email: "jj@jj.jj", password: "jjj", avatar: getfile(Faker::Avatar.image), admin: false, active: true, confirmed_at: Time.now)
 u = User.create(fname: "Jackpot", lname: "Kattis", email: "kk@kk.kk", password: "kkk", avatar: getfile(Faker::Avatar.image), admin: false, active: true, confirmed_at: Time.now)
-20.times do
+50.times do
   post = u.posts.create(
     type: ['Photo', 'Album'].sample,
     title: Faker::Company.name,
@@ -39,7 +39,7 @@ u = User.create(fname: "Jackpot", lname: "Kattis", email: "kk@kk.kk", password: 
   if post.type == "Photo"
     post.medium = Medium.new(url: getfile(Faker::LoremFlickr.image))
   else
-    Faker::Number.between(from: 1, to: 25).times do
+    Faker::Number.between(from: 1, to: 3).times do
       post.media.new(url: getfile(Faker::LoremFlickr.image))
     end
   end
@@ -50,7 +50,7 @@ end
 puts "Done: known users"
 
 # random users
-Faker::Number.between(from: 10, to: 30).times do
+Faker::Number.between(from: 20, to: 30).times do
   user = User.create(
     fname: Faker::Name.first_name,
     lname: Faker::Name.last_name,
@@ -71,7 +71,7 @@ Faker::Number.between(from: 10, to: 30).times do
     if post.type == "Photo"
       post.medium = Medium.new(url: getfile(Faker::LoremFlickr.image))
     else
-      Faker::Number.between(from: 1, to: 25).times do
+      Faker::Number.between(from: 1, to: 3).times do
         post.media.new(url: getfile(Faker::LoremFlickr.image))
       end
     end
@@ -82,9 +82,13 @@ end
 puts "Done: random users"
 
 # random follows
-Faker::Number.between(from: 100, to: 200).times do
-  user_id_1 = User.ids.sample
-  user_id_2 = User.ids.sample
+user_ids = User.ids
+user_pairs = user_ids.product(user_ids)
+Faker::Number.between(from: 200, to: 500).times do
+  if user_pairs.empty?
+    break
+  end
+  user_id_1, user_id_2 = user_pairs.shuffle!.pop
   if user_id_1 != user_id_2
     Follow.create(follower_id: user_id_1, followed_id: user_id_2)
   end
@@ -93,9 +97,14 @@ end
 puts "Done: follows"
 
 # random reactions
-Faker::Number.between(from: 100, to: 200).times do
-  user_id = User.ids.sample
-  post_id = Post.ids.sample
+user_ids = User.ids
+post_ids = Post.ids
+user_post_pairs = user_ids.product(post_ids)
+Faker::Number.between(from: 200, to: 500).times do
+  if user_post_pairs.empty?
+    break
+  end
+  user_id, post_id = user_post_pairs.shuffle!.pop
   Reaction.create(user_id: user_id, post_id: post_id)
 end
 
