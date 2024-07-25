@@ -8,8 +8,8 @@ gem "rails", "~> 7.1.3", ">= 7.1.3.4"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
-# Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 1.4"
+# Use pg as the database for Active Record
+gem "pg", "~> 1.1"
 gem 'mysql2', '>= 0.5.6'
 
 # Use the Puma web server [https://github.com/puma/puma]
@@ -73,6 +73,8 @@ gem "omniauth-rails_csrf_protection"
 gem "omniauth-google-oauth2"
 gem "omniauth-facebook"
 gem "omniauth-twitter"
+
+gem 'net-pop', github: 'ruby/net-pop'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

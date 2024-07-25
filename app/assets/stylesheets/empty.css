@@ -1,0 +1,15 @@
+.empty {
+    text-align: center;
+}
+
+.empty .illustration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.empty .illustration img {
+    width: 30%;
+    object-fit: cover;
+}
