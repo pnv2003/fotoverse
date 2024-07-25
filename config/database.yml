@@ -13,16 +13,21 @@
 # gem "pg"
 #
 default: &default
-  adapter: postgresql
   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  url: postgresql://phuong:LmapyOtU6c5K1yUK9TnQhLM4RNzCLmsB@dpg-cqgsfidds78s73aquvcg-a/fotoverse_y9mn
 
 development:
   <<: *default
-  database: fotoverse_development
+  database: fotoverse_dev
+  adapter: mysql2
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  encoding: utf8
+  username: phuong
+  password: pnv2003
+  socket: /var/run/mysqld/mysqld.sock
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -80,6 +85,5 @@ test:
 #
 production:
   <<: *default
-  database: fotoverse_production
-  username: fotoverse
-  password: <%= ENV["FOTOVERSE_DATABASE_PASSWORD"] %>
+  adapter: postgresql
+  url: postgresql://phuong:LmapyOtU6c5K1yUK9TnQhLM4RNzCLmsB@dpg-cqgsfidds78s73aquvcg-a/fotoverse_y9mn
