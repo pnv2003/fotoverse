@@ -274,7 +274,7 @@ Devise.setup do |config|
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :google_oauth2,  Rails.application.credentials.oauth2[:client_id], Rails.application.credentials.oauth2[:client_secret], {}
   config.omniauth :facebook, Rails.application.credentials.facebook[:app_id], Rails.application.credentials.facebook[:app_secret], {}
-  config.omniauth :twitter, Rails.application.credentials.twitter[:client_id], Rails.application.credentials.twitter[:client_secret], {}
+  config.omniauth :twitter2, Rails.application.credentials.twitter[:client_id], Rails.application.credentials.twitter[:client_secret], callback_path: '/users/auth/twitter2/callback', scope: "tweet.read users.read"
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or

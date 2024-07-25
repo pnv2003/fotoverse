@@ -72,7 +72,7 @@ gem "omniauth"
 gem "omniauth-rails_csrf_protection"
 gem "omniauth-google-oauth2"
 gem "omniauth-facebook"
-gem "omniauth-twitter"
+gem "omniauth-twitter2"
 
 gem 'net-pop', github: 'ruby/net-pop'
 
