@@ -1,6 +1,6 @@
-import { getRelativeTime } from "./utils/datetime";
-import { compactFormatter } from "./utils/number";
-import http from "./utils/request";
+// import { getRelativeTime } from "./utils/datetime";
+// import { compactFormatter } from "./utils/number";
+// import http from "./utils/request";
 
 // modal
 const photoItems = document.querySelectorAll("#photos .item");

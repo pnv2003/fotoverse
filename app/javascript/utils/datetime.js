@@ -7,7 +7,7 @@ const units = {
     second: 1000
 };
 
-export const getRelativeTime = (date, locale = 'en') => {
+const getRelativeTime = (date, locale = 'en') => {
     const now = new Date();
     const elapsed = date - now;
   

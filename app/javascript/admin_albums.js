@@ -1,6 +1,6 @@
-import { getRelativeTime } from "./utils/datetime";
-import { compactFormatter } from "./utils/number";
-import http from "./utils/request";
+// import { getRelativeTime } from "./utils/datetime";
+// import { compactFormatter } from "./utils/number";
+// import http from "./utils/request";
 
 const albumItems = document.querySelectorAll("#albums .item");
 

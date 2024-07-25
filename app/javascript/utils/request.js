@@ -56,6 +56,4 @@ const http = {
         }
         return response;
     }
-}
-
-export default http;
+};

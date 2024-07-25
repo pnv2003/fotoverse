@@ -31,13 +31,13 @@
 
                             <ul class="dropdown-menu">
                                 <% if current_page?(new_photo_path) %>
-                                    <li><a class="dropdown-item" href="#"><%= I18n.t('photo') %></a></li>
+                                    <li><a class="dropdown-item"><%= I18n.t('photo') %></a></li>
                                 <% else %>
                                     <li><%= link_to I18n.t('photo'), new_photo_path, class: "dropdown-item", data: {turbo: false} %></li>
                                 <% end %>
 
                                 <% if current_page?(new_album_path) %>
-                                    <li><a class="dropdown-item" href="#"><%= I18n.t('album') %></a></li>
+                                    <li><a class="dropdown-item"><%= I18n.t('album') %></a></li>
                                 <% else %>
                                     <li><%= link_to I18n.t('album'), new_album_path, class: "dropdown-item", data: {turbo: false} %></li>
                                 <% end %>
