@@ -1,6 +1,6 @@
-import { debounce } from "./utils/exec";
-import http from "./utils/request";
-import { getRelativeTime } from "./utils/datetime";
+// import { debounce } from "./utils/exec";
+// import http from "./utils/request";
+// import { getRelativeTime } from "./utils/datetime";
 
 // tab
 const photos = document.querySelector("#photos");

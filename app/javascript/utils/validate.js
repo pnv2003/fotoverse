@@ -1,4 +1,4 @@
-export const validator = {
+const validator = {
     required: {
         check: (field) => field.value,
         message: "This field is required"
@@ -25,7 +25,7 @@ export const validator = {
     }}
 };
 
-export function validate(fcon, error, validator) {
+function validate(fcon, error, validator) {
     if (fcon) {
         if (!validator.check(fcon)) {
             fcon.classList.add('is-invalid');

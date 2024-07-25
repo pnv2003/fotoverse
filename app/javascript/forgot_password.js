@@ -1,4 +1,4 @@
-import { validate, validator } from "./utils/validate";
+// import { validate, validator } from "./utils/validate";
 
 const email = document.querySelector("#user_email");
 const emailError = document.querySelector("#user_email + .error");

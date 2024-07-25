@@ -1,4 +1,4 @@
-import { validate, validator } from "./utils/validate.js";
+// import { validate, validator } from "./utils/validate.js";
 
 const title = document.querySelector("#album_title");
 const description = document.querySelector("#album_description");

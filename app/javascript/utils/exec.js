@@ -7,7 +7,7 @@
  * @param scope
  * @returns {Function}
  */
-export const debounce = (func, wait, scope) => {
+const debounce = (func, wait, scope) => {
     var timeout;
     return function () {
         var context = scope || this, args = arguments;
@@ -27,7 +27,7 @@ export const debounce = (func, wait, scope) => {
  * @param scope
  * @returns {Function}
  */
-export const throttle = (fn, threshhold, scope) => {
+const throttle = (fn, threshhold, scope) => {
     threshhold || (threshhold = 250);
     var last,
         deferTimer;

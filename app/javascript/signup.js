@@ -1,5 +1,5 @@
-import { validate, validator } from "./utils/validate.js";
-import http from "./utils/request.js";
+// import { validate, validator } from "./utils/validate.js";
+// import http from "./utils/request.js";
 
 const fname = document.querySelector("#user_fname");
 const lname = document.querySelector("#user_lname");

@@ -1,4 +1,4 @@
-import { validate, validator } from "./utils/validate";
+// import { validate, validator } from "./utils/validate";
 
 const newPassword = document.querySelector("#user_password");
 const confirmPassword = document.querySelector("#user_password_confirmation");
