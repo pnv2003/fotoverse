@@ -29,10 +29,11 @@ puts "Done: admin"
 User.create!(fname: "Jameson", lname: "Kezzer", email: "jj@jj.jj", password: "jjj", avatar: getfile(Faker::Avatar.image), admin: false, active: true, confirmed_at: Time.now)
 u = User.create!(fname: "Jackpot", lname: "Kattis", email: "kk@kk.kk", password: "kkk", avatar: getfile(Faker::Avatar.image), admin: false, active: true, confirmed_at: Time.now)
 50.times do
+  desc = Faker::Quote.matz
   post = u.posts.create!(
     type: ['Photo', 'Album'].sample,
     title: Faker::Company.name,
-    description: Faker::Quote.matz,
+    description: desc <= 300 ? desc : Faker::Lorem.paragraph_by_chars(number: Faker::Number.between(from: 1, to: 300)),
     mode: ['public', 'private'].sample
   )
 
@@ -61,10 +62,11 @@ Faker::Number.between(from: 20, to: 30).times do
   )
 
   Faker::Number.between(from: 1, to: 10).times do
+    desc = Faker::Quote.matz
     post = user.posts.create!(
       type: ['Photo', 'Album'].sample,
       title: Faker::Company.name,
-      description: Faker::Quote.matz,
+      description: desc <= 300 ? desc : Faker::Lorem.paragraph_by_chars(number: Faker::Number.between(from: 1, to: 300)),
       mode: ['public', 'private'].sample
     )
 
