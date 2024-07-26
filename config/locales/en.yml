@@ -129,7 +129,7 @@ en:
     already_have_account: "Already have an account?"
     cancel_my_account: "Cancel my account"
     leave_blank: "leave blank if you don't want to change it"
-    we_need_your_password: "We need your current password to confirm your changes (enter if you logged in with email)."
+    we_need_your_password: "required if you logged in using email and password"
     delete_account: "Delete Account"
     new_password: "New password"
     confirm_new_password: "Confirm new password"

@@ -150,7 +150,7 @@ vi:
     already_have_account: "Đã có tài khoản?"
     cancel_my_account: "Hủy tài khoản"
     leave_blank: "để trống nếu bạn không muốn thay đổi"
-    we_need_your_password: "Chúng tôi cần mật khẩu hiện tại của bạn để xác nhận thay đổi của bạn (nhập nếu bạn sử dụng email để đăng nhập)."
+    we_need_your_password: "bắt buộc nếu bạn đăng nhập bằng email và mật khẩu"
     delete_account: "Xóa tài khoản"
     new_password: "Mật khẩu mới"
     confirm_new_password: "Xác nhận mật khẩu mới"
