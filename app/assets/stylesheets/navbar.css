@@ -2,6 +2,10 @@ nav.navbar {
     background: linear-gradient(90deg, rgba(9,38,121,1) 0%, rgba(0,212,255,1) 100%);
 }
 
+nav.navbar form[role="search"] button[type="submit"] {
+    min-width: 6rem;
+}
+
 header.guest {
     display: flex;
     align-items: center;
