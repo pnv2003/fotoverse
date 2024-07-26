@@ -1,26 +1,35 @@
 <main class="admin-photos">
-    <div id="photos" class="content display">
-        <% @photos.each do |photo| %>
-            <div class="item">
-                <%= image_tag photo.medium.url.url, alt: "photo" %>
-                <div class="info" style="display: none">
-                    <p class="id"><%= photo.id %></p>
-                    <p class="user-name"><%= photo.user.fname + ' ' + photo.user.lname %></p>
-                    <p class="user-avatar"><%= image_tag photo.user.avatar.url %></p>
-                    <p class="user-path"><%= edit_admin_user_path(photo.user_id) %></p>
-                    <p class="title"><%= photo.title %></p>
-                    <p class="desc"><%= photo.description %></p>
-                    <p class="mode"><%= photo.mode %></p>
-                    <p class="reacted"><%= photo.reactors.ids.include?(current_user.id) %></p>
-                    <p class="react-count"><%= photo.reactions.count %></p>
-                    <p class="updated-at"><%= photo.updated_at %></p>
-                    <p class="edit-path"><%= edit_admin_photo_path(photo.id) %></p>
-                    <p class="delete-path"><%= admin_photo_path(photo.id) %></p>
+    <% if @photos.count > 0 %>
+        <div id="photos" class="content display">
+            <% @photos.each do |photo| %>
+                <div class="item">
+                    <%= image_tag photo.medium.url.url, alt: "photo" %>
+                    <div class="info" style="display: none">
+                        <p class="id"><%= photo.id %></p>
+                        <p class="user-name"><%= photo.user.fname + ' ' + photo.user.lname %></p>
+                        <p class="user-avatar"><%= image_tag photo.user.avatar.url %></p>
+                        <p class="user-path"><%= edit_admin_user_path(photo.user_id) %></p>
+                        <p class="title"><%= photo.title %></p>
+                        <p class="desc"><%= photo.description %></p>
+                        <p class="mode"><%= photo.mode %></p>
+                        <p class="reacted"><%= photo.reactors.ids.include?(current_user.id) %></p>
+                        <p class="react-count"><%= photo.reactions.count %></p>
+                        <p class="updated-at"><%= photo.updated_at %></p>
+                        <p class="edit-path"><%= edit_admin_photo_path(photo.id) %></p>
+                        <p class="delete-path"><%= admin_photo_path(photo.id) %></p>
+                    </div>
                 </div>
+            <% end %>
+        </div>
+    <% else %>
+        <div id="photos class="empty">
+            <div class="illustration">
+                <%= image_tag "photo_illustration.png", alt: "No Photos" %>
             </div>
-        <% end %>
-    </div>
-    
+            <h2><%= I18n.t('no_photos') %></h2>
+            <p><%= I18n.t('no_photos_desc_admin') %></p>
+        </div>
+    <% end %>
     <%= paginate @photos, theme: 'bootstrap-5', pagination_class: "pagination-lg" %>
 
     <div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

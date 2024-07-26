@@ -96,6 +96,8 @@ en:
   no_user_albums_desc: "You haven't created any albums yet. Organize and share your photos with the community!"
   no_followers_desc: "You don't have any followers yet. Share your profile to attract more followers!"
   no_following_desc: "You're not following anyone yet. Follow some users to see their posts in your feed!"
+  no_photos_desc_admin: "Wait for users to upload photos to see them here."
+  no_albums_desc_admin: "Wait for users to create albums to see them here."
 
   nav:
     feeds: "Feeds"

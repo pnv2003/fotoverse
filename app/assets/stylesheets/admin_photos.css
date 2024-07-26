@@ -7,7 +7,7 @@ main.admin-photos {
     padding: 2rem;
 }
 
-main.admin-photos > * {
+main.admin-photos > #photos {
     max-width: 70rem;
 }
 

@@ -7,7 +7,7 @@ main.admin-albums {
     padding: 2rem;
 }
 
-main.admin-albums > * {
+main.admin-albums > #albums {
     max-width: 70rem;
 }
 
