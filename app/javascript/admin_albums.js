@@ -74,9 +74,6 @@ albumItems.forEach(item => item.addEventListener("click", () => {
     const albumId = item.querySelector(".id").textContent;
     const reacted = item.querySelector(".reacted").textContent;
     const reactButton = albumModal.querySelector(".react");
-    if (reacted === "true") {
-        toggleReact(reactButton.querySelector("i"));
-    }
     reactButton.setAttribute("data-post-id", albumId);
     albumModalInstance.show();
 }));
