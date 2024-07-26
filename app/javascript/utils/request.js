@@ -1,4 +1,4 @@
-const SERVER_URL = "http://127.0.0.1:3000";
+const SERVER_URL = railsEnv === 'development' ? 'http://127.0.0.1:3000' : 'https://fotoverse.onrender.com';
 
 const http = {
     request: async function(method, baseURL, param, data, json = true) {
