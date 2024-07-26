@@ -18,7 +18,7 @@ class User < ApplicationRecord
 
   validates :fname, length: { maximum: 25 }
   validates :lname, length: { maximum: 25 }
-  validates :email, presence: true, length: { maximum: 255 }, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
+  validates :email, presence: true, length: { maximum: 255 }, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: { scope: :provider }
   # validates :password_digest, presence: true, confirmation: true, length: { maximum: 64 }
   validates :admin, inclusion: [true, false]
   validates :active, inclusion: [true, false]
@@ -41,7 +41,7 @@ class User < ApplicationRecord
 
       user.provider = auth.provider
       user.uid = auth.uid
-      user.email = auth.info.email || "jellyismeee@gmail.com"
+      user.email = auth.info.email || "#{user.fname}-#{user.uid}-twitter@example.org"
       user.password = Devise.friendly_token[0,20]
       user.password_confirmation = user.password
       user.admin = false
