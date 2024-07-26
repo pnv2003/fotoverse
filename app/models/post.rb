@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user
 
-  has_many :reactions
+  has_many :reactions, dependent: :destroy
   has_many :reactors, class_name: "User", through: :reactions, source: :user
 
   validates :user_id, presence: true

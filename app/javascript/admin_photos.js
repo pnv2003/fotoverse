@@ -53,9 +53,6 @@ photoItems.forEach(item => item.addEventListener("click", () => {
     const photoId = item.querySelector(".id").textContent;
     const reacted = item.querySelector(".reacted").textContent;
     const reactButton = photoModal.querySelector(".react");
-    if (reacted === "true") {
-        toggleReact(reactButton.querySelector("i"));
-    }
     reactButton.setAttribute("data-post-id", photoId);
     photoModalInstance.show();
 }));

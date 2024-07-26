@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.css" crossorigin="anonymous">
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.6.2/cropper.min.js" crossorigin="anonymous"></script>
 
+    <script>
+      window.railsEnv = '<%= Rails.env %>';
+    </script>
     <script src="<%= javascript_url "utils/datetime" %>"></script>
     <script src="<%= javascript_url "utils/exec" %>"></script>
     <script src="<%= javascript_url "utils/number" %>"></script>

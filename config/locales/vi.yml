@@ -117,6 +117,8 @@ vi:
   no_user_albums_desc: "Bạn chưa tạo album nào. Hãy tạo album để tổ chức và chia sẻ ảnh với cộng đồng!"
   no_followers_desc: "Chưa có ai theo dõi bạn. Hãy chia sẻ tài khoản của mình để có nhiều người theo dõi hơn!"
   no_following_desc: "Bạn chưa theo dõi ai. Hãy theo dõi người khác để xem ảnh của họ!"
+  no_photos_desc_admin: "Chờ người dùng tải ảnh lên để xem chúng ở đây."
+  no_albums_desc_admin: "Chờ người dùng tạo album để xem chúng ở đây."
 
   nav:
     feeds: "Bảng tin"
@@ -148,7 +150,7 @@ vi:
     already_have_account: "Đã có tài khoản?"
     cancel_my_account: "Hủy tài khoản"
     leave_blank: "để trống nếu bạn không muốn thay đổi"
-    we_need_your_password: "Chúng tôi cần mật khẩu hiện tại của bạn để xác nhận thay đổi của bạn"
+    we_need_your_password: "bắt buộc nếu bạn đăng nhập bằng email và mật khẩu"
     delete_account: "Xóa tài khoản"
     new_password: "Mật khẩu mới"
     confirm_new_password: "Xác nhận mật khẩu mới"
