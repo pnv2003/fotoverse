@@ -18,6 +18,12 @@ const pwdError = document.querySelector("#user_password + .error");
 const conpwdError = document.querySelector("#user_password_confirmation + .error");
 const curpwdError = document.querySelector("#user_current_password + .error");
 
+if (currentUser.provider) {
+	document.querySelectorAll(".optional").forEach((element) => {
+		element.classList.add("d-none");
+	});
+}
+
 const preview = document.querySelector("#preview-avatar");
 const previewImage = document.querySelector("#preview-avatar > img");
 const cropperModal = new bootstrap.Modal('#cropperModal');
