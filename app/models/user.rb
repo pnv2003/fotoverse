@@ -41,7 +41,10 @@ class User < ApplicationRecord
 
       user.provider = auth.provider
       user.uid = auth.uid
-      user.email = auth.info.email || "#{user.fname}-#{user.uid}-twitter@example.org"
+      user.email = auth.info.email
+      if user.email.nil? || where(email: user.email).exists?
+        user.email = "#{user.fname}-#{user.uid}-#{auth.provider}@example.org"
+      end
       user.password = Devise.friendly_token[0,20]
       user.password_confirmation = user.password
       user.admin = false
