@@ -109,9 +109,15 @@ document.querySelector("#update").addEventListener('click', (e) => {
 				return conpwd.value === pwd.value;
 			},
 			message: "Password does not match"
-		}) &
-		validate(curpwd, curpwdError, validator.required)
+		})
     ) {
+
+		if (!currentUser.provider) {
+			if (!validate(curpwd, curpwdError, validator.required)) {
+				return;
+			}
+		}
+
 		// submit avatar
 		const form = document.querySelector("#avatar-form");
 		const formData = new FormData(form);
