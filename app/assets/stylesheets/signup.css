@@ -53,7 +53,7 @@ main.signup .third-party {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 main.signup .third-party button img {
@@ -64,7 +64,7 @@ main.signup .or {
     display: flex;
     align-items: center;
     text-align: center;
-    margin-bottom: 1rem;
+    margin: 1rem 0;
 }
 
 main.signup .or::before,

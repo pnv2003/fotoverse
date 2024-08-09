@@ -3,18 +3,6 @@
   <h2><%= I18n.t('signup') %></h2>
 
   <div class="wrapper">
-    <div class="third-party">
-      <p><%= I18n.t('auth.sign_up_with') %></p>
-      <div class="row row-cols-3">
-        <%= button_to omniauth_authorize_path(:user, :google_oauth2, locale: I18n.locale), class: "not-button" do %>
-          <%= image_tag 'google.png', size: "50", alt: "Google"%>
-        <% end %>
-        <a href="#"> <%= image_tag 'facebook.png', size: "50", alt: "Facebook"%> </a>
-        <a href="#"> <%= image_tag 'twitter.png', size: "50", alt: "X"%> </a>
-      </div>
-    </div>
-
-    <div class="or"><%= I18n.t('auth.or') %></div>
 
     <%= form_for(resource, as: resource_name, url: user_registration_path) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
@@ -52,10 +40,28 @@
       <p><%= I18n.t('auth.by_signing_up') %> <a href="#"><%= I18n.t('auth.terms') %></a>, <a href="#"><%= I18n.t('auth.privacy_policy') %></a> <%= I18n.t('auth.and') %> <a href="#"><%= I18n.t('auth.cookies_policy') %></a> <%= I18n.t('auth.of_us') %></p>
       <%= f.submit I18n.t('signup'), id: "signup", class: "btn btn-primary" %>
 
-      <hr>
-
-      <p><%= I18n.t('auth.already_have_account') %> <%= link_to I18n.t('login'), new_user_session_path %></p>
     <% end %>
+
+    <div class="or"><%= I18n.t('auth.or') %></div>
+
+    <div class="third-party">
+      <p><%= I18n.t('auth.sign_up_with') %></p>
+      <div class="row row-cols-3">
+        <%= button_to omniauth_authorize_path(:user, :google_oauth2, locale: I18n.locale), class: "not-button" do %>
+          <%= image_tag 'google.png', size: "50", alt: "Google"%>
+        <% end %>
+        <%= button_to omniauth_authorize_path(:user, :facebook, locale: I18n.locale), class: "not-button" do %>
+          <%= image_tag 'facebook.png', size: "50", alt: "Facebook"%>
+        <% end %>
+        <%= button_to omniauth_authorize_path(:user, :twitter2, locale: I18n.locale), class: "not-button" do %>
+          <%= image_tag 'twitter.png', size: "50", alt: "Twitter"%>
+        <% end %>
+      </div>
+    </div>
+
+    <hr>
+
+    <p><%= I18n.t('auth.already_have_account') %> <%= link_to I18n.t('login'), new_user_session_path %></p>
   </div>
 </main>
 
