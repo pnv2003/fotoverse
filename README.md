@@ -1,4 +1,4 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/phuongngo0320/fotoverse/pull/73 -->
+<!-- Improved compatibility of back to top link: See: https://github.com/pnv2003/fotoverse/pull/73 -->
 <a id="readme-top"></a>
 <!--
 *** Thanks for checking out the Best-README-Template. If you have a suggestion
@@ -30,7 +30,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/phuongngo0320/fotoverse">
+  <a href="https://github.com/pnv2003/fotoverse">
     <img src="public/android-chrome-512x512.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -39,14 +39,14 @@
   <p align="center">
     A Social Media Platform Inspired by Instagram
     <br />
-    <a href="https://github.com/phuongngo0320/fotoverse"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/pnv2003/fotoverse"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/phuongngo0320/fotoverse">View Demo</a>
+    <a href="https://github.com/pnv2003/fotoverse">View Demo</a>
     ·
-    <a href="https://github.com/phuongngo0320/fotoverse/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
+    <a href="https://github.com/pnv2003/fotoverse/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     ·
-    <a href="https://github.com/phuongngo0320/fotoverse/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
+    <a href="https://github.com/pnv2003/fotoverse/issues/new?labels=enhancement&template=feature-request---.md">Request Feature</a>
   </p>
 </div>
 
@@ -111,7 +111,7 @@ Ensure you have Ruby and Rails installed on your system. Detailed installation i
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/phuongngo0320/fotoverse
+   git clone https://github.com/pnv2003/fotoverse
    cd fotoverse
    ```
 2. Configure the database
@@ -186,7 +186,7 @@ This section is under construction. In the meantime, feel free to explore the ap
 - [ ] Real-time notifications with WebSocket
 - [x] Deploy app to [Render](https://render.com)
 
-See the [open issues](https://github.com/phuongngo0320/fotoverse/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/pnv2003/fotoverse/issues) for a full list of proposed features (and known issues).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -224,7 +224,7 @@ This project is currently unlicensed. If you wish to use, modify, or distribute 
 
 Phuong Ngo - phuongngovan2003@gmail.com
 
-Project Link: [https://github.com/phuongngo0320/fotoverse](https://github.com/phuongngo0320/fotoverse)
+Project Link: [https://github.com/pnv2003/fotoverse](https://github.com/pnv2003/fotoverse)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -249,16 +249,16 @@ I would like to express my sincere gratitude to the following individuals and or
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-<!-- [contributors-shield]: https://img.shields.io/github/contributors/phuongngo0320/fotoverse.svg?style=for-the-badge
-[contributors-url]: https://github.com/phuongngo0320/fotoverse/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/phuongngo0320/fotoverse.svg?style=for-the-badge
-[forks-url]: https://github.com/phuongngo0320/fotoverse/network/members
-[stars-shield]: https://img.shields.io/github/stars/phuongngo0320/fotoverse.svg?style=for-the-badge
-[stars-url]: https://github.com/phuongngo0320/fotoverse/stargazers
-[issues-shield]: https://img.shields.io/github/issues/phuongngo0320/fotoverse.svg?style=for-the-badge
-[issues-url]: https://github.com/phuongngo0320/fotoverse/issues
-[license-shield]: https://img.shields.io/github/license/phuongngo0320/fotoverse.svg?style=for-the-badge
-[license-url]: https://github.com/phuongngo0320/fotoverse/blob/master/LICENSE.txt
+<!-- [contributors-shield]: https://img.shields.io/github/contributors/pnv2003/fotoverse.svg?style=for-the-badge
+[contributors-url]: https://github.com/pnv2003/fotoverse/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/pnv2003/fotoverse.svg?style=for-the-badge
+[forks-url]: https://github.com/pnv2003/fotoverse/network/members
+[stars-shield]: https://img.shields.io/github/stars/pnv2003/fotoverse.svg?style=for-the-badge
+[stars-url]: https://github.com/pnv2003/fotoverse/stargazers
+[issues-shield]: https://img.shields.io/github/issues/pnv2003/fotoverse.svg?style=for-the-badge
+[issues-url]: https://github.com/pnv2003/fotoverse/issues
+[license-shield]: https://img.shields.io/github/license/pnv2003/fotoverse.svg?style=for-the-badge
+[license-url]: https://github.com/pnv2003/fotoverse/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
 [product-screenshot]: images/screenshot.png
